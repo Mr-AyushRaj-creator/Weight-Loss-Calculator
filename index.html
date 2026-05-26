@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Weight Loss & Macro Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  /* ===== CSS RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ===== CSS VARIABLES - DARK THEME (default) ===== */
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-card: rgba(255,255,255,0.04);
+    --bg-card-hover: rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text-primary: #f0f0ff;
+    --text-secondary: #9090b0;
+    --text-muted: #5a5a7a;
+    --accent: #6c63ff;
+    --accent-2: #ff6584;
+    --accent-3: #43e97b;
+    --accent-4: #f6d365;
+    --accent-glow: rgba(108,99,255,0.35);
+    --protein-color: #ff6b6b;
+    --carbs-color: #4ecdc4;
+    --fat-color: #f6d365;
+    --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
+    --shadow-glow: 0 0 30px rgba(108,99,255,0.25);
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* ===== LIGHT MODE ===== */
+  [data-theme="light"] {
+    --bg-primary: #f0f0ff;
+    --bg-secondary: #e8e8f8;
+    --bg-card: rgba(255,255,255,0.75);
+    --bg-card-hover: rgba(255,255,255,0.92);
+    --border: rgba(108,99,255,0.12);
+    --border-hover: rgba(108,99,255,0.28);
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a4a6a;
+    --text-muted: #8888aa;
+    --accent-glow: rgba(108,99,255,0.18);
+    --shadow-card: 0 8px 32px rgba(108,99,255,0.1);
+    --shadow-glow: 0 0 30px rgba(108,99,255,0.15);
+  }
+
+  /* ===== GLOBAL ===== */
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background var(--transition), color var(--transition);
+    overflow-x: hidden;
+  }
+
+  /* ===== ANIMATED BACKGROUND ===== */
+  .bg-gradient {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(108,99,255,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(255,101,132,0.1) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(67,233,123,0.05) 0%, transparent 50%);
+  }
+  [data-theme="light"] .bg-gradient {
+    background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(108,99,255,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(255,101,132,0.08) 0%, transparent 55%);
+  }
+  .bg-orb {
+    position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
+    animation: orbFloat 10s ease-in-out infinite alternate;
+  }
+  .bg-orb-1 { width: 500px; height: 500px; top: -150px; left: -150px; background: rgba(108,99,255,0.12); animation-delay: 0s; }
+  .bg-orb-2 { width: 400px; height: 400px; bottom: -100px; right: -100px; background: rgba(255,101,132,0.1); animation-delay: -5s; }
+  @keyframes orbFloat { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.1); } }
+
+  /* ===== LAYOUT ===== */
+  .wrapper { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* ===== HEADER / HERO ===== */
+  .hero {
+    text-align: center; padding: 60px 20px 48px;
+    background: linear-gradient(180deg, rgba(108,99,255,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(108,99,255,0.15); border: 1px solid rgba(108,99,255,0.3);
+    padding: 6px 16px; border-radius: 50px; font-size: 12px; font-weight: 600;
+    color: #a89dff; letter-spacing: 0.05em; text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6c63ff; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.4); } }
+  .hero h1 {
+    font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 0%, #a89dff 50%, #ff6584 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  [data-theme="light"] .hero h1 {
+    background: linear-gradient(135deg, #1a1a2e 0%, #6c63ff 50%, #ff6584 100%);
+    -webkit-background-clip: text; background-clip: text;
+  }
+  .hero p { font-size: clamp(0.95rem, 2vw, 1.1rem); color: var(--text-secondary); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+  /* ===== THEME TOGGLE ===== */
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; z-index: 100;
+    width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--bg-card); backdrop-filter: blur(20px);
+    cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition); box-shadow: var(--shadow-card);
+  }
+  .theme-toggle:hover { border-color: var(--border-hover); transform: rotate(20deg) scale(1.08); box-shadow: var(--shadow-glow); }
+
+  /* ===== GLASS CARD ===== */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 32px;
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    box-shadow: var(--shadow-card); transition: all var(--transition);
+    margin-bottom: 24px;
+  }
+  .card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-card), 0 0 0 1px var(--border); }
+  .card-title {
+    font-family: var(--font-head); font-size: 1.1rem; font-weight: 600;
+    color: var(--text-primary); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { font-size: 1.3rem; }
+  .card-title .badge {
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 50px;
+    background: rgba(108,99,255,0.15); color: #a89dff; margin-left: auto;
+  }
+
+  /* ===== INPUT SECTION ===== */
+  .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+  @media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+
+  .input-group { display: flex; flex-direction: column; gap: 8px; }
+  .input-group label { font-size: 13px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.03em; text-transform: uppercase; }
+  .input-wrap { position: relative; }
+  .input-wrap input {
+    width: 100%; height: 56px; padding: 0 56px 0 18px;
+    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); color: var(--text-primary); font-size: 1.05rem; font-weight: 500;
+    font-family: var(--font-body); outline: none; transition: all var(--transition);
+    appearance: none; -webkit-appearance: none;
+  }
+  [data-theme="light"] .input-wrap input { background: rgba(255,255,255,0.7); }
+  .input-wrap input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(108,99,255,0.2), var(--shadow-glow); background: rgba(108,99,255,0.05); }
+  .input-wrap input::placeholder { color: var(--text-muted); }
+  .input-unit {
+    position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.03em;
+  }
+  .input-wrap input.error { border-color: var(--accent-2); box-shadow: 0 0 0 3px rgba(255,101,132,0.2); }
+  .error-msg { font-size: 12px; color: var(--accent-2); margin-top: 4px; display: none; }
+  .error-msg.show { display: block; animation: fadeIn 0.2s ease; }
+
+  /* ===== BUTTONS ===== */
+  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    flex: 1; min-width: 130px; height: 54px; border-radius: var(--radius-sm); border: none;
+    font-family: var(--font-body); font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all var(--transition); position: relative; overflow: hidden;
+  }
+  .btn::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0); transition: background 0.2s; }
+  .btn:hover::after { background: rgba(255,255,255,0.08); }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary {
+    background: linear-gradient(135deg, #6c63ff 0%, #9d7dff 100%);
+    color: #fff; box-shadow: 0 4px 20px rgba(108,99,255,0.45), 0 0 0 1px rgba(108,99,255,0.3);
+  }
+  .btn-primary:hover { box-shadow: 0 6px 28px rgba(108,99,255,0.6), 0 0 0 1px rgba(108,99,255,0.5); transform: translateY(-1px); }
+  .btn-outline {
+    background: var(--bg-card); color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--border-hover); color: var(--text-primary); }
+  .btn-ghost {
+    background: rgba(255,101,132,0.08); color: #ff6584; border: 1px solid rgba(255,101,132,0.2);
+  }
+  .btn-ghost:hover { background: rgba(255,101,132,0.15); border-color: rgba(255,101,132,0.4); }
+
+  /* Loading spinner */
+  .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; display: none; animation: spin 0.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .btn-primary.loading .spinner { display: block; }
+  .btn-primary.loading .btn-text { opacity: 0.6; }
+
+  /* ===== RESULTS SECTION ===== */
+  #results { display: none; animation: slideUp 0.5s cubic-bezier(0.4,0,0.2,1); }
+  @keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  /* ===== CALORIE CARDS ===== */
+  .calorie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 700px) { .calorie-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 440px) { .calorie-grid { grid-template-columns: 1fr; } }
+
+  .cal-card {
+    border-radius: var(--radius-md); padding: 22px 20px; position: relative; overflow: hidden;
+    border: 1px solid var(--border); transition: all var(--transition); cursor: default;
+  }
+  .cal-card::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity var(--transition); }
+  .cal-card:hover { transform: translateY(-3px); }
+  .cal-card:hover::before { opacity: 1; }
+
+  .cal-card.maintenance { background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(108,99,255,0.03)); border-color: rgba(108,99,255,0.25); }
+  .cal-card.maintenance::before { background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(108,99,255,0.05)); }
+  .cal-card.maintenance:hover { box-shadow: 0 8px 32px rgba(108,99,255,0.25); border-color: rgba(108,99,255,0.4); }
+
+  .cal-card.fat-loss { background: linear-gradient(135deg, rgba(67,233,123,0.08), rgba(67,233,123,0.02)); border-color: rgba(67,233,123,0.2); }
+  .cal-card.fat-loss::before { background: linear-gradient(135deg, rgba(67,233,123,0.14), rgba(67,233,123,0.04)); }
+  .cal-card.fat-loss:hover { box-shadow: 0 8px 32px rgba(67,233,123,0.2); border-color: rgba(67,233,123,0.4); }
+
+  .cal-card.aggressive { background: linear-gradient(135deg, rgba(255,101,132,0.08), rgba(255,101,132,0.02)); border-color: rgba(255,101,132,0.2); }
+  .cal-card.aggressive::before { background: linear-gradient(135deg, rgba(255,101,132,0.14), rgba(255,101,132,0.04)); }
+  .cal-card.aggressive:hover { box-shadow: 0 8px 32px rgba(255,101,132,0.2); border-color: rgba(255,101,132,0.4); }
+
+  .cal-card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+  .cal-card.maintenance .cal-card-label { color: #a89dff; }
+  .cal-card.fat-loss .cal-card-label { color: #43e97b; }
+  .cal-card.aggressive .cal-card-label { color: #ff6584; }
+
+  .cal-card-value { font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+  .cal-card-unit { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .cal-card-diff { font-size: 12px; font-weight: 600; margin-top: 8px; padding: 4px 10px; border-radius: 50px; display: inline-block; }
+  .cal-card.fat-loss .cal-card-diff { background: rgba(67,233,123,0.15); color: #43e97b; }
+  .cal-card.aggressive .cal-card-diff { background: rgba(255,101,132,0.15); color: #ff6584; }
+  .cal-card-icon { position: absolute; top: 18px; right: 18px; font-size: 1.6rem; opacity: 0.35; }
+
+  /* ===== MACRO CARDS ===== */
+  .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  @media (max-width: 700px) { .macro-grid { grid-template-columns: 1fr; } }
+
+  .macro-card {
+    border-radius: var(--radius-md); padding: 24px 20px;
+    border: 1px solid var(--border); background: var(--bg-card);
+    position: relative; overflow: hidden; transition: all var(--transition);
+  }
+  .macro-card:hover { transform: translateY(-3px); border-color: var(--border-hover); }
+
+  .macro-icon { font-size: 2rem; margin-bottom: 12px; }
+  .macro-name { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .macro-card.protein .macro-name { color: var(--protein-color); }
+  .macro-card.carbs .macro-name { color: var(--carbs-color); }
+  .macro-card.fat .macro-name { color: var(--fat-color); }
+
+  .macro-grams { font-family: var(--font-head); font-size: 2rem; font-weight: 700; color: var(--text-primary); }
+  .macro-grams span { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+  .macro-kcal { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+  /* Progress bar */
+  .progress-wrap { margin-top: 14px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
+  .progress-bar { height: 5px; border-radius: 10px; background: rgba(255,255,255,0.07); overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 10px; width: 0; transition: width 1s cubic-bezier(0.4,0,0.2,1) 0.3s; }
+  .macro-card.protein .progress-fill { background: linear-gradient(90deg, #ff6b6b, #ffa0a0); }
+  .macro-card.carbs .progress-fill { background: linear-gradient(90deg, #4ecdc4, #80ede8); }
+  .macro-card.fat .progress-fill { background: linear-gradient(90deg, #f6d365, #ffd95a); }
+
+  /* Glow strip at bottom of macro card */
+  .macro-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+  .macro-card.protein::after { background: linear-gradient(90deg, transparent, var(--protein-color), transparent); }
+  .macro-card.carbs::after { background: linear-gradient(90deg, transparent, var(--carbs-color), transparent); }
+  .macro-card.fat::after { background: linear-gradient(90deg, transparent, var(--fat-color), transparent); }
+
+  /* ===== TOTAL CALORIES BANNER ===== */
+  .total-banner {
+    background: linear-gradient(135deg, rgba(108,99,255,0.12), rgba(157,125,255,0.08));
+    border: 1px solid rgba(108,99,255,0.25); border-radius: var(--radius-md);
+    padding: 24px 28px; display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; flex-wrap: wrap; gap: 16px;
+    box-shadow: 0 0 40px rgba(108,99,255,0.12);
+  }
+  .total-banner-label { font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+  .total-banner-value { font-family: var(--font-head); font-size: 2.8rem; font-weight: 700; color: #a89dff; line-height: 1; }
+  .total-banner-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+  .total-split { display: flex; gap: 20px; flex-wrap: wrap; }
+  .total-split-item { text-align: center; }
+  .total-split-item .val { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; }
+  .total-split-item .lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ===== CHART ===== */
+  .chart-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .chart-wrap { grid-template-columns: 1fr; } }
+  .chart-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px; }
+  .chart-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .chart-canvas-wrap { position: relative; height: 220px; }
+
+  /* Custom legend */
+  .legend { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .legend-name { color: var(--text-secondary); flex: 1; }
+  .legend-val { font-weight: 600; color: var(--text-primary); }
+  .legend-pct { font-size: 11px; color: var(--text-muted); }
+
+  /* ===== BMI & EXTRAS SECTION ===== */
+  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  @media (max-width: 700px) { .extras-grid { grid-template-columns: 1fr; } }
+
+  .bmi-meter { margin: 20px 0 12px; position: relative; }
+  .bmi-bar { height: 10px; border-radius: 10px; background: linear-gradient(90deg, #43e97b 0%, #f6d365 40%, #ff6584 70%, #c0392b 100%); position: relative; }
+  .bmi-needle { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 18px; height: 18px; background: white; border-radius: 50%; border: 3px solid var(--bg-secondary); box-shadow: 0 2px 8px rgba(0,0,0,0.4); transition: left 1s cubic-bezier(0.4,0,0.2,1) 0.4s; }
+  .bmi-labels { display: flex; justify-content: space-between; margin-top: 8px; }
+  .bmi-labels span { font-size: 10px; color: var(--text-muted); }
+  .bmi-value-display { text-align: center; margin: 12px 0; }
+  .bmi-num { font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+  .bmi-cat { font-size: 14px; font-weight: 600; margin-top: 4px; padding: 4px 14px; border-radius: 50px; display: inline-block; }
+  .bmi-cat.underweight { background: rgba(67,184,255,0.15); color: #43b8ff; }
+  .bmi-cat.normal { background: rgba(67,233,123,0.15); color: #43e97b; }
+  .bmi-cat.overweight { background: rgba(246,211,101,0.15); color: #f6d365; }
+  .bmi-cat.obese { background: rgba(255,101,132,0.15); color: #ff6584; }
+
+  .height-input-row { display: flex; gap: 10px; align-items: flex-end; }
+  .height-input-row .input-group { flex: 1; }
+
+  .weight-range-row { display: flex; gap: 12px; margin-top: 12px; }
+  .wr-item { flex: 1; background: rgba(67,233,123,0.08); border: 1px solid rgba(67,233,123,0.2); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+  .wr-item .wr-val { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: #43e97b; }
+  .wr-item .wr-lbl { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Water intake */
+  .water-val { font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: #4ecdc4; line-height: 1; text-align: center; margin: 16px 0 4px; }
+  .water-sub { text-align: center; font-size: 13px; color: var(--text-secondary); }
+  .water-cups { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; justify-content: center; }
+  .water-cup { font-size: 1.4rem; opacity: 0.25; transition: opacity 0.3s; }
+  .water-cup.active { opacity: 1; }
+
+  /* ===== ACTION BUTTONS ROW ===== */
+  .action-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .btn-action {
+    flex: 1; min-width: 140px; height: 48px; border-radius: var(--radius-sm);
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all var(--transition); border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-secondary);
+  }
+  .btn-action:hover { border-color: var(--border-hover); color: var(--text-primary); background: var(--bg-card-hover); transform: translateY(-1px); }
+  .btn-action.copy:hover { border-color: rgba(67,233,123,0.4); color: #43e97b; }
+  .btn-action.pdf:hover { border-color: rgba(108,99,255,0.4); color: #a89dff; }
+  .btn-action.share:hover { border-color: rgba(78,205,196,0.4); color: #4ecdc4; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    background: #1e1e2e; border: 1px solid rgba(67,233,123,0.3); border-radius: var(--radius-sm);
+    padding: 12px 20px; font-size: 14px; font-weight: 500; color: #43e97b;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4); transform: translateY(80px); opacity: 0;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1); pointer-events: none; display: flex; gap: 8px; align-items: center;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ===== SECTION DIVIDER ===== */
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .card { padding: 20px 16px; }
+    .btn-row { flex-direction: column; }
+    .btn { min-width: 100%; }
+    .hero { padding: 40px 16px 32px; }
+    .total-banner { flex-direction: column; }
+  }
+
+  /* ===== NUMBER COUNTER ANIMATION ===== */
+  .count-up { display: inline-block; }
+
+  /* ===== SCROLLBAR ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+  /* ===== FOOTER ===== */
+  .footer { text-align: center; padding: 32px 0 16px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+  /* Number counter animation helper */
+  @keyframes countUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-gradient" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+<div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark mode">🌙</button>
+
+<!-- Toast notification -->
+<div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+<div class="wrapper">
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="hero-badge">🔥 Nutrition Intelligence</div>
+    <h1>Weight Loss &amp;<br/>Macro Calculator</h1>
+    <p>Enter your body weight to instantly get your personalized maintenance calories, fat loss targets, and precise macro breakdown.</p>
+  </header>
+
+  <!-- ===== INPUT CARD ===== -->
+  <section class="card" aria-label="Calculator inputs">
+    <div class="card-title">
+      <span class="icon">⚙️</span> Your Details
+      <span class="badge">Step 1</span>
+    </div>
+
+    <div class="input-grid">
+      <!-- Weight -->
+      <div class="input-group">
+        <label for="weight">Body Weight</label>
+        <div class="input-wrap">
+          <input type="number" id="weight" placeholder="e.g. 75" min="20" max="300" step="0.1" aria-describedby="weightError" />
+          <span class="input-unit">kg</span>
+        </div>
+        <span class="error-msg" id="weightError">Please enter a valid weight (20–300 kg)</span>
+      </div>
+
+      <!-- Height (for BMI) -->
+      <div class="input-group">
+        <label for="height">Height <span style="font-weight:400;opacity:0.6;">(for BMI)</span></label>
+        <div class="input-wrap">
+          <input type="number" id="height" placeholder="e.g. 175" min="100" max="250" step="1" aria-describedby="heightError" />
+          <span class="input-unit">cm</span>
+        </div>
+        <span class="error-msg" id="heightError">Please enter a valid height (100–250 cm)</span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" id="calculateBtn" onclick="calculate()">
+        <div class="spinner" id="spinner" aria-hidden="true"></div>
+        <span class="btn-text">⚡ Calculate Now</span>
+      </button>
+      <button class="btn btn-ghost" onclick="resetAll()">↺ Reset</button>
+    </div>
+  </section>
+
+  <!-- ===== RESULTS ===== -->
+  <div id="results" aria-live="polite">
+
+    <!-- CALORIE SECTION -->
+    <div class="section-label">🔥 Calorie Targets</div>
+    <div class="calorie-grid">
+      <div class="cal-card maintenance">
+        <span class="cal-card-icon">🎯</span>
+        <div class="cal-card-label">Maintenance</div>
+        <div class="cal-card-value count-up" id="maintenanceCal">—</div>
+        <div class="cal-card-unit">calories / day</div>
+      </div>
+      <div class="cal-card fat-loss">
+        <span class="cal-card-icon">📉</span>
+        <div class="cal-card-label">Fat Loss</div>
+        <div class="cal-card-value count-up" id="fatLossCal">—</div>
+        <div class="cal-card-unit">calories / day</div>
+        <div class="cal-card-diff" id="fatLossDiff">−500 kcal deficit</div>
+      </div>
+      <div class="cal-card aggressive">
+        <span class="cal-card-icon">⚡</span>
+        <div class="cal-card-label">Aggressive Cut</div>
+        <div class="cal-card-value count-up" id="aggressiveCal">—</div>
+        <div class="cal-card-unit">calories / day</div>
+        <div class="cal-card-diff" id="aggressiveDiff">−700 kcal deficit</div>
+      </div>
+    </div>
+
+    <!-- TOTAL BANNER -->
+    <div class="total-banner" role="region" aria-label="Total macro calories">
+      <div>
+        <div class="total-banner-label">Total Daily Calories from Macros</div>
+        <div class="total-banner-value" id="totalCal">—</div>
+        <div class="total-banner-sub">Protein + Carbs + Fat combined</div>
+      </div>
+      <div class="total-split" id="totalSplit">
+        <div class="total-split-item">
+          <div class="val" style="color:var(--protein-color)" id="splitProtein">—</div>
+          <div class="lbl">Protein</div>
+        </div>
+        <div class="total-split-item">
+          <div class="val" style="color:var(--carbs-color)" id="splitCarbs">—</div>
+          <div class="lbl">Carbs</div>
+        </div>
+        <div class="total-split-item">
+          <div class="val" style="color:var(--fat-color)" id="splitFat">—</div>
+          <div class="lbl">Fat</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACRO SECTION -->
+    <div class="section-label">💪 Macro Breakdown</div>
+    <div class="macro-grid">
+      <!-- Protein -->
+      <div class="macro-card protein">
+        <div class="macro-icon">🥩</div>
+        <div class="macro-name">Protein</div>
+        <div class="macro-grams" id="proteinG">— <span>g</span></div>
+        <div class="macro-kcal" id="proteinKcal">— kcal</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>of daily macros</span><span id="proteinPct">—%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="proteinBar" role="progressbar" aria-label="Protein percentage"></div></div>
+        </div>
+      </div>
+      <!-- Carbs -->
+      <div class="macro-card carbs">
+        <div class="macro-icon">🌾</div>
+        <div class="macro-name">Carbohydrates</div>
+        <div class="macro-grams" id="carbsG">— <span>g</span></div>
+        <div class="macro-kcal" id="carbsKcal">— kcal</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>of daily macros</span><span id="carbsPct">—%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="carbsBar" role="progressbar" aria-label="Carbs percentage"></div></div>
+        </div>
+      </div>
+      <!-- Fat -->
+      <div class="macro-card fat">
+        <div class="macro-icon">🥑</div>
+        <div class="macro-name">Healthy Fats</div>
+        <div class="macro-grams" id="fatG">— <span>g</span></div>
+        <div class="macro-kcal" id="fatKcal">— kcal</div>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>of daily macros</span><span id="fatPct">—%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="fatBar" role="progressbar" aria-label="Fat percentage"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS -->
+    <div class="section-label">📊 Visual Distribution</div>
+    <div class="chart-wrap" style="margin-bottom:24px;">
+      <div class="chart-box">
+        <div class="chart-title">Macro Distribution (kcal)</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="donutChart" role="img" aria-label="Donut chart showing macro calorie distribution between protein, carbs, and fat"></canvas>
+        </div>
+        <div class="legend" id="donutLegend"></div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Calorie Comparison</div>
+        <div class="chart-canvas-wrap">
+          <canvas id="barChart" role="img" aria-label="Bar chart comparing maintenance, fat loss, and aggressive fat loss calorie targets"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- BMI + WATER ===== -->
+    <div class="section-label" id="extrasLabel">📏 BMI &amp; Wellness</div>
+    <div class="extras-grid">
+
+      <!-- BMI Card -->
+      <div class="card" id="bmiCard" style="margin-bottom:0;" aria-label="BMI calculator results">
+        <div class="card-title"><span class="icon">⚖️</span> BMI Calculator</div>
+        <div id="bmiContent">
+          <div style="text-align:center;color:var(--text-muted);font-size:13px;padding:20px 0;">Enter your height above to calculate BMI</div>
+        </div>
+      </div>
+
+      <!-- Water Card -->
+      <div class="card" style="margin-bottom:0;" aria-label="Daily water intake recommendation">
+        <div class="card-title"><span class="icon">💧</span> Daily Water Intake</div>
+        <div class="water-val" id="waterVal">—</div>
+        <div class="water-sub" id="waterSub">Enter weight to calculate</div>
+        <div class="water-cups" id="waterCups" aria-label="Water cups visual"></div>
+        <div style="margin-top:16px;padding:12px;background:rgba(78,205,196,0.08);border:1px solid rgba(78,205,196,0.2);border-radius:var(--radius-sm);">
+          <p style="font-size:12px;color:var(--text-secondary);line-height:1.6;">💡 Drink an extra <strong style="color:#4ecdc4;">500ml</strong> on active days. Spread intake throughout the day for best absorption.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Healthy Weight Range -->
+    <div id="weightRangeSection" style="display:none; margin-top:24px;">
+      <div class="card" style="margin-bottom:0;">
+        <div class="card-title"><span class="icon">🏋️</span> Healthy Weight Range <span style="font-size:12px;color:var(--text-muted);margin-left:4px;">(for your height)</span></div>
+        <div class="weight-range-row">
+          <div class="wr-item">
+            <div class="wr-val" id="wMin">—</div>
+            <div class="wr-lbl">Minimum (BMI 18.5)</div>
+          </div>
+          <div class="wr-item">
+            <div class="wr-val" id="wMax">—</div>
+            <div class="wr-lbl">Maximum (BMI 24.9)</div>
+          </div>
+          <div class="wr-item" id="wCurrentWrap">
+            <div class="wr-val" id="wCurrent" style="color:#a89dff;">—</div>
+            <div class="wr-lbl">Your Current Weight</div>
+          </div>
+        </div>
+        <p id="weightAdvice" style="margin-top:14px;font-size:13px;color:var(--text-secondary);line-height:1.6;"></p>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="action-row" role="group" aria-label="Result actions">
+      <button class="btn-action copy" onclick="copyResults()">📋 Copy Results</button>
+      <button class="btn-action pdf" onclick="downloadPDF()">📄 Download PDF</button>
+      <button class="btn-action share" onclick="shareResults()">🔗 Share</button>
+    </div>
+  </div>
+
+</div><!-- /wrapper -->
+
+<footer class="footer">
+  <p>⚡ Macro Calculator &nbsp;·&nbsp; Formulas: BW × 32 maintenance &nbsp;·&nbsp; For informational purposes only — consult a nutritionist</p>
+</footer>
+
+<script>
+/* ===========================
+   STATE & CHARTS
+=========================== */
+let donutChart = null;
+let barChart = null;
+let lastResults = null;
+
+/* ===========================
+   THEME TOGGLE
+=========================== */
+const themeBtn = document.getElementById('themeToggle');
+let isDark = true;
+
+themeBtn.addEventListener('click', () => {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeBtn.textContent = isDark ? '🌙' : '☀️';
+  if (lastResults) updateCharts(lastResults); // re-render charts for new theme
+});
+
+/* ===========================
+   VALIDATION
+=========================== */
+function validateWeight(val) {
+  const n = parseFloat(val);
+  return !isNaN(n) && n >= 20 && n <= 300;
+}
+function validateHeight(val) {
+  if (!val || val === '') return true; // optional
+  const n = parseFloat(val);
+  return !isNaN(n) && n >= 100 && n <= 250;
+}
+
+function showError(id, msgId) {
+  document.getElementById(id).classList.add('error');
+  document.getElementById(msgId).classList.add('show');
+}
+function clearError(id, msgId) {
+  document.getElementById(id).classList.remove('error');
+  document.getElementById(msgId).classList.remove('show');
+}
+
+/* ===========================
+   ANIMATED NUMBER COUNTER
+=========================== */
+function animateCount(el, target, duration = 800, prefix = '', suffix = '') {
+  const start = Date.now();
+  const startVal = 0;
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+  function step() {
+    const elapsed = Date.now() - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const current = Math.round(easeOut(progress) * target);
+    el.textContent = prefix + current.toLocaleString() + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = prefix + target.toLocaleString() + suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+/* ===========================
+   MAIN CALCULATE FUNCTION
+=========================== */
+function calculate() {
+  const weightEl = document.getElementById('weight');
+  const heightEl = document.getElementById('height');
+  const btn = document.getElementById('calculateBtn');
+
+  const weightVal = weightEl.value.trim();
+  const heightVal = heightEl.value.trim();
+
+  // Validate
+  let valid = true;
+  if (!validateWeight(weightVal)) { showError('weight', 'weightError'); valid = false; }
+  else { clearError('weight', 'weightError'); }
+
+  if (!validateHeight(heightVal)) { showError('height', 'heightError'); valid = false; }
+  else { clearError('height', 'heightError'); }
+
+  if (!valid) return;
+
+  // Loading state
+  btn.classList.add('loading');
+  document.getElementById('spinner').style.display = 'block';
+
+  setTimeout(() => {
+    const bw = parseFloat(weightVal);
+    const ht = heightVal ? parseFloat(heightVal) : null;
+
+    /* --- CALORIE CALCULATIONS --- */
+    const maintenance = Math.round(bw * 32);
+    const fatLoss = maintenance - 500;
+    const aggressive = maintenance - 700;
+
+    /* --- MACRO CALCULATIONS --- */
+    const protein = Math.round(bw * 1.7);
+    const carbs = Math.round(bw * 2);
+    const fat = Math.round(bw * 0.9);
+
+    /* --- CALORIE CONVERSIONS --- */
+    const proteinKcal = protein * 4;
+    const carbsKcal = carbs * 4;
+    const fatKcal = fat * 9;
+    const totalKcal = proteinKcal + carbsKcal + fatKcal;
+
+    /* --- PERCENTAGES --- */
+    const proteinPct = Math.round((proteinKcal / totalKcal) * 100);
+    const carbsPct = Math.round((carbsKcal / totalKcal) * 100);
+    const fatPct = 100 - proteinPct - carbsPct;
+
+    /* --- WATER INTAKE: 35ml per kg --- */
+    const waterLiters = (bw * 35 / 1000).toFixed(1);
+    const waterCups = Math.round(bw * 35 / 250);
+
+    /* --- BMI --- */
+    let bmi = null;
+    if (ht) {
+      const htM = ht / 100;
+      bmi = (bw / (htM * htM)).toFixed(1);
+    }
+
+    lastResults = { bw, ht, maintenance, fatLoss, aggressive, protein, carbs, fat, proteinKcal, carbsKcal, fatKcal, totalKcal, proteinPct, carbsPct, fatPct, waterLiters, waterCups, bmi };
+
+    renderResults(lastResults);
+
+    btn.classList.remove('loading');
+    document.getElementById('spinner').style.display = 'none';
+  }, 700);
+}
+
+/* ===========================
+   RENDER RESULTS
+=========================== */
+function renderResults(r) {
+  const resultsEl = document.getElementById('results');
+
+  // Show results section
+  resultsEl.style.display = 'block';
+  resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // --- Calories ---
+  animateCount(document.getElementById('maintenanceCal'), r.maintenance);
+  animateCount(document.getElementById('fatLossCal'), r.fatLoss);
+  animateCount(document.getElementById('aggressiveCal'), r.aggressive);
+  animateCount(document.getElementById('totalCal'), r.totalKcal);
+
+  document.getElementById('fatLossDiff').textContent = `−500 kcal deficit`;
+  document.getElementById('aggressiveDiff').textContent = `−700 kcal deficit`;
+
+  // Split
+  document.getElementById('splitProtein').textContent = r.proteinKcal + ' kcal';
+  document.getElementById('splitCarbs').textContent = r.carbsKcal + ' kcal';
+  document.getElementById('splitFat').textContent = r.fatKcal + ' kcal';
+
+  // --- Macros ---
+  document.getElementById('proteinG').innerHTML = `${r.protein} <span>g</span>`;
+  document.getElementById('proteinKcal').textContent = `${r.proteinKcal} kcal`;
+  document.getElementById('proteinPct').textContent = `${r.proteinPct}%`;
+
+  document.getElementById('carbsG').innerHTML = `${r.carbs} <span>g</span>`;
+  document.getElementById('carbsKcal').textContent = `${r.carbsKcal} kcal`;
+  document.getElementById('carbsPct').textContent = `${r.carbsPct}%`;
+
+  document.getElementById('fatG').innerHTML = `${r.fat} <span>g</span>`;
+  document.getElementById('fatKcal').textContent = `${r.fatKcal} kcal`;
+  document.getElementById('fatPct').textContent = `${r.fatPct}%`;
+
+  // Animate progress bars
+  setTimeout(() => {
+    document.getElementById('proteinBar').style.width = r.proteinPct + '%';
+    document.getElementById('carbsBar').style.width = r.carbsPct + '%';
+    document.getElementById('fatBar').style.width = r.fatPct + '%';
+  }, 150);
+
+  // --- Water ---
+  document.getElementById('waterVal').textContent = `${r.waterLiters}L`;
+  document.getElementById('waterSub').textContent = `Recommended daily water intake`;
+  renderWaterCups(r.waterCups);
+
+  // --- BMI ---
+  renderBMI(r.bmi, r.bw, r.ht);
+
+  // --- Charts ---
+  updateCharts(r);
+}
+
+/* ===========================
+   WATER CUPS VISUAL
+=========================== */
+function renderWaterCups(cups) {
+  const el = document.getElementById('waterCups');
+  el.innerHTML = '';
+  const total = Math.min(cups, 12);
+  for (let i = 0; i < 12; i++) {
+    const cup = document.createElement('span');
+    cup.className = 'water-cup' + (i < total ? ' active' : '');
+    cup.textContent = '🥤';
+    cup.setAttribute('aria-hidden', 'true');
+    el.appendChild(cup);
+  }
+}
+
+/* ===========================
+   BMI RENDER
+=========================== */
+function renderBMI(bmi, bw, ht) {
+  const content = document.getElementById('bmiContent');
+  if (!bmi) {
+    content.innerHTML = `<div style="text-align:center;color:var(--text-muted);font-size:13px;padding:20px 0;">Enter your height above to calculate BMI</div>`;
+    return;
+  }
+
+  const bmiNum = parseFloat(bmi);
+  let cat, catClass, pct;
+  if (bmiNum < 18.5) { cat = 'Underweight'; catClass = 'underweight'; pct = Math.max(2, (bmiNum / 40) * 100); }
+  else if (bmiNum < 25) { cat = 'Normal Weight'; catClass = 'normal'; pct = (bmiNum / 40) * 100; }
+  else if (bmiNum < 30) { cat = 'Overweight'; catClass = 'overweight'; pct = (bmiNum / 40) * 100; }
+  else { cat = 'Obese'; catClass = 'obese'; pct = Math.min(98, (bmiNum / 40) * 100); }
+
+  content.innerHTML = `
+    <div class="bmi-value-display">
+      <div class="bmi-num">${bmi}</div>
+      <div class="bmi-cat ${catClass}">${cat}</div>
+    </div>
+    <div class="bmi-meter">
+      <div class="bmi-bar">
+        <div class="bmi-needle" id="bmiNeedle" style="left:0%"></div>
+      </div>
+      <div class="bmi-labels">
+        <span>Under</span><span>Normal</span><span>Over</span><span>Obese</span>
+      </div>
+    </div>
+  `;
+  setTimeout(() => {
+    const needle = document.getElementById('bmiNeedle');
+    if (needle) needle.style.left = Math.min(97, pct) + '%';
+  }, 100);
+
+  // Healthy weight range
+  if (ht) {
+    const htM = ht / 100;
+    const minW = (18.5 * htM * htM).toFixed(1);
+    const maxW = (24.9 * htM * htM).toFixed(1);
+    document.getElementById('wMin').textContent = minW + ' kg';
+    document.getElementById('wMax').textContent = maxW + ' kg';
+    document.getElementById('wCurrent').textContent = bw + ' kg';
+
+    let advice = '';
+    if (catClass === 'normal') advice = `✅ Great news! Your current weight of ${bw}kg is within the healthy BMI range for your height. Keep maintaining your lifestyle.`;
+    else if (catClass === 'underweight') advice = `⬆️ Your weight is slightly below the healthy range. Aim to gradually increase to ${minW}–${maxW} kg through balanced nutrition.`;
+    else if (catClass === 'overweight') advice = `📉 Your goal range is ${minW}–${maxW} kg. A moderate calorie deficit with the fat loss target above will help you get there safely.`;
+    else advice = `🏃 Your weight is above the healthy range. Work toward ${maxW} kg using your aggressive fat loss target. Consider consulting a healthcare professional.`;
+
+    document.getElementById('weightAdvice').textContent = advice;
+    document.getElementById('weightRangeSection').style.display = 'block';
+  }
+}
+
+/* ===========================
+   CHARTS
+=========================== */
+function updateCharts(r) {
+  const textColor = isDark ? '#9090b0' : '#4a4a6a';
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+
+  // --- Donut Chart ---
+  const donutCtx = document.getElementById('donutChart').getContext('2d');
+  if (donutChart) donutChart.destroy();
+  donutChart = new Chart(donutCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Protein', 'Carbs', 'Fat'],
+      datasets: [{
+        data: [r.proteinKcal, r.carbsKcal, r.fatKcal],
+        backgroundColor: ['#ff6b6b', '#4ecdc4', '#f6d365'],
+        borderColor: isDark ? '#12121a' : '#f0f0ff',
+        borderWidth: 3,
+        hoverBorderWidth: 4,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      cutout: '70%',
+      plugins: { legend: { display: false }, tooltip: {
+        backgroundColor: isDark ? '#1e1e2e' : '#fff',
+        titleColor: isDark ? '#f0f0ff' : '#1a1a2e',
+        bodyColor: textColor, borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+        borderWidth: 1, padding: 12, cornerRadius: 10,
+        callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.parsed} kcal (${Math.round((ctx.parsed/r.totalKcal)*100)}%)`
+        }
+      }}
+    }
+  });
+
+  // Legend
+  const legendEl = document.getElementById('donutLegend');
+  const items = [
+    { name: 'Protein', val: `${r.protein}g`, kcal: r.proteinKcal, pct: r.proteinPct, color: '#ff6b6b' },
+    { name: 'Carbs', val: `${r.carbs}g`, kcal: r.carbsKcal, pct: r.carbsPct, color: '#4ecdc4' },
+    { name: 'Fats', val: `${r.fat}g`, kcal: r.fatKcal, pct: r.fatPct, color: '#f6d365' }
+  ];
+  legendEl.innerHTML = items.map(i => `
+    <div class="legend-item">
+      <div class="legend-dot" style="background:${i.color}"></div>
+      <span class="legend-name">${i.name} (${i.val})</span>
+      <span class="legend-val">${i.kcal} kcal</span>
+      <span class="legend-pct">${i.pct}%</span>
+    </div>
+  `).join('');
+
+  // --- Bar Chart ---
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  if (barChart) barChart.destroy();
+  barChart = new Chart(barCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Maintenance', 'Fat Loss', 'Aggressive'],
+      datasets: [{
+        data: [r.maintenance, r.fatLoss, r.aggressive],
+        backgroundColor: ['rgba(108,99,255,0.75)', 'rgba(67,233,123,0.75)', 'rgba(255,101,132,0.75)'],
+        borderColor: ['#6c63ff', '#43e97b', '#ff6584'],
+        borderWidth: 2, borderRadius: 8,
+        hoverBackgroundColor: ['rgba(108,99,255,0.95)', 'rgba(67,233,123,0.95)', 'rgba(255,101,132,0.95)']
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: isDark ? '#1e1e2e' : '#fff',
+          titleColor: isDark ? '#f0f0ff' : '#1a1a2e',
+          bodyColor: textColor, borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+          borderWidth: 1, padding: 12, cornerRadius: 10,
+          callbacks: { label: ctx => ` ${ctx.parsed.y.toLocaleString()} kcal/day` }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: textColor, font: { size: 12 } }, border: { display: false } },
+        y: {
+          grid: { color: gridColor }, ticks: { color: textColor, font: { size: 11 }, callback: v => v.toLocaleString() },
+          border: { display: false }, min: Math.max(0, r.aggressive - 300)
+        }
+      }
+    }
+  });
+}
+
+/* ===========================
+   RESET
+=========================== */
+function resetAll() {
+  document.getElementById('weight').value = '';
+  document.getElementById('height').value = '';
+  clearError('weight', 'weightError');
+  clearError('height', 'heightError');
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('weightRangeSection').style.display = 'none';
+  lastResults = null;
+  // Reset progress bars
+  ['proteinBar','carbsBar','fatBar'].forEach(id => document.getElementById(id).style.width = '0');
+  if (donutChart) { donutChart.destroy(); donutChart = null; }
+  if (barChart) { barChart.destroy(); barChart = null; }
+}
+
+/* ===========================
+   COPY RESULTS
+=========================== */
+function copyResults() {
+  if (!lastResults) return;
+  const r = lastResults;
+  const text = `
+╔══════════════════════════════════════╗
+║   WEIGHT LOSS & MACRO CALCULATOR    ║
+╚══════════════════════════════════════╝
+
+Body Weight: ${r.bw} kg
+
+🔥 CALORIE TARGETS
+• Maintenance:    ${r.maintenance.toLocaleString()} kcal/day
+• Fat Loss:       ${r.fatLoss.toLocaleString()} kcal/day (−500 deficit)
+• Aggressive Cut: ${r.aggressive.toLocaleString()} kcal/day (−700 deficit)
+
+💪 DAILY MACROS
+• Protein:  ${r.protein}g → ${r.proteinKcal} kcal (${r.proteinPct}%)
+• Carbs:    ${r.carbs}g → ${r.carbsKcal} kcal (${r.carbsPct}%)
+• Fat:      ${r.fat}g → ${r.fatKcal} kcal (${r.fatPct}%)
+
+📊 TOTAL FROM MACROS: ${r.totalKcal.toLocaleString()} kcal
+
+💧 DAILY WATER: ${r.waterLiters}L${r.bmi ? `\n⚖️ BMI: ${r.bmi}` : ''}
+
+Generated by Macro Calculator
+  `.trim();
+
+  navigator.clipboard.writeText(text).then(() => showToast('✅ Results copied to clipboard!')).catch(() => showToast('⚠️ Copy not supported — try selecting manually'));
+}
+
+/* ===========================
+   PDF DOWNLOAD
+=========================== */
+function downloadPDF() {
+  if (!lastResults) return;
+  const r = lastResults;
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    const W = doc.internal.pageSize.getWidth();
+    const margin = 20;
+
+    // Background header
+    doc.setFillColor(15, 15, 25);
+    doc.rect(0, 0, W, 50, 'F');
+
+    // Title
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(168, 157, 255);
+    doc.text('MACRO CALCULATOR', W / 2, 22, { align: 'center' });
+    doc.setFontSize(11);
+    doc.setTextColor(144, 144, 176);
+    doc.text('Personalized Nutrition Report', W / 2, 32, { align: 'center' });
+    doc.setFontSize(9);
+    doc.text(`Generated: ${new Date().toLocaleDateString('en-IN', { year:'numeric',month:'long',day:'numeric' })}   •   Body Weight: ${r.bw} kg`, W / 2, 42, { align: 'center' });
+
+    let y = 62;
+    const colW = (W - margin * 2 - 10) / 2;
+
+    function section(title, rows, startY, x, w) {
+      doc.setFillColor(20, 20, 35);
+      doc.roundedRect(x, startY, w, 10 + rows.length * 10 + 8, 3, 3, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(108, 99, 255);
+      doc.text(title.toUpperCase(), x + 6, startY + 8);
+      rows.forEach((row, i) => {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(9);
+        doc.setTextColor(144, 144, 176);
+        doc.text(row[0], x + 6, startY + 17 + i * 10);
+        doc.setFont('helvetica', 'bold');
+        doc.setTextColor(240, 240, 255);
+        doc.text(row[1], x + w - 6, startY + 17 + i * 10, { align: 'right' });
+      });
+      return startY + 10 + rows.length * 10 + 12;
+    }
+
+    // Calorie section (full width)
+    doc.setFillColor(20, 20, 35);
+    doc.roundedRect(margin, y, W - margin * 2, 58, 3, 3, 'F');
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(108, 99, 255);
+    doc.text('CALORIE TARGETS', margin + 6, y + 9);
+    const calRows = [
+      ['Maintenance Calories', `${r.maintenance.toLocaleString()} kcal/day`],
+      ['Fat Loss (−500 deficit)', `${r.fatLoss.toLocaleString()} kcal/day`],
+      ['Aggressive Cut (−700 deficit)', `${r.aggressive.toLocaleString()} kcal/day`],
+      ['Total from Macros', `${r.totalKcal.toLocaleString()} kcal/day`],
+    ];
+    calRows.forEach((row, i) => {
+      const isTotal = i === 3;
+      doc.setFont('helvetica', isTotal ? 'bold' : 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(isTotal ? 168 : 144, isTotal ? 157 : 144, isTotal ? 255 : 176);
+      doc.text(row[0], margin + 6, y + 19 + i * 11);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(240, 240, 255);
+      doc.text(row[1], W - margin - 6, y + 19 + i * 11, { align: 'right' });
+    });
+    y += 68;
+
+    // Macros (two columns)
+    const leftEnd = section('Protein', [
+      ['Daily Amount', `${r.protein} g`],
+      ['Calories', `${r.proteinKcal} kcal`],
+      ['% of Total', `${r.proteinPct}%`]
+    ], y, margin, colW);
+
+    section('Carbohydrates', [
+      ['Daily Amount', `${r.carbs} g`],
+      ['Calories', `${r.carbsKcal} kcal`],
+      ['% of Total', `${r.carbsPct}%`]
+    ], y, margin + colW + 10, colW);
+
+    y = leftEnd;
+    section('Healthy Fats', [
+      ['Daily Amount', `${r.fat} g`],
+      ['Calories', `${r.fatKcal} kcal`],
+      ['% of Total', `${r.fatPct}%`]
+    ], y, margin, colW);
+
+    section('Wellness', [
+      ['Daily Water', `${r.waterLiters} L`],
+      r.bmi ? ['BMI', r.bmi] : ['Body Weight', `${r.bw} kg`]
+    ], y, margin + colW + 10, colW);
+
+    // Footer
+    y = 270;
+    doc.setFillColor(15, 15, 25);
+    doc.rect(0, y, W, 27, 'F');
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(90, 90, 120);
+    doc.text('This report is for informational purposes only. Consult a registered dietitian before making dietary changes.', W / 2, y + 10, { align: 'center' });
+    doc.text('Macro Calculator  ·  Weight Loss & Nutrition Tool', W / 2, y + 18, { align: 'center' });
+
+    doc.save(`macro-report-${r.bw}kg.pdf`);
+    showToast('📄 PDF downloaded successfully!');
+  } catch (e) {
+    console.error(e);
+    showToast('⚠️ PDF generation failed. Try again.');
+  }
+}
+
+/* ===========================
+   SHARE
+=========================== */
+function shareResults() {
+  if (!lastResults) return;
+  const r = lastResults;
+  const text = `My Macro Plan 💪\n• Maintenance: ${r.maintenance} kcal\n• Fat Loss: ${r.fatLoss} kcal\n• Protein: ${r.protein}g | Carbs: ${r.carbs}g | Fat: ${r.fat}g\nCalculated with Macro Calculator!`;
+  if (navigator.share) {
+    navigator.share({ title: 'My Macro Plan', text }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text).then(() => showToast('🔗 Share text copied to clipboard!'));
+  }
+}
+
+/* ===========================
+   TOAST
+=========================== */
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+/* ===========================
+   KEYBOARD SHORTCUT: Enter to calculate
+=========================== */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (document.activeElement.id === 'weight' || document.activeElement.id === 'height')) {
+    calculate();
+  }
+});
+
+/* ===========================
+   INPUT: auto-clear errors on type
+=========================== */
+document.getElementById('weight').addEventListener('input', () => clearError('weight', 'weightError'));
+document.getElementById('height').addEventListener('input', () => clearError('height', 'heightError'));
+</script>
+</body>
+</html>
