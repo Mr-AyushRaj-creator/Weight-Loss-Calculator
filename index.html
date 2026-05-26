@@ -402,6 +402,265 @@
 
   /* Number counter animation helper */
   @keyframes countUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  /* =========================
+   PHYSIQUE SHOWCASE
+========================= */
+
+.physique-section{
+  position:relative;
+  padding:120px 0;
+  overflow:hidden;
+}
+
+.section-heading{
+  text-align:center;
+  margin-bottom:70px;
+}
+
+.section-tag{
+  display:inline-block;
+  padding:10px 22px;
+  border-radius:100px;
+  background:rgba(0,255,255,0.08);
+  border:1px solid rgba(0,255,255,0.2);
+  color:#00e5ff;
+  font-size:12px;
+  letter-spacing:3px;
+  margin-bottom:24px;
+}
+
+.section-heading h2{
+  font-size:72px;
+  font-weight:800;
+  letter-spacing:4px;
+  line-height:1;
+  margin-bottom:20px;
+  background:linear-gradient(to right,#ffffff,#6ec3ff,#d18cff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-heading p{
+  color:#8b95b3;
+  font-size:18px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+
+.physique-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:24px;
+}
+
+.physique-card{
+  position:relative;
+  height:720px;
+  border-radius:32px;
+  overflow:hidden;
+  background:#0c0f18;
+  border:1px solid rgba(255,255,255,0.08);
+  transition:0.5s ease;
+  cursor:pointer;
+}
+
+.physique-card:hover{
+  transform:translateY(-18px) scale(1.02);
+}
+
+.card-glow{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:0.5s ease;
+}
+
+.physique-card:hover .card-glow{
+  opacity:1;
+}
+
+.shredded .card-glow{
+  background:linear-gradient(to top,rgba(0,174,255,0.35),transparent);
+}
+
+.aesthetic .card-glow{
+  background:linear-gradient(to top,rgba(170,0,255,0.35),transparent);
+}
+
+.calisthenics .card-glow{
+  background:linear-gradient(to top,rgba(0,255,242,0.35),transparent);
+}
+
+.bodybuilder .card-glow{
+  background:linear-gradient(to top,rgba(255,174,0,0.35),transparent);
+}
+
+.athlete .card-glow{
+  background:linear-gradient(to top,rgba(0,102,255,0.35),transparent);
+}
+
+.transformation .card-glow{
+  background:linear-gradient(to top,rgba(255,0,119,0.35),transparent);
+}
+
+.physique-image{
+  position:absolute;
+  inset:0;
+}
+
+.physique-image::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.2)
+  );
+}
+
+.physique-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.8s ease;
+}
+
+.physique-card:hover img{
+  transform:scale(1.08);
+}
+
+.physique-image.split{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.physique-content{
+  position:absolute;
+  bottom:40px;
+  left:30px;
+  right:30px;
+  z-index:3;
+}
+
+.physique-icon{
+  width:62px;
+  height:62px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  margin-bottom:24px;
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+.shredded .physique-icon{
+  color:#00b7ff;
+  background:rgba(0,183,255,0.12);
+}
+
+.aesthetic .physique-icon{
+  color:#bb6dff;
+  background:rgba(187,109,255,0.12);
+}
+
+.calisthenics .physique-icon{
+  color:#00ffe5;
+  background:rgba(0,255,229,0.12);
+}
+
+.bodybuilder .physique-icon{
+  color:#ffb700;
+  background:rgba(255,183,0,0.12);
+}
+
+.athlete .physique-icon{
+  color:#3d8bff;
+  background:rgba(61,139,255,0.12);
+}
+
+.transformation .physique-icon{
+  color:#ff4da6;
+  background:rgba(255,77,166,0.12);
+}
+
+.physique-content h3{
+  font-size:38px;
+  font-weight:800;
+  margin-bottom:12px;
+  line-height:1;
+}
+
+.shredded h3{color:#00b7ff;}
+.aesthetic h3{color:#bb6dff;}
+.calisthenics h3{color:#00ffe5;}
+.bodybuilder h3{color:#ffb700;}
+.athlete h3{color:#3d8bff;}
+.transformation h3{color:#ff4da6;}
+
+.physique-content span{
+  display:block;
+  color:#ffffff;
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.physique-content p{
+  color:#9ca6c4;
+  font-size:16px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1600px){
+
+  .physique-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+}
+
+@media(max-width:992px){
+
+  .section-heading h2{
+    font-size:52px;
+  }
+
+  .physique-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:768px){
+
+  .physique-section{
+    padding:80px 0;
+  }
+
+  .section-heading h2{
+    font-size:42px;
+  }
+
+  .section-heading p{
+    font-size:13px;
+    letter-spacing:2px;
+  }
+
+  .physique-grid{
+    grid-template-columns:1fr;
+  }
+
+  .physique-card{
+    height:620px;
+  }
+
+}
 </style>
 </head>
 <body>
@@ -425,6 +684,121 @@
     <h1>Weight Loss &amp;<br/>Macro Calculator</h1>
     <p>Enter your body weight to instantly get your personalized maintenance calories, fat loss targets, and precise macro breakdown.</p>
   </header>
+
+  <!-- =========================
+     FUTURISTIC PHYSIQUE SHOWCASE
+     ADD THIS SECTION BELOW HERO
+========================= -->
+
+<section class="physique-section">
+
+  <div class="section-heading">
+    <span class="section-tag">AI FITNESS EXPERIENCE</span>
+    <h2>PHYSIQUE SHOWCASE</h2>
+    <p>Choose Your Ultimate Transformation Vision</p>
+  </div>
+
+  <div class="physique-grid">
+
+    <!-- SHREDDED -->
+    <div class="physique-card shredded">
+      <div class="card-glow"></div>
+
+      <div class="physique-image">
+        <img src="https://images.unsplash.com/photo-1583500178450-e59e4309b57d?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">⚡</div>
+        <h3>SHREDDED</h3>
+        <span>Low Body Fat</span>
+        <p>Defined Muscles</p>
+      </div>
+    </div>
+
+    <!-- AESTHETIC -->
+    <div class="physique-card aesthetic">
+      <div class="card-glow"></div>
+
+      <div class="physique-image">
+        <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">🔥</div>
+        <h3>AESTHETIC</h3>
+        <span>Perfect Symmetry</span>
+        <p>Balanced Physique</p>
+      </div>
+    </div>
+
+    <!-- CALISTHENICS -->
+    <div class="physique-card calisthenics">
+      <div class="card-glow"></div>
+
+      <div class="physique-image">
+        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">💪</div>
+        <h3>CALISTHENICS</h3>
+        <span>Strength & Control</span>
+        <p>Functional Fitness</p>
+      </div>
+    </div>
+
+    <!-- BODYBUILDER -->
+    <div class="physique-card bodybuilder">
+      <div class="card-glow"></div>
+
+      <div class="physique-image">
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">🏆</div>
+        <h3>BODYBUILDER</h3>
+        <span>Mass & Strength</span>
+        <p>Maximum Size</p>
+      </div>
+    </div>
+
+    <!-- LEAN ATHLETE -->
+    <div class="physique-card athlete">
+      <div class="card-glow"></div>
+
+      <div class="physique-image">
+        <img src="https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">🚀</div>
+        <h3>LEAN ATHLETE</h3>
+        <span>Lean & Athletic</span>
+        <p>Elite Performance</p>
+      </div>
+    </div>
+
+    <!-- TRANSFORMATION -->
+    <div class="physique-card transformation">
+      <div class="card-glow"></div>
+
+      <div class="physique-image split">
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=900&auto=format&fit=crop" alt="">
+        <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=900&auto=format&fit=crop" alt="">
+      </div>
+
+      <div class="physique-content">
+        <div class="physique-icon">📈</div>
+        <h3>TRANSFORMATION</h3>
+        <span>Ordinary → Elite</span>
+        <p>Total Reinvention</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ===== INPUT CARD ===== -->
   <section class="card" aria-label="Calculator inputs">
