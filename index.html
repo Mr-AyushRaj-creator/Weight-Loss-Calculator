@@ -191,7 +191,6 @@ body{
 [data-theme="light"] .btn-hs{border-color:rgba(0,0,0,.15)}
 .btn-hs:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,245,255,.05)}
 [data-theme="light"] .btn-hs:hover{border-color:var(--purple);color:var(--purple);background:rgba(108,99,255,.05)}
-
 .hero-stats{
   display:flex;gap:36px;justify-content:center;flex-wrap:wrap;
   padding-top:36px;border-top:1px solid rgba(255,255,255,.07);
@@ -220,8 +219,6 @@ body{
 @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
 /* ── SECTION COMMON ────────────────────────── */
-.section{position:relative;z-index:1;padding:70px 24px}
-.sec-head{text-align:center;margin-bottom:48px}
 .sec-tag{
   display:inline-flex;align-items:center;gap:7px;
   font-size:11px;font-weight:700;letter-spacing:.1em;
@@ -238,6 +235,7 @@ body{
   color:var(--text);margin-bottom:10px;
 }
 .sec-sub{font-size:.95rem;color:var(--muted2)}
+.sec-head{text-align:center;margin-bottom:48px}
 
 /* ── CALCULATOR SECTION ────────────────────── */
 #calc{
@@ -266,9 +264,7 @@ body{
   display:flex;align-items:center;justify-content:center;font-size:1.2rem;
 }
 .ic-b{background:rgba(14,165,255,.1);border:1px solid rgba(14,165,255,.2)}
-.ic-p{background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.2)}
 .ic-c{background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.2)}
-.ic-g{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2)}
 .gc-title{font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:800;color:var(--text)}
 .gc-sub{font-size:12px;color:var(--muted2);margin-top:2px}
 
@@ -276,10 +272,7 @@ body{
 .i2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:22px}
 @media(max-width:500px){.i2{grid-template-columns:1fr}}
 .ig{display:flex;flex-direction:column;gap:7px}
-.ilbl{
-  font-size:10px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--muted2);
-}
+.ilbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted2)}
 .iw{position:relative}
 .ifield{
   width:100%;height:54px;padding:0 54px 0 16px;
@@ -353,7 +346,6 @@ body{
 #results{display:none;animation:fup .5s ease}
 @keyframes fup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
-/* Divider */
 .rdiv{
   display:flex;align-items:center;gap:10px;
   font-size:10px;font-weight:700;letter-spacing:.1em;
@@ -375,38 +367,20 @@ body{
   cursor:default;transition:transform .3s,box-shadow .3s;
 }
 .cccard:hover{transform:translateY(-4px)}
-.cccard.m{
-  background:linear-gradient(135deg,rgba(14,165,255,.09),rgba(14,165,255,.02));
-  border-color:rgba(14,165,255,.2);
-}
+.cccard.m{background:linear-gradient(135deg,rgba(14,165,255,.09),rgba(14,165,255,.02));border-color:rgba(14,165,255,.2)}
 .cccard.m:hover{box-shadow:0 0 28px rgba(14,165,255,.22);border-color:rgba(14,165,255,.45)}
-.cccard.f{
-  background:linear-gradient(135deg,rgba(16,185,129,.09),rgba(16,185,129,.02));
-  border-color:rgba(16,185,129,.2);
-}
+.cccard.f{background:linear-gradient(135deg,rgba(16,185,129,.09),rgba(16,185,129,.02));border-color:rgba(16,185,129,.2)}
 .cccard.f:hover{box-shadow:0 0 28px rgba(16,185,129,.22);border-color:rgba(16,185,129,.45)}
-.cccard.a{
-  background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(245,158,11,.02));
-  border-color:rgba(245,158,11,.2);
-}
+.cccard.a{background:linear-gradient(135deg,rgba(245,158,11,.09),rgba(245,158,11,.02));border-color:rgba(245,158,11,.2)}
 .cccard.a:hover{box-shadow:0 0 28px rgba(245,158,11,.22);border-color:rgba(245,158,11,.45)}
 .cce{font-size:1.25rem;margin-bottom:7px}
-.ccl{
-  font-size:9.5px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;margin-bottom:5px;
-}
+.ccl{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
 .cccard.m .ccl{color:var(--blue)}
 .cccard.f .ccl{color:var(--green)}
 .cccard.a .ccl{color:var(--orange)}
-.ccv{
-  font-family:'Montserrat',sans-serif;
-  font-size:1.7rem;font-weight:900;color:var(--text);line-height:1;
-}
+.ccv{font-family:'Montserrat',sans-serif;font-size:1.7rem;font-weight:900;color:var(--text);line-height:1}
 .ccu{font-size:9px;color:var(--muted);margin-top:3px}
-.ccb{
-  font-size:9px;font-weight:700;margin-top:7px;
-  padding:3px 9px;border-radius:50px;display:inline-block;
-}
+.ccb{font-size:9px;font-weight:700;margin-top:7px;padding:3px 9px;border-radius:50px;display:inline-block}
 .cccard.f .ccb{background:rgba(16,185,129,.12);color:var(--green)}
 .cccard.a .ccb{background:rgba(245,158,11,.12);color:var(--orange)}
 
@@ -420,10 +394,7 @@ body{
   margin-bottom:20px;
 }
 .tbn-l .lbl{font-size:10px;font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:.06em}
-.tbn-l .val{
-  font-family:'Montserrat',sans-serif;
-  font-size:2.5rem;font-weight:900;color:var(--purple);line-height:1;
-}
+.tbn-l .val{font-family:'Montserrat',sans-serif;font-size:2.5rem;font-weight:900;color:var(--purple);line-height:1}
 .tbn-l .sub{font-size:11px;color:var(--muted);margin-top:2px}
 .tbn-r{display:flex;gap:18px;flex-wrap:wrap}
 .tbi .v{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:700}
@@ -445,24 +416,16 @@ body{
 .mcard.p:hover{border-color:rgba(245,158,11,.48);box-shadow:0 0 24px rgba(245,158,11,.14)}
 .mcard.c:hover{border-color:rgba(0,245,255,.48);box-shadow:0 0 24px rgba(0,245,255,.14)}
 .mcard.f:hover{border-color:rgba(168,85,247,.48);box-shadow:0 0 24px rgba(168,85,247,.14)}
-.mcard::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-}
+.mcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
 .mcard.p::after{background:linear-gradient(90deg,transparent,var(--orange),transparent)}
 .mcard.c::after{background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
 .mcard.f::after{background:linear-gradient(90deg,transparent,var(--purple),transparent)}
 .mc-ico{font-size:1.5rem;margin-bottom:9px}
-.mc-nm{
-  font-size:9.5px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;margin-bottom:5px;
-}
+.mc-nm{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
 .mcard.p .mc-nm{color:var(--orange)}
 .mcard.c .mc-nm{color:var(--cyan)}
 .mcard.f .mc-nm{color:var(--purple)}
-.mc-g{
-  font-family:'Montserrat',sans-serif;
-  font-size:1.9rem;font-weight:900;color:var(--text);line-height:1;
-}
+.mc-g{font-family:'Montserrat',sans-serif;font-size:1.9rem;font-weight:900;color:var(--text);line-height:1}
 .mc-g span{font-size:13px;font-weight:500;color:var(--muted)}
 .mc-k{font-size:11px;color:var(--muted2);margin-top:3px}
 .mc-prog{margin-top:12px}
@@ -477,14 +440,8 @@ body{
 /* Charts */
 .charts{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
 @media(max-width:600px){.charts{grid-template-columns:1fr}}
-.cbox{
-  background:var(--glass);border:1px solid var(--border);
-  border-radius:15px;padding:20px;
-}
-.cbox-t{
-  font-size:10px;font-weight:700;color:var(--muted2);
-  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;
-}
+.cbox{background:var(--glass);border:1px solid var(--border);border-radius:15px;padding:20px}
+.cbox-t{font-size:10px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
 .cbox-c{position:relative;height:195px}
 .leg{display:flex;flex-direction:column;gap:6px;margin-top:10px}
 .li{display:flex;align-items:center;gap:8px;font-size:11px}
@@ -495,19 +452,10 @@ body{
 
 /* BMI */
 .bmi-display{text-align:center;margin:18px 0}
-.bmi-num{
-  font-family:'Montserrat',sans-serif;
-  font-size:4.2rem;font-weight:900;line-height:1;
-}
-.bmi-badge{
-  display:inline-block;padding:5px 20px;
-  border-radius:50px;font-size:12px;font-weight:700;margin-top:8px;
-}
+.bmi-num{font-family:'Montserrat',sans-serif;font-size:4.2rem;font-weight:900;line-height:1}
+.bmi-badge{display:inline-block;padding:5px 20px;border-radius:50px;font-size:12px;font-weight:700;margin-top:8px}
 .bmi-meter{position:relative;margin:18px 0 10px}
-.bmi-bar{
-  height:8px;border-radius:8px;
-  background:linear-gradient(90deg,#10b981 0%,#0ea5ff 28%,#f59e0b 55%,#f97316 72%,#ef4444 100%);
-}
+.bmi-bar{height:8px;border-radius:8px;background:linear-gradient(90deg,#10b981 0%,#0ea5ff 28%,#f59e0b 55%,#f97316 72%,#ef4444 100%)}
 .bmi-needle{
   position:absolute;top:50%;
   transform:translate(-50%,-50%);
@@ -519,19 +467,13 @@ body{
 .bmi-lbls{display:flex;justify-content:space-between;margin-top:6px}
 .bmi-lbls span{font-size:9px;color:var(--muted)}
 .wr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.wrc{
-  background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);
-  border-radius:11px;padding:12px;text-align:center;
-}
+.wrc{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:11px;padding:12px;text-align:center}
 .wrc-v{font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:700;color:var(--green)}
 .wrc-l{font-size:9.5px;color:var(--muted);margin-top:2px}
 
 /* Water */
 .water-row{display:flex;align-items:center;gap:22px;margin-top:14px;flex-wrap:wrap}
-.water-num{
-  font-family:'Montserrat',sans-serif;
-  font-size:2.8rem;font-weight:900;color:var(--cyan);line-height:1;
-}
+.water-num{font-family:'Montserrat',sans-serif;font-size:2.8rem;font-weight:900;color:var(--cyan);line-height:1}
 [data-theme="light"] .water-num{color:var(--purple)}
 .water-cups{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
 .wcup{font-size:1.1rem;opacity:.18;transition:.3s}
@@ -595,16 +537,9 @@ footer{
 [data-theme="light"] .foot-links a:hover{color:var(--purple)}
 
 /* ── RESPONSIVE ────────────────────────────── */
-@media(max-width:600px){
-  .tbn{flex-direction:column}
-  .wr-grid{grid-template-columns:1fr 1fr}
-  .abrow{gap:8px}
-}
-@media(max-width:480px){
-  .gc{padding:20px 16px}
-  .ccgrid{grid-template-columns:1fr}
-  .brow{flex-direction:column}
-}
+@media(max-width:600px){.tbn{flex-direction:column}.wr-grid{grid-template-columns:1fr 1fr}.abrow{gap:8px}}
+@media(max-width:480px){.gc{padding:20px 16px}.ccgrid{grid-template-columns:1fr}.brow{flex-direction:column}}
+
 /* ═══════════════════════════════════════════
    PHYSIQUE SHOWCASE
 ═══════════════════════════════════════════ */
@@ -617,26 +552,16 @@ footer{
   background:
     radial-gradient(ellipse 70% 50% at 15% 50%, rgba(14,165,255,.06) 0%, transparent 55%),
     radial-gradient(ellipse 60% 50% at 85% 50%, rgba(168,85,247,.07) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(3,3,9,.0) 0%, rgba(3,3,9,.5) 50%, rgba(3,3,9,.0) 100%);
+    linear-gradient(180deg, rgba(3,3,9,0) 0%, rgba(3,3,9,.5) 50%, rgba(3,3,9,0) 100%);
 }
-
-/* subtle scan-line texture */
 .ps-section::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(14,165,255,.015) 2px,
-    rgba(14,165,255,.015) 4px
-  );
+  background-image: repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(14,165,255,.015) 2px,rgba(14,165,255,.015) 4px);
   pointer-events: none;
   z-index: 0;
 }
-
-/* ── Header ── */
 .ps-head {
   position: relative;
   z-index: 2;
@@ -670,7 +595,7 @@ footer{
   50%      { box-shadow: 0 0 0 7px rgba(0,245,255,0); }
 }
 .ps-title {
-  font-family: 'Montserrat', 'Space Grotesk', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 900;
   letter-spacing: -.02em;
@@ -688,8 +613,6 @@ footer{
   margin: 0 auto;
   line-height: 1.75;
 }
-
-/* ── Carousel wrapper ── */
 .ps-carousel-outer {
   position: relative;
   z-index: 2;
@@ -697,21 +620,14 @@ footer{
 }
 @media (max-width: 768px) { .ps-carousel-outer { padding: 0 44px; } }
 @media (max-width: 480px) { .ps-carousel-outer { padding: 0 36px; } }
-
-.ps-viewport {
-  overflow: hidden;
-  border-radius: 4px;
-}
-
+.ps-viewport { overflow: hidden; border-radius: 4px; }
 .ps-track {
   display: flex;
   gap: 20px;
   transition: transform .75s cubic-bezier(.77,0,.18,1);
   will-change: transform;
-  padding: 24px 2px 32px;  /* space for box-shadow to show */
+  padding: 24px 2px 32px;
 }
-
-/* ── Cards ── */
 .ps-card {
   flex: 0 0 calc(33.333% - 14px);
   aspect-ratio: 3 / 4;
@@ -721,18 +637,13 @@ footer{
   cursor: pointer;
   transform-style: preserve-3d;
   transform-origin: center center;
-  transition:
-    transform .4s cubic-bezier(.4,0,.2,1),
-    box-shadow .4s cubic-bezier(.4,0,.2,1),
-    border-color .4s;
+  transition: transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1), border-color .4s;
   border: 1px solid rgba(255,255,255,.07);
   box-shadow: 0 8px 40px rgba(0,0,0,.5);
   background: #07071a;
 }
 @media (max-width: 1024px) { .ps-card { flex: 0 0 calc(50% - 10px); } }
 @media (max-width: 640px)  { .ps-card { flex: 0 0 100%; } }
-
-/* neon border on hover (per-card color via CSS var) */
 .ps-card:hover {
   border-color: var(--cc, rgba(0,245,255,.5));
   box-shadow:
@@ -741,13 +652,7 @@ footer{
     0 0 80px rgba(0,245,255,.06),
     0 20px 60px rgba(0,0,0,.6);
 }
-
-/* image */
-.ps-img-wrap {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
+.ps-img-wrap { position: absolute; inset: 0; overflow: hidden; }
 .ps-img-wrap img {
   width: 100%;
   height: 100%;
@@ -755,23 +660,12 @@ footer{
   object-position: center top;
   transition: transform .8s cubic-bezier(.4,0,.2,1);
   will-change: transform;
-  transform-origin: center center;
 }
-.ps-card:hover .ps-img-wrap img {
-  transform: scale(1.07) translateY(-2%);
-}
-
-/* gradient overlays */
+.ps-card:hover .ps-img-wrap img { transform: scale(1.07) translateY(-2%); }
 .ps-overlay-base {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(3,3,9,.96)  0%,
-    rgba(3,3,9,.65)  30%,
-    rgba(3,3,9,.18)  65%,
-    rgba(3,3,9,.04)  100%
-  );
+  background: linear-gradient(to top,rgba(3,3,9,.96) 0%,rgba(3,3,9,.65) 30%,rgba(3,3,9,.18) 65%,rgba(3,3,9,.04) 100%);
   z-index: 1;
 }
 .ps-overlay-color {
@@ -782,12 +676,9 @@ footer{
   z-index: 2;
 }
 .ps-card:hover .ps-overlay-color { opacity: 1; }
-
-/* top corner tag */
 .ps-tag {
   position: absolute;
-  top: 18px;
-  left: 18px;
+  top: 18px; left: 18px;
   z-index: 4;
   padding: 5px 12px;
   border-radius: 50px;
@@ -803,27 +694,17 @@ footer{
   transform: translateY(-6px);
   transition: all .4s .05s;
 }
-.ps-card:hover .ps-tag {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* content at bottom */
+.ps-card:hover .ps-tag { opacity: 1; transform: translateY(0); }
 .ps-content {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   z-index: 3;
   padding: 28px 26px 30px;
 }
 .ps-icon {
-  width: 46px;
-  height: 46px;
+  width: 46px; height: 46px;
   border-radius: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   font-size: 1.3rem;
   margin-bottom: 14px;
   background: rgba(0,0,0,.45);
@@ -833,19 +714,15 @@ footer{
   opacity: 0;
   transition: all .45s .05s cubic-bezier(.4,0,.2,1);
 }
-.ps-card:hover .ps-icon {
-  opacity: 1;
-  transform: translateY(0);
-}
+.ps-card:hover .ps-icon { opacity: 1; transform: translateY(0); }
 .ps-card-title {
-  font-family: 'Montserrat', 'Space Grotesk', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: clamp(1.3rem, 2.2vw, 1.65rem);
   font-weight: 900;
   letter-spacing: .03em;
   line-height: 1.1;
   margin-bottom: 7px;
   color: var(--cc, #00f5ff);
-  /* always visible */
 }
 .ps-card-sub {
   font-size: 12.5px;
@@ -855,12 +732,7 @@ footer{
   opacity: 0;
   transition: all .4s .08s cubic-bezier(.4,0,.2,1);
 }
-.ps-card:hover .ps-card-sub {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* decorative line at bottom of card */
+.ps-card:hover .ps-card-sub { opacity: 1; transform: translateY(0); }
 .ps-card::after {
   content: '';
   position: absolute;
@@ -872,15 +744,12 @@ footer{
   transition: opacity .4s;
 }
 .ps-card:hover::after { opacity: 1; }
-
-/* ── Arrows ── */
 .ps-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  width: 46px;
-  height: 46px;
+  width: 46px; height: 46px;
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,.12);
   background: rgba(8,8,24,.85);
@@ -888,9 +757,7 @@ footer{
   color: rgba(255,255,255,.7);
   font-size: 22px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: all .3s;
   line-height: 1;
   padding-bottom: 1px;
@@ -901,16 +768,9 @@ footer{
   box-shadow: 0 0 20px rgba(0,245,255,.25);
   transform: translateY(-50%) scale(1.08);
 }
-.ps-arrow:disabled {
-  opacity: .25;
-  cursor: default;
-  transform: translateY(-50%);
-  box-shadow: none;
-}
+.ps-arrow:disabled { opacity: .25; cursor: default; transform: translateY(-50%); box-shadow: none; }
 .ps-prev { left: 6px; }
 .ps-next { right: 6px; }
-
-/* ── Dots ── */
 .ps-dots {
   display: flex;
   justify-content: center;
@@ -920,8 +780,7 @@ footer{
   z-index: 2;
 }
 .ps-dot {
-  width: 7px;
-  height: 7px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: rgba(255,255,255,.18);
   cursor: pointer;
@@ -939,149 +798,13 @@ footer{
 </head>
 <body>
 
-<!--═══════════════════════════════════════
-   PHYSIQUE SHOWCASE SECTION
-═══════════════════════════════════════-->
-<section class="ps-section" id="showcase">
-
-  <div class="ps-head">
-    <div class="ps-eyebrow"><span class="dot"></span>AI FITNESS INTELLIGENCE</div>
-    <h2 class="ps-title">Choose Your Ideal Physique</h2>
-    <p class="ps-sub">Different physiques require different training styles, nutrition systems, and recovery protocols.</p>
-  </div>
-
-  <div class="ps-carousel-outer">
-
-    <button class="ps-arrow ps-prev" id="psPrev" aria-label="Previous">&#8249;</button>
-
-    <div class="ps-viewport">
-      <div class="ps-track" id="psTrack">
-
-        <!-- CARD 1: FAT TO FIT -->
-        <div class="ps-card" style="--cc:#ec4899"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/1__FAT_TO_FIT_TRANSFORMATION.png" alt="Fat to Fit Transformation" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(236,72,153,.28),transparent 55%)"></div>
-          <span class="ps-tag">TRANSFORMATION</span>
-          <div class="ps-content">
-            <div class="ps-icon">📈</div>
-            <div class="ps-card-title">FAT TO FIT</div>
-            <div class="ps-card-sub">Complete Lifestyle Rebuild</div>
-          </div>
-        </div>
-
-        <!-- CARD 2: LEAN ATHLETIC -->
-        <div class="ps-card" style="--cc:#3b82f6"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/2__LEAN_ATHLETIC_PHYSIQUE.png" alt="Lean Athletic Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(59,130,246,.28),transparent 55%)"></div>
-          <span class="ps-tag">ATHLETIC</span>
-          <div class="ps-content">
-            <div class="ps-icon">🏃</div>
-            <div class="ps-card-title">LEAN ATHLETE</div>
-            <div class="ps-card-sub">Functional & Sustainable Fitness</div>
-          </div>
-        </div>
-
-        <!-- CARD 3: CALISTHENICS -->
-        <div class="ps-card" style="--cc:#10b981"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/3__CALISTHENICS_ATHLETE.png" alt="Calisthenics Athlete" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(16,185,129,.28),transparent 55%)"></div>
-          <span class="ps-tag">FUNCTIONAL</span>
-          <div class="ps-content">
-            <div class="ps-icon">⚡</div>
-            <div class="ps-card-title">CALISTHENICS</div>
-            <div class="ps-card-sub">Strength Through Movement</div>
-          </div>
-        </div>
-
-        <!-- CARD 4: AESTHETIC -->
-        <div class="ps-card" style="--cc:#a855f7"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/4__AESTHETIC_PHYSIQUE.png" alt="Aesthetic Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(168,85,247,.28),transparent 55%)"></div>
-          <span class="ps-tag">SYMMETRY</span>
-          <div class="ps-content">
-            <div class="ps-icon">🔥</div>
-            <div class="ps-card-title">AESTHETIC</div>
-            <div class="ps-card-sub">Balanced Greek-God Proportions</div>
-          </div>
-        </div>
-
-        <!-- CARD 5: SHREDDED -->
-        <div class="ps-card" style="--cc:#00f5ff"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/5__SHREDDED_PHYSIQUE.png" alt="Shredded Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(0,245,255,.22),transparent 55%)"></div>
-          <span class="ps-tag">DEFINITION</span>
-          <div class="ps-content">
-            <div class="ps-icon">💎</div>
-            <div class="ps-card-title">SHREDDED</div>
-            <div class="ps-card-sub">Extreme Conditioning & Definition</div>
-          </div>
-        </div>
-
-        <!-- CARD 6: BODYBUILDER -->
-        <div class="ps-card" style="--cc:#f59e0b"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/6__BODYBUILDER_PHYSIQUE.png" alt="Bodybuilder Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(245,158,11,.28),transparent 55%)"></div>
-          <span class="ps-tag">MASS</span>
-          <div class="ps-content">
-            <div class="ps-icon">🏆</div>
-            <div class="ps-card-title">BODYBUILDER</div>
-            <div class="ps-card-sub">Maximum Mass & Dominance</div>
-          </div>
-        </div>
-
-      </div><!-- /track -->
-    </div><!-- /viewport -->
-
-    <button class="ps-arrow ps-next" id="psNext" aria-label="Next">&#8250;</button>
-
-  </div><!-- /carousel-outer -->
-
-  <div class="ps-dots" id="psDots"></div>
-
-</section>
-
+<!-- ── Particles canvas ── -->
 <canvas id="pcv" aria-hidden="true"></canvas>
 
-<!-- Theme Toggle -->
-<button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+<!-- ── Theme Toggle ── -->
+<button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
 
-<!-- Toast -->
+<!-- ── Toast ── -->
 <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
 
 <!-- ══ HERO ════════════════════════════════════ -->
@@ -1109,6 +832,121 @@ footer{
   <div class="scroll-hint" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
     <div class="arr"></div><span>Scroll</span>
   </div>
+</section>
+
+<!-- ══ PHYSIQUE SHOWCASE ═══════════════════════ -->
+<section class="ps-section" id="showcase">
+
+  <div class="ps-head">
+    <div class="ps-eyebrow"><span class="dot"></span>AI FITNESS INTELLIGENCE</div>
+    <h2 class="ps-title">Choose Your Ideal Physique</h2>
+    <p class="ps-sub">Different physiques require different training styles, nutrition systems, and recovery protocols.</p>
+  </div>
+
+  <div class="ps-carousel-outer">
+    <button class="ps-arrow ps-prev" id="psPrev" aria-label="Previous">&#8249;</button>
+
+    <div class="ps-viewport">
+      <div class="ps-track" id="psTrack">
+
+        <!-- CARD 1: FAT TO FIT -->
+        <div class="ps-card" style="--cc:#ec4899" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/1__FAT_TO_FIT_TRANSFORMATION.png" alt="Fat to Fit Transformation" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(236,72,153,.28),transparent 55%)"></div>
+          <span class="ps-tag">TRANSFORMATION</span>
+          <div class="ps-content">
+            <div class="ps-icon">📈</div>
+            <div class="ps-card-title">FAT TO FIT</div>
+            <div class="ps-card-sub">Complete Lifestyle Rebuild</div>
+          </div>
+        </div>
+
+        <!-- CARD 2: LEAN ATHLETIC -->
+        <div class="ps-card" style="--cc:#3b82f6" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/2__LEAN_ATHLETIC_PHYSIQUE.png" alt="Lean Athletic Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(59,130,246,.28),transparent 55%)"></div>
+          <span class="ps-tag">ATHLETIC</span>
+          <div class="ps-content">
+            <div class="ps-icon">🏃</div>
+            <div class="ps-card-title">LEAN ATHLETE</div>
+            <div class="ps-card-sub">Functional & Sustainable Fitness</div>
+          </div>
+        </div>
+
+        <!-- CARD 3: CALISTHENICS -->
+        <div class="ps-card" style="--cc:#10b981" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/3__CALISTHENICS_ATHLETE.png" alt="Calisthenics Athlete" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(16,185,129,.28),transparent 55%)"></div>
+          <span class="ps-tag">FUNCTIONAL</span>
+          <div class="ps-content">
+            <div class="ps-icon">⚡</div>
+            <div class="ps-card-title">CALISTHENICS</div>
+            <div class="ps-card-sub">Strength Through Movement</div>
+          </div>
+        </div>
+
+        <!-- CARD 4: AESTHETIC -->
+        <div class="ps-card" style="--cc:#a855f7" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/4__AESTHETIC_PHYSIQUE.png" alt="Aesthetic Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(168,85,247,.28),transparent 55%)"></div>
+          <span class="ps-tag">SYMMETRY</span>
+          <div class="ps-content">
+            <div class="ps-icon">🔥</div>
+            <div class="ps-card-title">AESTHETIC</div>
+            <div class="ps-card-sub">Balanced Greek-God Proportions</div>
+          </div>
+        </div>
+
+        <!-- CARD 5: SHREDDED -->
+        <div class="ps-card" style="--cc:#00f5ff" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/5__SHREDDED_PHYSIQUE.png" alt="Shredded Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(0,245,255,.22),transparent 55%)"></div>
+          <span class="ps-tag">DEFINITION</span>
+          <div class="ps-content">
+            <div class="ps-icon">💎</div>
+            <div class="ps-card-title">SHREDDED</div>
+            <div class="ps-card-sub">Extreme Conditioning & Definition</div>
+          </div>
+        </div>
+
+        <!-- CARD 6: BODYBUILDER -->
+        <div class="ps-card" style="--cc:#f59e0b" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/6__BODYBUILDER_PHYSIQUE.png" alt="Bodybuilder Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(245,158,11,.28),transparent 55%)"></div>
+          <span class="ps-tag">MASS</span>
+          <div class="ps-content">
+            <div class="ps-icon">🏆</div>
+            <div class="ps-card-title">BODYBUILDER</div>
+            <div class="ps-card-sub">Maximum Mass & Dominance</div>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /viewport -->
+
+    <button class="ps-arrow ps-next" id="psNext" aria-label="Next">&#8250;</button>
+  </div><!-- /carousel-outer -->
+
+  <div class="ps-dots" id="psDots"></div>
+
 </section>
 
 <!-- ══ CALCULATOR ══════════════════════════════ -->
@@ -1155,7 +993,7 @@ footer{
       </div>
     </div>
 
-    <!-- ── RESULTS ── -->
+    <!-- RESULTS -->
     <div id="results" aria-live="polite">
 
       <div class="rdiv">🔥 Calorie Targets</div>
@@ -1184,19 +1022,19 @@ footer{
           <div class="mc-ico">🥩</div><div class="mc-nm">Protein</div>
           <div class="mc-g" id="mPg">— <span>g</span></div>
           <div class="mc-k" id="mPk">— kcal</div>
-          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mPb" role="progressbar"></div></div><div class="mc-pct" id="mPp"></div></div>
+          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mPb"></div></div><div class="mc-pct" id="mPp"></div></div>
         </div>
         <div class="mcard c">
           <div class="mc-ico">🌾</div><div class="mc-nm">Carbohydrates</div>
           <div class="mc-g" id="mCg">— <span>g</span></div>
           <div class="mc-k" id="mCk">— kcal</div>
-          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mCb" role="progressbar"></div></div><div class="mc-pct" id="mCp"></div></div>
+          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mCb"></div></div><div class="mc-pct" id="mCp"></div></div>
         </div>
         <div class="mcard f">
           <div class="mc-ico">🥑</div><div class="mc-nm">Healthy Fats</div>
           <div class="mc-g" id="mFg">— <span>g</span></div>
           <div class="mc-k" id="mFk">— kcal</div>
-          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mFb" role="progressbar"></div></div><div class="mc-pct" id="mFp"></div></div>
+          <div class="mc-prog"><div class="mc-bar"><div class="mc-fill" id="mFb"></div></div><div class="mc-pct" id="mFp"></div></div>
         </div>
       </div>
 
@@ -1204,12 +1042,12 @@ footer{
       <div class="charts">
         <div class="cbox">
           <div class="cbox-t">Macro Distribution</div>
-          <div class="cbox-c"><canvas id="donutC" role="img" aria-label="Macro calorie distribution chart"></canvas></div>
+          <div class="cbox-c"><canvas id="donutC"></canvas></div>
           <div class="leg" id="donutLeg"></div>
         </div>
         <div class="cbox">
           <div class="cbox-t">Calorie Comparison</div>
-          <div class="cbox-c"><canvas id="barC" role="img" aria-label="Calorie targets comparison chart"></canvas></div>
+          <div class="cbox-c"><canvas id="barC"></canvas></div>
         </div>
       </div>
 
@@ -1222,9 +1060,7 @@ footer{
           </div>
           <div class="bmi-meter">
             <div class="bmi-bar"><div class="bmi-needle" id="bmiNeedle" style="left:0%"></div></div>
-            <div class="bmi-lbls">
-              <span>Under</span><span>Normal</span><span>Over</span><span>Obese</span>
-            </div>
+            <div class="bmi-lbls"><span>Under</span><span>Normal</span><span>Over</span><span>Obese</span></div>
           </div>
           <div class="wr-grid">
             <div class="wrc"><div class="wrc-v" id="wrMin">—</div><div class="wrc-l">Min (BMI 18.5)</div></div>
@@ -1245,7 +1081,7 @@ footer{
           </div>
           <div class="water-num" id="waterVal">—</div>
         </div>
-        <div class="water-cups" id="waterCups" aria-label="Visual water cups" style="margin-top:14px"></div>
+        <div class="water-cups" id="waterCups" style="margin-top:14px"></div>
         <p style="font-size:12px;color:var(--muted2);margin-top:12px;line-height:1.6">
           💡 Add <strong style="color:var(--cyan)">500ml</strong> on training days. Hydration optimises nutrient absorption and fat oxidation.
         </p>
@@ -1271,204 +1107,20 @@ footer{
 
 <script>
 /* ═══════════════════════════════════════════
-   PHYSIQUE DATA & SVG BUILDER
-═══════════════════════════════════════════ */
-const PHYS = [
-  { id:'shredded',  name:'SHREDDED',     sub:'Elite Definition',      desc:'Low Body Fat\nDefined Muscles',          icon:'🏆', color:'#00f5ff', rgb:'0,245,255',   tags:['8-10% BF','Vascular','Stage Ready'],
-    sl:16,sr:104, wl:44,wr:76, hl:38,hr:82, elx:4, erx:116, ey:115, hlx:7, hrx:113, hy:172, kl:44,kr:76, fl:41,fr:79, asw:3.5, lsw:5.5 },
-  { id:'aesthetic', name:'AESTHETIC',    sub:'Perfect Symmetry',      desc:'Symmetrical Physique\nPerfect Proportions', icon:'⭐', color:'#a855f7', rgb:'168,85,247', tags:['10-12% BF','V-Taper','Symmetry'],
-    sl:22,sr:98, wl:43,wr:77, hl:38,hr:82, elx:10,erx:110, ey:115, hlx:13,hrx:107, hy:172, kl:44,kr:76, fl:41,fr:79, asw:3.5, lsw:5 },
-  { id:'cali',      name:'CALISTHENICS', sub:'Strength & Control',    desc:'Functional Fitness\nBodyweight Mastery',    icon:'⚡', color:'#10b981', rgb:'16,185,129',  tags:['10-12% BF','Explosive','Functional'],
-    pose:'cal',
-    sl:26,sr:94, wl:44,wr:76, hl:40,hr:80, elx:40,erx:80, ey:28, hlx:53,hrx:67, hy:7, kl:44,kr:76, fl:41,fr:79, asw:3, lsw:4.5 },
-  { id:'bb',        name:'BODYBUILDER',  sub:'Maximum Mass',          desc:'Mass & Strength\nMaximum Size',             icon:'💪', color:'#f59e0b', rgb:'245,158,11',  tags:['5-8% BF','Maximum Size','Massive'],
-    pose:'bb',
-    sl:8, sr:112, wl:42,wr:78, hl:36,hr:84, elx:1, erx:119, ey:110, hlx:4, hrx:116, hy:168, kl:44,kr:76, fl:40,fr:80, asw:6, lsw:7.5 },
-  { id:'athlete',   name:'LEAN ATHLETE', sub:'Athletic Performance',  desc:'Lean & Strong\nAthletic Performance',       icon:'🏃', color:'#3b82f6', rgb:'59,130,246',  tags:['12-15% BF','Endurance','Athletic'],
-    sl:27,sr:93, wl:44,wr:76, hl:40,hr:80, elx:14,erx:106, ey:115, hlx:17,hrx:103, hy:172, kl:44,kr:76, fl:41,fr:79, asw:3, lsw:4.5 },
-  { id:'trans',     name:'TRANSFORMATION', sub:'From Ordinary to Elite', desc:'Before & After\nThe Journey',           icon:'📈', color:'#ec4899', rgb:'236,72,153',  tags:['Fat Loss','Muscle Gain','Recomp'],
-    special:'trans' }
-];
-
-function makeSVG(p) {
-  if (p.special === 'trans') return makeTransSVG(p.color);
-  const id = 'sv' + Math.random().toString(36).slice(2,7);
-  const SY=48,WY=130,HY=148,KY=210,FY=270;
-  const hcl = p.hl+(p.hr-p.hl)*.3, hcr = p.hl+(p.hr-p.hl)*.7;
-  const bar = p.pose==='cal'
-    ? `<rect x="12" y="2" width="96" height="5" rx="2.5" fill="none" stroke="${p.color}" stroke-width="2.5" filter="url(#${id}g)"/>
-       <line x1="38" y1="7" x2="38" y2="14" stroke="${p.color}" stroke-width="1.5" opacity=".4"/>
-       <line x1="82" y1="7" x2="82" y2="14" stroke="${p.color}" stroke-width="1.5" opacity=".4"/>` : '';
-  const bbExtra = p.pose==='bb'
-    ? `<ellipse cx="${p.sl-4}" cy="${SY+28}" rx="5" ry="12" fill="none" stroke="${p.color}" stroke-width="1.5" opacity=".3"/>
-       <ellipse cx="${p.sr+4}" cy="${SY+28}" rx="5" ry="12" fill="none" stroke="${p.color}" stroke-width="1.5" opacity=".3"/>` : '';
-  return `<svg viewBox="0 0 120 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<defs>
-  <filter id="${id}g" x="-50%" y="-50%" width="200%" height="200%">
-    <feGaussianBlur stdDeviation="2.5" result="b"/>
-    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-  </filter>
-  <radialGradient id="${id}bg" cx="50%" cy="40%" r="50%">
-    <stop offset="0%" stop-color="${p.color}" stop-opacity=".07"/>
-    <stop offset="100%" stop-color="${p.color}" stop-opacity="0"/>
-  </radialGradient>
-</defs>
-<rect width="120" height="280" fill="url(#${id}bg)"/>
-<line x1="0" y1="88" x2="120" y2="88" stroke="${p.color}" stroke-width=".4" opacity=".09"/>
-<line x1="0" y1="168" x2="120" y2="168" stroke="${p.color}" stroke-width=".4" opacity=".09"/>
-<line x1="0" y1="248" x2="120" y2="248" stroke="${p.color}" stroke-width=".4" opacity=".09"/>
-${bar}
-<circle cx="60" cy="28" r="15" fill="rgba(0,0,0,.22)" stroke="${p.color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<circle cx="54" cy="25" r="2" fill="${p.color}"/><circle cx="66" cy="25" r="2" fill="${p.color}"/>
-<path d="M 52,35 Q 60,42 68,35" fill="none" stroke="${p.color}" stroke-width="1" opacity=".42"/>
-<line x1="60" y1="43" x2="60" y2="${SY}" stroke="${p.color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="${p.sl}" y1="${SY}" x2="${p.sr}" y2="${SY}" stroke="${p.color}" stroke-width="2.5" filter="url(#${id}g)"/>
-<circle cx="${p.sl}" cy="${SY}" r="4" fill="${p.color}" filter="url(#${id}g)"/>
-<circle cx="${p.sr}" cy="${SY}" r="4" fill="${p.color}" filter="url(#${id}g)"/>
-<path d="M ${p.sl},${SY} Q ${60-11},${SY+17} 60,${SY+15}" fill="none" stroke="${p.color}" stroke-width="1.2" opacity=".5"/>
-<path d="M ${p.sr},${SY} Q ${60+11},${SY+17} 60,${SY+15}" fill="none" stroke="${p.color}" stroke-width="1.2" opacity=".5"/>
-<line x1="60" y1="${SY}" x2="60" y2="${WY}" stroke="${p.color}" stroke-width=".8" stroke-dasharray="4,3" opacity=".28"/>
-<circle cx="60" cy="${SY+24}" r="2" fill="${p.color}" opacity=".35"/>
-<circle cx="60" cy="${SY+40}" r="2" fill="${p.color}" opacity=".35"/>
-<circle cx="60" cy="${SY+56}" r="2" fill="${p.color}" opacity=".35"/>
-<line x1="${p.sl}" y1="${SY}" x2="${p.wl}" y2="${WY}" stroke="${p.color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="${p.sr}" y1="${SY}" x2="${p.wr}" y2="${WY}" stroke="${p.color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="${p.wl}" y1="${WY}" x2="${p.wr}" y2="${WY}" stroke="${p.color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="${p.wl}" y1="${WY}" x2="${p.hl}" y2="${HY}" stroke="${p.color}" stroke-width="2"/>
-<line x1="${p.wr}" y1="${WY}" x2="${p.hr}" y2="${HY}" stroke="${p.color}" stroke-width="2"/>
-<line x1="${p.hl}" y1="${HY}" x2="${p.hr}" y2="${HY}" stroke="${p.color}" stroke-width="2" filter="url(#${id}g)"/>
-${bbExtra}
-<line x1="${p.sl}" y1="${SY}" x2="${p.elx}" y2="${p.ey}" stroke="${p.color}" stroke-width="${p.asw}" filter="url(#${id}g)"/>
-<circle cx="${p.elx}" cy="${p.ey}" r="3.5" fill="${p.color}" filter="url(#${id}g)"/>
-<line x1="${p.elx}" y1="${p.ey}" x2="${p.hlx}" y2="${p.hy}" stroke="${p.color}" stroke-width="${p.asw-.5}" filter="url(#${id}g)"/>
-<circle cx="${p.hlx}" cy="${p.hy}" r="3.5" fill="none" stroke="${p.color}" stroke-width="1.5"/>
-<line x1="${p.sr}" y1="${SY}" x2="${p.erx}" y2="${p.ey}" stroke="${p.color}" stroke-width="${p.asw}" filter="url(#${id}g)"/>
-<circle cx="${p.erx}" cy="${p.ey}" r="3.5" fill="${p.color}" filter="url(#${id}g)"/>
-<line x1="${p.erx}" y1="${p.ey}" x2="${p.hrx}" y2="${p.hy}" stroke="${p.color}" stroke-width="${p.asw-.5}" filter="url(#${id}g)"/>
-<circle cx="${p.hrx}" cy="${p.hy}" r="3.5" fill="none" stroke="${p.color}" stroke-width="1.5"/>
-<line x1="${hcl}" y1="${HY}" x2="${p.kl}" y2="${KY}" stroke="${p.color}" stroke-width="${p.lsw}" filter="url(#${id}g)"/>
-<circle cx="${p.kl}" cy="${KY}" r="4" fill="${p.color}" opacity=".75" filter="url(#${id}g)"/>
-<line x1="${p.kl}" y1="${KY}" x2="${p.fl}" y2="${FY}" stroke="${p.color}" stroke-width="${p.lsw-1}"/>
-<line x1="${p.fl}" y1="${FY}" x2="${p.fl-8}" y2="${FY}" stroke="${p.color}" stroke-width="2.5"/>
-<line x1="${hcr}" y1="${HY}" x2="${p.kr}" y2="${KY}" stroke="${p.color}" stroke-width="${p.lsw}" filter="url(#${id}g)"/>
-<circle cx="${p.kr}" cy="${KY}" r="4" fill="${p.color}" opacity=".75" filter="url(#${id}g)"/>
-<line x1="${p.kr}" y1="${KY}" x2="${p.fr}" y2="${FY}" stroke="${p.color}" stroke-width="${p.lsw-1}"/>
-<line x1="${p.fr}" y1="${FY}" x2="${p.fr+8}" y2="${FY}" stroke="${p.color}" stroke-width="2.5"/>
-</svg>`;
-}
-
-function makeTransSVG(color) {
-  const id='tr'+Math.random().toString(36).slice(2,6);
-  return `<svg viewBox="0 0 120 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-<defs>
-  <filter id="${id}g"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<line x1="60" y1="0" x2="60" y2="280" stroke="${color}" stroke-width="1" stroke-dasharray="4,4" opacity=".38"/>
-<text x="22" y="16" fill="${color}" font-size="7" font-weight="700" opacity=".7" text-anchor="middle" font-family="Montserrat,sans-serif">BEFORE</text>
-<text x="90" y="16" fill="${color}" font-size="7" font-weight="700" opacity=".7" text-anchor="middle" font-family="Montserrat,sans-serif">AFTER</text>
-<!-- BEFORE (heavier) -->
-<circle cx="24" cy="38" r="12" fill="none" stroke="${color}" stroke-width="1.5" opacity=".5" filter="url(#${id}g)"/>
-<line x1="24" y1="50" x2="24" y2="60" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="8" y1="64" x2="40" y2="64" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="8" y1="64" x2="14" y2="118" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="40" y1="64" x2="34" y2="118" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="14" y1="118" x2="34" y2="118" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="8" y1="64" x2="2" y2="107" stroke="${color}" stroke-width="3" opacity=".5"/>
-<line x1="2" y1="107" x2="4" y2="148" stroke="${color}" stroke-width="2.5" opacity=".5"/>
-<line x1="40" y1="64" x2="46" y2="107" stroke="${color}" stroke-width="3" opacity=".5"/>
-<line x1="46" y1="107" x2="44" y2="148" stroke="${color}" stroke-width="2.5" opacity=".5"/>
-<line x1="12" y1="118" x2="10" y2="130" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="36" y1="118" x2="38" y2="130" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="10" y1="130" x2="38" y2="130" stroke="${color}" stroke-width="1.5" opacity=".5"/>
-<line x1="16" y1="130" x2="14" y2="202" stroke="${color}" stroke-width="4" opacity=".5"/>
-<circle cx="14" cy="202" r="3" fill="${color}" opacity=".5"/>
-<line x1="14" y1="202" x2="13" y2="268" stroke="${color}" stroke-width="3.5" opacity=".5"/>
-<line x1="32" y1="130" x2="34" y2="202" stroke="${color}" stroke-width="4" opacity=".5"/>
-<circle cx="34" cy="202" r="3" fill="${color}" opacity=".5"/>
-<line x1="34" y1="202" x2="35" y2="268" stroke="${color}" stroke-width="3.5" opacity=".5"/>
-<!-- AFTER (lean) -->
-<circle cx="90" cy="34" r="11" fill="none" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<circle cx="85" cy="31" r="1.5" fill="${color}"/><circle cx="95" cy="31" r="1.5" fill="${color}"/>
-<line x1="90" y1="45" x2="90" y2="56" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<line x1="73" y1="60" x2="107" y2="60" stroke="${color}" stroke-width="2" filter="url(#${id}g)"/>
-<circle cx="73" cy="60" r="3" fill="${color}"/><circle cx="107" cy="60" r="3" fill="${color}"/>
-<line x1="73" y1="60" x2="81" y2="120" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<line x1="107" y1="60" x2="99" y2="120" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<line x1="81" y1="120" x2="99" y2="120" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<line x1="73" y1="60" x2="67" y2="106" stroke="${color}" stroke-width="2.5" filter="url(#${id}g)"/>
-<circle cx="67" cy="106" r="2.5" fill="${color}"/>
-<line x1="67" y1="106" x2="69" y2="158" stroke="${color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="107" y1="60" x2="113" y2="106" stroke="${color}" stroke-width="2.5" filter="url(#${id}g)"/>
-<circle cx="113" cy="106" r="2.5" fill="${color}"/>
-<line x1="113" y1="106" x2="111" y2="158" stroke="${color}" stroke-width="2" filter="url(#${id}g)"/>
-<line x1="79" y1="120" x2="77" y2="132" stroke="${color}" stroke-width="1.8"/>
-<line x1="101" y1="120" x2="103" y2="132" stroke="${color}" stroke-width="1.8"/>
-<line x1="77" y1="132" x2="103" y2="132" stroke="${color}" stroke-width="1.8" filter="url(#${id}g)"/>
-<line x1="82" y1="132" x2="80" y2="202" stroke="${color}" stroke-width="3.5" filter="url(#${id}g)"/>
-<circle cx="80" cy="202" r="3" fill="${color}" opacity=".7"/>
-<line x1="80" y1="202" x2="79" y2="268" stroke="${color}" stroke-width="3"/>
-<line x1="98" y1="132" x2="100" y2="202" stroke="${color}" stroke-width="3.5" filter="url(#${id}g)"/>
-<circle cx="100" cy="202" r="3" fill="${color}" opacity=".7"/>
-<line x1="100" y1="202" x2="101" y2="268" stroke="${color}" stroke-width="3"/>
-<path d="M 56,138 L 64,134 M 56,138 L 64,142" fill="none" stroke="${color}" stroke-width="1.5" opacity=".8"/>
-</svg>`;
-}
-
-/* ═══════════════════════════════════════════
-   RENDER PHYSIQUE CARDS
-═══════════════════════════════════════════ */
-let selPhys = null;
-function renderPhys() {
-  const track = document.getElementById('physTrack');
-  const dots  = document.getElementById('physDots');
-  track.innerHTML = dots.innerHTML = '';
-  PHYS.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = 'pcard rv' + (i < 4 ? ' d'+(i+1) : '');
-    card.setAttribute('role','listitem');
-    card.style.cssText = `--pc-color:${p.color};--pc-rgb:${p.rgb}`;
-    card.dataset.id = p.id;
-    card.innerHTML = `
-      <div class="pcard-fig">${makeSVG(p)}</div>
-      <div class="pcard-body">
-        <div class="pcard-badge">${p.icon}</div>
-        <div class="pcard-name">${p.name}</div>
-        <div class="pcard-desc">${p.desc.replace('\n','<br>')}</div>
-        <div class="pcard-tags">${p.tags.map(t=>`<span class="ptag">${t}</span>`).join('')}</div>
-      </div>`;
-    card.addEventListener('click', () => {
-      selPhys = p.id;
-      document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('sel'));
-      card.classList.add('sel');
-      showToast(`✓ Goal set: ${p.name}`,'ok');
-    });
-    track.appendChild(card);
-    const dot = document.createElement('div');
-    dot.className = 'pdot' + (i===0?' on':'');
-    dot.addEventListener('click', () => {
-      const cards = track.querySelectorAll('.pcard');
-      if(cards[i]) cards[i].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
-      document.querySelectorAll('.pdot').forEach((d,j)=>d.classList.toggle('on',j===i));
-    });
-    dots.appendChild(dot);
-  });
-}
-
-/* ═══════════════════════════════════════════
    PARTICLES
 ═══════════════════════════════════════════ */
 (function(){
-  const cv = document.getElementById('pcv');
-  const ctx = cv.getContext('2d');
-  let W, H, pts;
-  function resize(){ W=cv.width=innerWidth; H=cv.height=innerHeight; }
+  const cv=document.getElementById('pcv');
+  const ctx=cv.getContext('2d');
+  let W,H,pts;
+  function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight}
   function init(){
     resize();
-    const n = Math.min(72, Math.floor(W/16));
-    const cols = ['rgba(0,245,255,','rgba(14,165,255,','rgba(168,85,247,','rgba(245,158,11,'];
-    pts = Array.from({length:n}, ()=>({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.38, vy:(Math.random()-.5)*.38,
+    const n=Math.min(72,Math.floor(W/16));
+    const cols=['rgba(0,245,255,','rgba(14,165,255,','rgba(168,85,247,','rgba(245,158,11,'];
+    pts=Array.from({length:n},()=>({
+      x:Math.random()*W,y:Math.random()*H,
+      vx:(Math.random()-.5)*.38,vy:(Math.random()-.5)*.38,
       r:Math.random()*1.8+.4,
       col:cols[Math.floor(Math.random()*cols.length)],
       a:Math.random()*.42+.1
@@ -1477,11 +1129,11 @@ function renderPhys() {
   function frame(){
     ctx.clearRect(0,0,W,H);
     pts.forEach((p,i)=>{
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>W) p.vx*=-1;
-      if(p.y<0||p.y>H) p.vy*=-1;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=p.col+p.a+')'; ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.col+p.a+')';ctx.fill();
       for(let j=i+1;j<pts.length;j++){
         const q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
         if(d<125){
@@ -1493,26 +1145,26 @@ function renderPhys() {
     });
     requestAnimationFrame(frame);
   }
-  addEventListener('resize',resize); init(); frame();
+  addEventListener('resize',resize);init();frame();
 })();
 
 /* ═══════════════════════════════════════════
    THEME TOGGLE
 ═══════════════════════════════════════════ */
-let isDark = true;
-document.getElementById('themeBtn').addEventListener('click', ()=>{
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark?'dark':'light');
-  document.getElementById('themeBtn').textContent = isDark?'🌙':'☀️';
-  if(window.__lastR) renderCharts(window.__lastR);
+let isDark=true;
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  isDark=!isDark;
+  document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
+  document.getElementById('themeBtn').textContent=isDark?'🌙':'☀️';
+  if(window.__lastR)renderCharts(window.__lastR);
 });
 
 /* ═══════════════════════════════════════════
    HERO COUNTERS
 ═══════════════════════════════════════════ */
-function animNum(el, to, sfx='', dur=1800){
-  const s=Date.now(), ease=t=>1-Math.pow(1-t,3);
-  (function step(){ const p=Math.min((Date.now()-s)/dur,1); el.textContent=Math.round(ease(p)*to).toLocaleString()+sfx; p<1&&requestAnimationFrame(step); })();
+function animNum(el,to,sfx='',dur=1800){
+  const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
+  (function step(){const p=Math.min((Date.now()-s)/dur,1);el.textContent=Math.round(ease(p)*to).toLocaleString()+sfx;p<1&&requestAnimationFrame(step);})();
 }
 window.addEventListener('load',()=>{
   setTimeout(()=>{
@@ -1526,10 +1178,10 @@ window.addEventListener('load',()=>{
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════════════════ */
-const ro = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); });
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
 },{threshold:.1});
-function initReveal(){ document.querySelectorAll('.rv').forEach(el=>ro.observe(el)); }
+function initReveal(){document.querySelectorAll('.rv').forEach(el=>ro.observe(el));}
 
 /* ═══════════════════════════════════════════
    VALIDATION
@@ -1538,7 +1190,7 @@ function setErr(fId,eId,show){
   document.getElementById(fId).classList.toggle('err',show);
   document.getElementById(eId).classList.toggle('on',show);
 }
-function valid(v,mn,mx){ const n=parseFloat(v); return !isNaN(n)&&n>=mn&&n<=mx; }
+function valid(v,mn,mx){const n=parseFloat(v);return !isNaN(n)&&n>=mn&&n<=mx;}
 
 /* ═══════════════════════════════════════════
    CALCULATOR — ORIGINAL FORMULAS PRESERVED
@@ -1547,16 +1199,16 @@ function calculate(){
   const wv=document.getElementById('weight').value.trim();
   const hv=document.getElementById('height').value.trim();
   let ok=true;
-  if(!valid(wv,20,300)){ setErr('weight','wErr',true); ok=false; } else setErr('weight','wErr',false);
-  if(hv && !valid(hv,100,250)){ setErr('height','hErr',true); ok=false; } else setErr('height','hErr',false);
-  if(!ok) return;
+  if(!valid(wv,20,300)){setErr('weight','wErr',true);ok=false;}else setErr('weight','wErr',false);
+  if(hv&&!valid(hv,100,250)){setErr('height','hErr',true);ok=false;}else setErr('height','hErr',false);
+  if(!ok)return;
 
   const btn=document.getElementById('calcBtn');
   btn.classList.add('ld');
   document.getElementById('bspin').style.display='block';
 
   setTimeout(()=>{
-    const bw=parseFloat(wv), ht=hv?parseFloat(hv):null;
+    const bw=parseFloat(wv),ht=hv?parseFloat(hv):null;
 
     /* ─── ORIGINAL FORMULAS — DO NOT MODIFY ─── */
     const maintenance = Math.round(bw * 32);
@@ -1571,20 +1223,20 @@ function calculate(){
     const totalKcal   = proteinKcal + carbsKcal + fatKcal;
     /* ────────────────────────────────────────── */
 
-    const pPct = Math.round(proteinKcal/totalKcal*100);
-    const cPct = Math.round(carbsKcal/totalKcal*100);
-    const fPct = 100-pPct-cPct;
-    const waterL = (bw*35/1000).toFixed(1);
-    const waterCups = Math.round(bw*35/250);
+    const pPct=Math.round(proteinKcal/totalKcal*100);
+    const cPct=Math.round(carbsKcal/totalKcal*100);
+    const fPct=100-pPct-cPct;
+    const waterL=(bw*35/1000).toFixed(1);
+    const waterCups=Math.round(bw*35/250);
     let bmi=null;
-    if(ht){ const hm=ht/100; bmi=(bw/(hm*hm)).toFixed(1); }
+    if(ht){const hm=ht/100;bmi=(bw/(hm*hm)).toFixed(1);}
 
     const R={bw,ht,maintenance,fatLoss,aggressive,protein,carbs,fat,proteinKcal,carbsKcal,fatKcal,totalKcal,pPct,cPct,fPct,waterL,waterCups,bmi};
-    window.__lastR = R;
+    window.__lastR=R;
     renderResults(R);
     btn.classList.remove('ld');
     document.getElementById('bspin').style.display='none';
-  }, 680);
+  },680);
 }
 
 /* ═══════════════════════════════════════════
@@ -1592,7 +1244,7 @@ function calculate(){
 ═══════════════════════════════════════════ */
 function animCount(el,to,dur=860){
   const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
-  (function step(){ const p=Math.min((Date.now()-s)/dur,1); el.textContent=Math.round(ease(p)*to).toLocaleString(); p<1&&requestAnimationFrame(step); })();
+  (function step(){const p=Math.min((Date.now()-s)/dur,1);el.textContent=Math.round(ease(p)*to).toLocaleString();p<1&&requestAnimationFrame(step);})();
 }
 
 function renderResults(R){
@@ -1625,14 +1277,13 @@ function renderResults(R){
     document.getElementById('mFb').style.width=R.fPct+'%';
   },160);
 
-  // Water
   document.getElementById('waterVal').textContent=R.waterL+'L';
   const cups=document.getElementById('waterCups');
   cups.innerHTML='';
   for(let i=0;i<12;i++){
     const s=document.createElement('span');
     s.className='wcup'+(i<R.waterCups?' on':'');
-    s.textContent='🥤'; s.setAttribute('aria-hidden','true');
+    s.textContent='🥤';s.setAttribute('aria-hidden','true');
     cups.appendChild(s);
   }
 
@@ -1643,11 +1294,11 @@ function renderResults(R){
 /* ═══════════════════════════════════════════
    CHARTS
 ═══════════════════════════════════════════ */
-let donutChart=null, barChart=null;
-function textColor(){ return isDark?'#9898c0':'#5a5a8a'; }
-function gridColor(){ return isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)'; }
+let donutChart=null,barChart=null;
+function textColor(){return isDark?'#9898c0':'#5a5a8a';}
+function gridColor(){return isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)';}
 function tooltipDef(){
-  return {
+  return{
     backgroundColor:isDark?'rgba(7,7,26,.96)':'rgba(255,255,255,.96)',
     titleColor:isDark?'#e8e8ff':'#1a1a2e',
     bodyColor:textColor(),
@@ -1657,40 +1308,38 @@ function tooltipDef(){
 }
 
 function renderCharts(R){
-  // Donut
-  if(donutChart) donutChart.destroy();
-  donutChart = new Chart(document.getElementById('donutC').getContext('2d'),{
+  if(donutChart)donutChart.destroy();
+  donutChart=new Chart(document.getElementById('donutC').getContext('2d'),{
     type:'doughnut',
-    data:{ labels:['Protein','Carbs','Fat'],
-      datasets:[{ data:[R.proteinKcal,R.carbsKcal,R.fatKcal],
+    data:{labels:['Protein','Carbs','Fat'],
+      datasets:[{data:[R.proteinKcal,R.carbsKcal,R.fatKcal],
         backgroundColor:['#f59e0b','#00f5ff','#a855f7'],
-        borderColor:'rgba(0,0,0,0)',borderWidth:0,hoverOffset:8 }]},
-    options:{ responsive:true,maintainAspectRatio:false,cutout:'70%',
-      plugins:{ legend:{display:false}, tooltip:{ ...tooltipDef(),
-        callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed} kcal (${Math.round(ctx.parsed/R.totalKcal*100)}%)`} } } }
+        borderColor:'rgba(0,0,0,0)',borderWidth:0,hoverOffset:8}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'70%',
+      plugins:{legend:{display:false},tooltip:{...tooltipDef(),
+        callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed} kcal (${Math.round(ctx.parsed/R.totalKcal*100)}%)`}}}}
   });
   document.getElementById('donutLeg').innerHTML=[
     {nm:'Protein',g:R.protein,k:R.proteinKcal,pct:R.pPct,c:'#f59e0b'},
-    {nm:'Carbs',  g:R.carbs,  k:R.carbsKcal,  pct:R.cPct,c:'#00f5ff'},
-    {nm:'Fats',   g:R.fat,    k:R.fatKcal,    pct:R.fPct,c:'#a855f7'}
+    {nm:'Carbs',g:R.carbs,k:R.carbsKcal,pct:R.cPct,c:'#00f5ff'},
+    {nm:'Fats',g:R.fat,k:R.fatKcal,pct:R.fPct,c:'#a855f7'}
   ].map(i=>`<div class="li"><div class="ld" style="background:${i.c}"></div><span class="ln">${i.nm} (${i.g}g)</span><span class="lv">${i.k} kcal</span><span class="lp">${i.pct}%</span></div>`).join('');
 
-  // Bar
-  if(barChart) barChart.destroy();
-  barChart = new Chart(document.getElementById('barC').getContext('2d'),{
+  if(barChart)barChart.destroy();
+  barChart=new Chart(document.getElementById('barC').getContext('2d'),{
     type:'bar',
-    data:{ labels:['Maintenance','Fat Loss','Aggressive'],
-      datasets:[{ data:[R.maintenance,R.fatLoss,R.aggressive],
+    data:{labels:['Maintenance','Fat Loss','Aggressive'],
+      datasets:[{data:[R.maintenance,R.fatLoss,R.aggressive],
         backgroundColor:['rgba(14,165,255,.7)','rgba(16,185,129,.7)','rgba(245,158,11,.7)'],
         borderColor:['#0ea5ff','#10b981','#f59e0b'],
         borderWidth:2,borderRadius:8,
-        hoverBackgroundColor:['rgba(14,165,255,.9)','rgba(16,185,129,.9)','rgba(245,158,11,.9)'] }]},
-    options:{ responsive:true,maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{ ...tooltipDef(),callbacks:{label:ctx=>` ${ctx.parsed.y.toLocaleString()} kcal/day`} } },
+        hoverBackgroundColor:['rgba(14,165,255,.9)','rgba(16,185,129,.9)','rgba(245,158,11,.9)']}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{...tooltipDef(),callbacks:{label:ctx=>` ${ctx.parsed.y.toLocaleString()} kcal/day`}}},
       scales:{
-        x:{ grid:{display:false},ticks:{color:textColor(),font:{size:11}},border:{display:false} },
-        y:{ grid:{color:gridColor()},ticks:{color:textColor(),font:{size:10},callback:v=>v.toLocaleString()},border:{display:false},min:Math.max(0,R.aggressive-300) }
-      } }
+        x:{grid:{display:false},ticks:{color:textColor(),font:{size:11}},border:{display:false}},
+        y:{grid:{color:gridColor()},ticks:{color:textColor(),font:{size:10},callback:v=>v.toLocaleString()},border:{display:false},min:Math.max(0,R.aggressive-300)}
+      }}
   });
 }
 
@@ -1699,7 +1348,7 @@ function renderCharts(R){
 ═══════════════════════════════════════════ */
 function renderBMI(R){
   const sec=document.getElementById('bmi-section');
-  if(!R.bmi){ sec.style.display='none'; return; }
+  if(!R.bmi){sec.style.display='none';return;}
   sec.style.display='';
   const bmiN=parseFloat(R.bmi);
   let cat,clr,pct;
@@ -1709,22 +1358,22 @@ function renderBMI(R){
   else{cat='Obese';clr='#ef4444';pct=Math.min(96,bmiN/40*100);}
 
   const numEl=document.getElementById('bmiNum');
-  numEl.textContent=R.bmi; numEl.style.color=clr;
+  numEl.textContent=R.bmi;numEl.style.color=clr;
   const badge=document.getElementById('bmiBadge');
   badge.textContent=cat;
   badge.style.cssText=`color:${clr};background:${clr}18;padding:5px 18px;border-radius:50px;font-size:12px;font-weight:700;border:1px solid ${clr}40`;
-  setTimeout(()=>{ document.getElementById('bmiNeedle').style.left=Math.min(95,pct)+'%'; },100);
+  setTimeout(()=>{document.getElementById('bmiNeedle').style.left=Math.min(95,pct)+'%';},100);
 
   const hm=R.ht/100;
-  const minW=(18.5*hm*hm).toFixed(1), maxW=(24.9*hm*hm).toFixed(1);
+  const minW=(18.5*hm*hm).toFixed(1),maxW=(24.9*hm*hm).toFixed(1);
   document.getElementById('wrMin').textContent=minW+' kg';
   document.getElementById('wrMax').textContent=maxW+' kg';
   document.getElementById('wrCur').textContent=R.bw+' kg';
 
   let advice='';
-  if(bmiN<18.5) advice=`⬆️ Your weight of ${R.bw}kg is below the healthy range. Aim to gradually reach ${minW}–${maxW}kg through a calorie-surplus nutrition plan.`;
-  else if(bmiN<25) advice=`✅ Your BMI of ${R.bmi} is in the healthy range. You're between ${minW}–${maxW}kg. Keep maintaining your current lifestyle.`;
-  else if(bmiN<30) advice=`📉 You're slightly above the healthy range. Using your fat loss target of ${R.fatLoss.toLocaleString()} kcal will help you reach ${maxW}kg safely.`;
+  if(bmiN<18.5)advice=`⬆️ Your weight of ${R.bw}kg is below the healthy range. Aim to gradually reach ${minW}–${maxW}kg through a calorie-surplus nutrition plan.`;
+  else if(bmiN<25)advice=`✅ Your BMI of ${R.bmi} is in the healthy range. You're between ${minW}–${maxW}kg. Keep maintaining your current lifestyle.`;
+  else if(bmiN<30)advice=`📉 You're slightly above the healthy range. Using your fat loss target of ${R.fatLoss.toLocaleString()} kcal will help you reach ${maxW}kg safely.`;
   else advice=`🏃 Your BMI indicates obesity. Start with the fat loss calorie target and gradually increase activity. Consider consulting a healthcare professional.`;
   document.getElementById('bmiAdvice').textContent=advice;
 }
@@ -1735,11 +1384,11 @@ function renderBMI(R){
 function resetAll(){
   document.getElementById('weight').value='';
   document.getElementById('height').value='';
-  setErr('weight','wErr',false); setErr('height','hErr',false);
+  setErr('weight','wErr',false);setErr('height','hErr',false);
   document.getElementById('results').style.display='none';
-  ['mPb','mCb','mFb'].forEach(id=>{ document.getElementById(id).style.width='0'; });
-  if(donutChart){ donutChart.destroy(); donutChart=null; }
-  if(barChart){ barChart.destroy(); barChart=null; }
+  ['mPb','mCb','mFb'].forEach(id=>{document.getElementById(id).style.width='0';});
+  if(donutChart){donutChart.destroy();donutChart=null;}
+  if(barChart){barChart.destroy();barChart=null;}
   window.__lastR=null;
 }
 
@@ -1748,35 +1397,35 @@ function resetAll(){
 ═══════════════════════════════════════════ */
 function copyResults(){
   const R=window.__lastR;
-  if(!R){ showToast('Calculate first!','er'); return; }
+  if(!R){showToast('Calculate first!','er');return;}
   const txt=`FITAI PRO — MACRO BLUEPRINT\n\nBody Weight: ${R.bw}kg\n\n🔥 CALORIE TARGETS\nMaintenance:    ${R.maintenance.toLocaleString()} kcal/day\nFat Loss:       ${R.fatLoss.toLocaleString()} kcal/day (−500 deficit)\nAggressive Cut: ${R.aggressive.toLocaleString()} kcal/day (−700 deficit)\n\n💪 DAILY MACROS\nProtein: ${R.protein}g → ${R.proteinKcal} kcal (${R.pPct}%)\nCarbs:   ${R.carbs}g → ${R.carbsKcal} kcal (${R.cPct}%)\nFat:     ${R.fat}g → ${R.fatKcal} kcal (${R.fPct}%)\n\n📊 TOTAL: ${R.totalKcal.toLocaleString()} kcal/day\n💧 WATER: ${R.waterL}L/day${R.bmi?`\n⚖️ BMI:   ${R.bmi}`:''}\n\nGenerated by FitAI Pro`;
-  navigator.clipboard.writeText(txt).then(()=>showToast('📋 Results copied!','ok')).catch(()=>showToast('Copy failed — try selecting manually','er'));
+  navigator.clipboard.writeText(txt).then(()=>showToast('📋 Results copied!','ok')).catch(()=>showToast('Copy failed','er'));
 }
 
 function downloadPDF(){
   const R=window.__lastR;
-  if(!R){ showToast('Calculate first!','er'); return; }
+  if(!R){showToast('Calculate first!','er');return;}
   try{
-    const {jsPDF}=window.jspdf;
+    const{jsPDF}=window.jspdf;
     const doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-    const W=doc.internal.pageSize.getWidth(), mg=20;
-    doc.setFillColor(3,3,10); doc.rect(0,0,W,55,'F');
-    doc.setFont('helvetica','bold'); doc.setFontSize(24); doc.setTextColor(0,245,255);
+    const W=doc.internal.pageSize.getWidth(),mg=20;
+    doc.setFillColor(3,3,10);doc.rect(0,0,W,55,'F');
+    doc.setFont('helvetica','bold');doc.setFontSize(24);doc.setTextColor(0,245,255);
     doc.text('FitAI Pro',W/2,20,{align:'center'});
-    doc.setFontSize(11); doc.setTextColor(152,152,192);
+    doc.setFontSize(11);doc.setTextColor(152,152,192);
     doc.text('AI-Powered Macro Blueprint',W/2,30,{align:'center'});
     doc.setFontSize(9);
     doc.text(`Body Weight: ${R.bw}kg  |  Generated: ${new Date().toLocaleDateString()}`,W/2,40,{align:'center'});
     let y=65;
     const row=(label,value,yy,x,w)=>{
-      doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(152,152,192);
+      doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(152,152,192);
       doc.text(label,x+6,yy);
-      doc.setFont('helvetica','bold'); doc.setTextColor(232,232,255);
+      doc.setFont('helvetica','bold');doc.setTextColor(232,232,255);
       doc.text(value,x+w-6,yy,{align:'right'});
     };
     const section=(title,rows,sy,x=mg,w=W-mg*2)=>{
-      doc.setFillColor(13,13,36); doc.roundedRect(x,sy,w,11+rows.length*11+7,3,3,'F');
-      doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(0,245,255);
+      doc.setFillColor(13,13,36);doc.roundedRect(x,sy,w,11+rows.length*11+7,3,3,'F');
+      doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(0,245,255);
       doc.text(title.toUpperCase(),x+6,sy+9);
       rows.forEach((r,i)=>row(r[0],r[1],sy+18+i*11,x,w));
       return sy+11+rows.length*11+11;
@@ -1794,268 +1443,159 @@ function downloadPDF(){
     section('Healthy Fats',[['Daily Amount',R.fat+'g'],['Calories',R.fatKcal+' kcal'],['% of Macros',R.fPct+'%']],y,mg,cw);
     section('Wellness',[['Daily Water',R.waterL+'L (35ml/kg)'],['Hydration Cups',R.waterCups+' × 250ml cups'],...(R.bmi?[['BMI Score',R.bmi]]:[[]])],y,mg+cw+10,cw);
     const fY=270;
-    doc.setFillColor(3,3,10); doc.rect(0,fY,W,28,'F');
-    doc.setFont('helvetica','normal'); doc.setFontSize(7.5); doc.setTextColor(90,90,120);
+    doc.setFillColor(3,3,10);doc.rect(0,fY,W,28,'F');
+    doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(90,90,120);
     doc.text('FitAI Pro  ·  AI-Powered Fitness Platform  ·  For informational purposes only.',W/2,fY+9,{align:'center'});
     doc.text('Consult a registered dietitian before making significant dietary changes.',W/2,fY+17,{align:'center'});
     doc.save(`fitai-blueprint-${R.bw}kg.pdf`);
     showToast('📄 PDF downloaded!','ok');
-  } catch(e){ console.error(e); showToast('PDF failed — try again','er'); }
+  }catch(e){console.error(e);showToast('PDF failed — try again','er');}
 }
 
 function shareResults(){
   const R=window.__lastR;
-  if(!R){ showToast('Calculate first!','er'); return; }
+  if(!R){showToast('Calculate first!','er');return;}
   const txt=`💪 My FitAI Pro Macro Blueprint\n• Maintenance: ${R.maintenance.toLocaleString()} kcal\n• Fat Loss: ${R.fatLoss.toLocaleString()} kcal\n• Protein: ${R.protein}g | Carbs: ${R.carbs}g | Fat: ${R.fat}g\n🔥 Try it at amazing-fitness-calculator.netlify.app`;
-  if(navigator.share) navigator.share({title:'My Macro Blueprint',text:txt}).catch(()=>{});
+  if(navigator.share)navigator.share({title:'My Macro Blueprint',text:txt}).catch(()=>{});
   else navigator.clipboard.writeText(txt).then(()=>showToast('🔗 Share text copied!','ok'));
 }
 
 /* ═══════════════════════════════════════════
    TOAST
 ═══════════════════════════════════════════ */
-function showToast(msg, type='nfo'){
+function showToast(msg,type='nfo'){
   const wrap=document.getElementById('toastWrap');
   const el=document.createElement('div');
   el.className=`toast ${type}`;
   el.textContent=msg;
   wrap.appendChild(el);
-  requestAnimationFrame(()=>{ requestAnimationFrame(()=>el.classList.add('on')); });
-  setTimeout(()=>{ el.classList.remove('on'); setTimeout(()=>el.remove(),400); },3000);
+  requestAnimationFrame(()=>{requestAnimationFrame(()=>el.classList.add('on'));});
+  setTimeout(()=>{el.classList.remove('on');setTimeout(()=>el.remove(),400);},3000);
 }
 
 /* ═══════════════════════════════════════════
    KEYBOARD
 ═══════════════════════════════════════════ */
 document.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&['weight','height'].includes(document.activeElement?.id)) calculate();
+  if(e.key==='Enter'&&['weight','height'].includes(document.activeElement?.id))calculate();
 });
 document.getElementById('weight').addEventListener('input',()=>setErr('weight','wErr',false));
 document.getElementById('height').addEventListener('input',()=>setErr('height','hErr',false));
 
 /* ═══════════════════════════════════════════
-   INIT
-═══════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded',()=>{
-  renderPhys();
-  initReveal();
-});
-/* ═══════════════════════════════════════════
    PHYSIQUE SHOWCASE CAROUSEL
 ═══════════════════════════════════════════ */
-(function () {
-  const TOTAL      = 6;
-  const GAP        = 20;
-  const AUTO_DELAY = 5000;
+(function(){
+  const TOTAL=6,GAP=20,AUTO_DELAY=5000;
+  let current=0,itemsVis=3,autoTimer=null;
 
-  let current    = 0;
-  let itemsVis   = 3;
-  let autoTimer  = null;
+  const track=document.getElementById('psTrack');
+  const viewport=track?track.parentElement:null;
+  const prevBtn=document.getElementById('psPrev');
+  const nextBtn=document.getElementById('psNext');
+  const dotsWrap=document.getElementById('psDots');
+  const cards=track?Array.from(track.querySelectorAll('.ps-card')):[];
 
-  const track    = document.getElementById('psTrack');
-  const viewport = track ? track.parentElement : null;
-  const prevBtn  = document.getElementById('psPrev');
-  const nextBtn  = document.getElementById('psNext');
-  const dotsWrap = document.getElementById('psDots');
-  const cards    = track ? Array.from(track.querySelectorAll('.ps-card')) : [];
+  if(!track||!cards.length)return;
 
-  if (!track || !cards.length) return;
-
-  /* ── helpers ── */
-  function getItemsVisible() {
-    const w = window.innerWidth;
-    if (w >= 1024) return 3;
-    if (w >= 640)  return 2;
+  function getItemsVisible(){
+    const w=window.innerWidth;
+    if(w>=1024)return 3;
+    if(w>=640)return 2;
     return 1;
   }
+  function maxIndex(){return Math.max(0,TOTAL-itemsVis);}
+  function cardWidth(){return(viewport.clientWidth-GAP*(itemsVis-1))/itemsVis;}
 
-  function maxIndex() {
-    return Math.max(0, TOTAL - itemsVis);
+  function setCardWidths(){
+    const cw=cardWidth();
+    cards.forEach(c=>{c.style.flex=`0 0 ${cw}px`;c.style.width=`${cw}px`;});
+    track.style.gap=GAP+'px';
   }
-
-  function cardWidth() {
-    const vw = viewport.clientWidth;
-    return (vw - GAP * (itemsVis - 1)) / itemsVis;
+  function goTo(index){
+    current=Math.max(0,Math.min(index,maxIndex()));
+    track.style.transform=`translateX(-${current*(cardWidth()+GAP)}px)`;
+    updateDots();updateArrows();
   }
-
-  /* ── render ── */
-  function setCardWidths() {
-    const cw = cardWidth();
-    cards.forEach(c => {
-      c.style.flex  = `0 0 ${cw}px`;
-      c.style.width = `${cw}px`;
-    });
-    track.style.gap = GAP + 'px';
+  function updateDots(){
+    dotsWrap.querySelectorAll('.ps-dot').forEach((d,i)=>d.classList.toggle('active',i===current));
   }
-
-  function goTo(index, force) {
-    current = Math.max(0, Math.min(index, maxIndex()));
-    const offset = current * (cardWidth() + GAP);
-    track.style.transform = `translateX(-${offset}px)`;
-    updateDots();
-    updateArrows();
+  function updateArrows(){
+    prevBtn.disabled=current===0;
+    nextBtn.disabled=current>=maxIndex();
   }
-
-  function updateDots() {
-    const dots = dotsWrap.querySelectorAll('.ps-dot');
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  function updateArrows() {
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= maxIndex();
-  }
-
-  function buildDots() {
-    dotsWrap.innerHTML = '';
-    const count = maxIndex() + 1;
-    for (let i = 0; i < count; i++) {
-      const d = document.createElement('button');
-      d.className = 'ps-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', `Slide ${i + 1}`);
-      d.addEventListener('click', () => { goTo(i); psAutoStop(); psAutoStart(); });
+  function buildDots(){
+    dotsWrap.innerHTML='';
+    for(let i=0;i<=maxIndex();i++){
+      const d=document.createElement('button');
+      d.className='ps-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label',`Slide ${i+1}`);
+      d.addEventListener('click',()=>{goTo(i);psAutoStop();psAutoStart();});
       dotsWrap.appendChild(d);
     }
   }
-
-  /* ── autoplay ── */
-  function psAutoStart() {
+  function psAutoStart(){
     psAutoStop();
-    autoTimer = setInterval(() => {
-      const next = current >= maxIndex() ? 0 : current + 1;
-      goTo(next);
-    }, AUTO_DELAY);
+    autoTimer=setInterval(()=>{
+      goTo(current>=maxIndex()?0:current+1);
+    },AUTO_DELAY);
   }
-  function psAutoStop() {
-    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  function psAutoStop(){
+    if(autoTimer){clearInterval(autoTimer);autoTimer=null;}
   }
-  window.psAutoStop  = psAutoStop;
-  window.psAutoStart = psAutoStart;
+  window.psAutoStop=psAutoStop;
+  window.psAutoStart=psAutoStart;
 
-  /* ── arrows ── */
-  prevBtn.addEventListener('click', () => { goTo(current - 1); psAutoStop(); psAutoStart(); });
-  nextBtn.addEventListener('click', () => { goTo(current + 1); psAutoStop(); psAutoStart(); });
+  prevBtn.addEventListener('click',()=>{goTo(current-1);psAutoStop();psAutoStart();});
+  nextBtn.addEventListener('click',()=>{goTo(current+1);psAutoStop();psAutoStart();});
 
-  /* ── touch swipe ── */
-  let touchStartX = 0;
-  track.addEventListener('touchstart',  e => { touchStartX = e.touches[0].clientX; psAutoStop(); }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+  let touchStartX=0;
+  track.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;psAutoStop();},{passive:true});
+  track.addEventListener('touchend',e=>{
+    const diff=touchStartX-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>40)diff>0?goTo(current+1):goTo(current-1);
     psAutoStart();
-  }, { passive: true });
+  },{passive:true});
 
-  /* ── 3D tilt parallax ── */
-  cards.forEach(card => {
-    const img = card.querySelector('.ps-img-wrap img');
-
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width  - 0.5;
-      const y = (e.clientY - rect.top)  / rect.height - 0.5;
-      const tx = y * -10, ty = x * 10;
-      card.style.transform = `perspective(900px) rotateX(${tx}deg) rotateY(${ty}deg)`;
-      if (img) img.style.transform = `scale(1.08) translate(${x * -12}px, ${y * -8}px)`;
+  cards.forEach(card=>{
+    const img=card.querySelector('.ps-img-wrap img');
+    card.addEventListener('mousemove',e=>{
+      const rect=card.getBoundingClientRect();
+      const x=(e.clientX-rect.left)/rect.width-.5;
+      const y=(e.clientY-rect.top)/rect.height-.5;
+      card.style.transform=`perspective(900px) rotateX(${y*-10}deg) rotateY(${x*10}deg)`;
+      if(img)img.style.transform=`scale(1.08) translate(${x*-12}px,${y*-8}px)`;
     });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-      if (img) img.style.transform = '';
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform='';
+      if(img)img.style.transform='';
     });
   });
 
-  /* ── resize ── */
   let resizeTimer;
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize',()=>{
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      const newVis = getItemsVisible();
-      if (newVis !== itemsVis) {
-        itemsVis = newVis;
-        current  = Math.min(current, maxIndex());
-        buildDots();
-      }
-      setCardWidths();
-      goTo(current, true);
-    }, 100);
+    resizeTimer=setTimeout(()=>{
+      const newVis=getItemsVisible();
+      if(newVis!==itemsVis){itemsVis=newVis;current=Math.min(current,maxIndex());buildDots();}
+      setCardWidths();goTo(current);
+    },100);
   });
 
-  /* ── init ── */
-  function init() {
-    itemsVis = getItemsVisible();
-    setCardWidths();
-    buildDots();
-    goTo(0);
-    psAutoStart();
+  function init(){
+    itemsVis=getItemsVisible();
+    setCardWidths();buildDots();goTo(0);psAutoStart();
   }
-
-  /* wait for fonts/layout */
-  if (document.readyState === 'complete') init();
-  else window.addEventListener('load', init);
+  if(document.readyState==='complete')init();
+  else window.addEventListener('load',init);
 })();
-</script>
-<script>
-function calculateCalories() {
-  const gender = document.getElementById("gender").value;
-  const age = parseInt(document.getElementById("age").value);
-  const height = parseInt(document.getElementById("height").value);
-  const weight = parseInt(document.getElementById("weight").value);
-  const activity = parseFloat(document.getElementById("activity").value);
 
-  let bmr = 0;
-
-  if (gender === "male") {
-    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-  } else {
-    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-  }
-
-  const calories = Math.round(bmr * activity);
-
-  document.getElementById("result").innerHTML =
-    calories + " <span>kcal/day</span>";
-}
-
-const track = document.getElementById("psTrack");
-const dotsContainer = document.getElementById("psDots");
-
-if (track && dotsContainer) {
-  const cards = document.querySelectorAll(".ps-card");
-  let currentIndex = 0;
-
-  cards.forEach((_, index) => {
-    const dot = document.createElement("button");
-    dot.classList.add("ps-dot");
-
-    if (index === 0) dot.classList.add("active");
-
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      updateCarousel();
-    });
-
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = document.querySelectorAll(".ps-dot");
-
-  function updateCarousel() {
-    const cardWidth = cards[0].offsetWidth + 24;
-
-    track.scrollTo({
-      left: currentIndex * cardWidth,
-      behavior: "smooth"
-    });
-
-    dots.forEach(dot => dot.classList.remove("active"));
-    dots[currentIndex].classList.add("active");
-  }
-
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % cards.length;
-    updateCarousel();
-  }, 5000);
-}
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  initReveal();
+});
 </script>
 </body>
 </html>
