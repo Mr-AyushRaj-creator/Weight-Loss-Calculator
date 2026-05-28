@@ -239,143 +239,6 @@ body{
 }
 .sec-sub{font-size:.95rem;color:var(--muted2)}
 
-<!-- ═══════════════════════════════════════
-   PHYSIQUE SHOWCASE SECTION
-═══════════════════════════════════════ -->
-<section class="ps-section" id="showcase">
-
-  <div class="ps-head">
-    <div class="ps-eyebrow"><span class="dot"></span>AI FITNESS INTELLIGENCE</div>
-    <h2 class="ps-title">Choose Your Ideal Physique</h2>
-    <p class="ps-sub">Different physiques require different training styles, nutrition systems, and recovery protocols.</p>
-  </div>
-
-  <div class="ps-carousel-outer">
-
-    <button class="ps-arrow ps-prev" id="psPrev" aria-label="Previous">&#8249;</button>
-
-    <div class="ps-viewport">
-      <div class="ps-track" id="psTrack">
-
-        <!-- CARD 1: FAT TO FIT -->
-        <div class="ps-card" style="--cc:#ec4899"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/1__FAT_TO_FIT_TRANSFORMATION.png" alt="Fat to Fit Transformation" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(236,72,153,.28),transparent 55%)"></div>
-          <span class="ps-tag">TRANSFORMATION</span>
-          <div class="ps-content">
-            <div class="ps-icon">📈</div>
-            <div class="ps-card-title">FAT TO FIT</div>
-            <div class="ps-card-sub">Complete Lifestyle Rebuild</div>
-          </div>
-        </div>
-
-        <!-- CARD 2: LEAN ATHLETIC -->
-        <div class="ps-card" style="--cc:#3b82f6"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/2__LEAN_ATHLETIC_PHYSIQUE.png" alt="Lean Athletic Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(59,130,246,.28),transparent 55%)"></div>
-          <span class="ps-tag">ATHLETIC</span>
-          <div class="ps-content">
-            <div class="ps-icon">🏃</div>
-            <div class="ps-card-title">LEAN ATHLETE</div>
-            <div class="ps-card-sub">Functional & Sustainable Fitness</div>
-          </div>
-        </div>
-
-        <!-- CARD 3: CALISTHENICS -->
-        <div class="ps-card" style="--cc:#10b981"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/3__CALISTHENICS_ATHLETE.png" alt="Calisthenics Athlete" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(16,185,129,.28),transparent 55%)"></div>
-          <span class="ps-tag">FUNCTIONAL</span>
-          <div class="ps-content">
-            <div class="ps-icon">⚡</div>
-            <div class="ps-card-title">CALISTHENICS</div>
-            <div class="ps-card-sub">Strength Through Movement</div>
-          </div>
-        </div>
-
-        <!-- CARD 4: AESTHETIC -->
-        <div class="ps-card" style="--cc:#a855f7"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/4__AESTHETIC_PHYSIQUE.png" alt="Aesthetic Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(168,85,247,.28),transparent 55%)"></div>
-          <span class="ps-tag">SYMMETRY</span>
-          <div class="ps-content">
-            <div class="ps-icon">🔥</div>
-            <div class="ps-card-title">AESTHETIC</div>
-            <div class="ps-card-sub">Balanced Greek-God Proportions</div>
-          </div>
-        </div>
-
-        <!-- CARD 5: SHREDDED -->
-        <div class="ps-card" style="--cc:#00f5ff"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/5__SHREDDED_PHYSIQUE.png" alt="Shredded Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(0,245,255,.22),transparent 55%)"></div>
-          <span class="ps-tag">DEFINITION</span>
-          <div class="ps-content">
-            <div class="ps-icon">💎</div>
-            <div class="ps-card-title">SHREDDED</div>
-            <div class="ps-card-sub">Extreme Conditioning & Definition</div>
-          </div>
-        </div>
-
-        <!-- CARD 6: BODYBUILDER -->
-        <div class="ps-card" style="--cc:#f59e0b"
-             data-tilt
-             onmouseenter="psAutoStop()"
-             onmouseleave="psAutoStart()">
-          <div class="ps-img-wrap">
-            <img src="images/6__BODYBUILDER_PHYSIQUE.png" alt="Bodybuilder Physique" loading="lazy">
-          </div>
-          <div class="ps-overlay-base"></div>
-          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(245,158,11,.28),transparent 55%)"></div>
-          <span class="ps-tag">MASS</span>
-          <div class="ps-content">
-            <div class="ps-icon">🏆</div>
-            <div class="ps-card-title">BODYBUILDER</div>
-            <div class="ps-card-sub">Maximum Mass & Dominance</div>
-          </div>
-        </div>
-
-      </div><!-- /track -->
-    </div><!-- /viewport -->
-
-    <button class="ps-arrow ps-next" id="psNext" aria-label="Next">&#8250;</button>
-
-  </div><!-- /carousel-outer -->
-
-  <div class="ps-dots" id="psDots"></div>
-
-</section>
-
 /* ── CALCULATOR SECTION ────────────────────── */
 #calc{
   padding:60px 24px 80px;
@@ -1076,6 +939,143 @@ footer{
 </head>
 <body>
 
+═══════════════════════════════════════
+   PHYSIQUE SHOWCASE SECTION
+═══════════════════════════════════════
+<section class="ps-section" id="showcase">
+
+  <div class="ps-head">
+    <div class="ps-eyebrow"><span class="dot"></span>AI FITNESS INTELLIGENCE</div>
+    <h2 class="ps-title">Choose Your Ideal Physique</h2>
+    <p class="ps-sub">Different physiques require different training styles, nutrition systems, and recovery protocols.</p>
+  </div>
+
+  <div class="ps-carousel-outer">
+
+    <button class="ps-arrow ps-prev" id="psPrev" aria-label="Previous">&#8249;</button>
+
+    <div class="ps-viewport">
+      <div class="ps-track" id="psTrack">
+
+        <!-- CARD 1: FAT TO FIT -->
+        <div class="ps-card" style="--cc:#ec4899"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/1__FAT_TO_FIT_TRANSFORMATION.png" alt="Fat to Fit Transformation" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(236,72,153,.28),transparent 55%)"></div>
+          <span class="ps-tag">TRANSFORMATION</span>
+          <div class="ps-content">
+            <div class="ps-icon">📈</div>
+            <div class="ps-card-title">FAT TO FIT</div>
+            <div class="ps-card-sub">Complete Lifestyle Rebuild</div>
+          </div>
+        </div>
+
+        <!-- CARD 2: LEAN ATHLETIC -->
+        <div class="ps-card" style="--cc:#3b82f6"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/2__LEAN_ATHLETIC_PHYSIQUE.png" alt="Lean Athletic Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(59,130,246,.28),transparent 55%)"></div>
+          <span class="ps-tag">ATHLETIC</span>
+          <div class="ps-content">
+            <div class="ps-icon">🏃</div>
+            <div class="ps-card-title">LEAN ATHLETE</div>
+            <div class="ps-card-sub">Functional & Sustainable Fitness</div>
+          </div>
+        </div>
+
+        <!-- CARD 3: CALISTHENICS -->
+        <div class="ps-card" style="--cc:#10b981"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/3__CALISTHENICS_ATHLETE.png" alt="Calisthenics Athlete" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(16,185,129,.28),transparent 55%)"></div>
+          <span class="ps-tag">FUNCTIONAL</span>
+          <div class="ps-content">
+            <div class="ps-icon">⚡</div>
+            <div class="ps-card-title">CALISTHENICS</div>
+            <div class="ps-card-sub">Strength Through Movement</div>
+          </div>
+        </div>
+
+        <!-- CARD 4: AESTHETIC -->
+        <div class="ps-card" style="--cc:#a855f7"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/4__AESTHETIC_PHYSIQUE.png" alt="Aesthetic Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(168,85,247,.28),transparent 55%)"></div>
+          <span class="ps-tag">SYMMETRY</span>
+          <div class="ps-content">
+            <div class="ps-icon">🔥</div>
+            <div class="ps-card-title">AESTHETIC</div>
+            <div class="ps-card-sub">Balanced Greek-God Proportions</div>
+          </div>
+        </div>
+
+        <!-- CARD 5: SHREDDED -->
+        <div class="ps-card" style="--cc:#00f5ff"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/5__SHREDDED_PHYSIQUE.png" alt="Shredded Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(0,245,255,.22),transparent 55%)"></div>
+          <span class="ps-tag">DEFINITION</span>
+          <div class="ps-content">
+            <div class="ps-icon">💎</div>
+            <div class="ps-card-title">SHREDDED</div>
+            <div class="ps-card-sub">Extreme Conditioning & Definition</div>
+          </div>
+        </div>
+
+        <!-- CARD 6: BODYBUILDER -->
+        <div class="ps-card" style="--cc:#f59e0b"
+             data-tilt
+             onmouseenter="psAutoStop()"
+             onmouseleave="psAutoStart()">
+          <div class="ps-img-wrap">
+            <img src="images/6__BODYBUILDER_PHYSIQUE.png" alt="Bodybuilder Physique" loading="lazy">
+          </div>
+          <div class="ps-overlay-base"></div>
+          <div class="ps-overlay-color" style="background:linear-gradient(to top,rgba(245,158,11,.28),transparent 55%)"></div>
+          <span class="ps-tag">MASS</span>
+          <div class="ps-content">
+            <div class="ps-icon">🏆</div>
+            <div class="ps-card-title">BODYBUILDER</div>
+            <div class="ps-card-sub">Maximum Mass & Dominance</div>
+          </div>
+        </div>
+
+      </div><!-- /track -->
+    </div><!-- /viewport -->
+
+    <button class="ps-arrow ps-next" id="psNext" aria-label="Next">&#8250;</button>
+
+  </div><!-- /carousel-outer -->
+
+  <div class="ps-dots" id="psDots"></div>
+
+</section>
+
 <canvas id="pcv" aria-hidden="true"></canvas>
 
 <!-- Theme Toggle -->
@@ -1109,16 +1109,6 @@ footer{
   <div class="scroll-hint" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
     <div class="arr"></div><span>Scroll</span>
   </div>
-</section>
-
-<!-- ══ PHYSIQUE SHOWCASE ═══════════════════════ -->
-<section id="showcase">
-  <div class="showcase-head rv">
-    <div class="showcase-title">PHYSIQUE SHOWCASE</div>
-    <div class="showcase-subtitle"><span>Choose Your Inspiration</span></div>
-  </div>
-  <div class="phys-track" id="physTrack" role="list"></div>
-  <div class="phys-dots" id="physDots" aria-hidden="true"></div>
 </section>
 
 <!-- ══ CALCULATOR ══════════════════════════════ -->
