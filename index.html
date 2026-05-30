@@ -794,6 +794,68 @@ footer{
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0,245,255,.6);
 }
+/* ── Select dropdown ─────────────────── */
+.iselect{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230ea5ff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:40px;
+  cursor:pointer;
+}
+[data-theme="light"] .iselect{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a855f7' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.iselect option{background:#0d0d24;color:#e8e8ff}
+[data-theme="light"] .iselect option{background:#f0f0ff;color:#1a1a2e}
+
+/* ── BMR / TDEE strip ────────────────── */
+.bmr-strip{
+  display:flex;align-items:center;gap:16px;
+  background:rgba(14,165,255,.05);
+  border:1px solid rgba(14,165,255,.14);
+  border-radius:12px;padding:14px 20px;
+  margin-bottom:16px;flex-wrap:wrap;
+  justify-content:center;
+}
+.bmr-item{text-align:center}
+.bmr-label{
+  display:block;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3px;
+}
+.bmr-val{
+  font-family:'Montserrat',sans-serif;
+  font-size:1.25rem;font-weight:900;color:var(--blue);
+}
+.bmr-unit{font-size:10px;color:var(--muted);margin-left:3px}
+.bmr-arrow{font-size:1.2rem;color:var(--muted);flex-shrink:0}
+
+/* ── Goal tabs ───────────────────────── */
+.goal-tabs{display:flex;gap:8px;margin:20px 0 12px;flex-wrap:wrap}
+.goal-tab{
+  padding:8px 18px;border-radius:50px;
+  border:1px solid var(--border);background:transparent;
+  color:var(--muted2);font-family:'Poppins',sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;
+  transition:all var(--t);
+}
+.goal-tab:hover{border-color:var(--cyan);color:var(--cyan)}
+.goal-tab.active{
+  background:rgba(0,245,255,.08);
+  border-color:var(--cyan);color:var(--cyan);
+  box-shadow:0 0 16px rgba(0,245,255,.12);
+}
+
+/* ── Macro banner ────────────────────── */
+.macro-banner{
+  background:rgba(168,85,247,.06);
+  border:1px solid rgba(168,85,247,.2);
+  border-radius:10px;padding:10px 16px;
+  font-size:12px;color:var(--muted2);
+  margin-bottom:16px;text-align:center;
+  line-height:1.6;
+}
 </style>
 </head>
 <body>
@@ -966,24 +1028,58 @@ footer{
           <div class="gc-sub">Enter your body weight for a precision nutrition blueprint</div>
         </div>
       </div>
+      
+      <!-- Row 1: Weight + Height -->
       <div class="i2">
         <div class="ig">
           <label class="ilbl" for="weight">Body Weight</label>
           <div class="iw">
-            <input class="ifield" id="weight" type="number" placeholder="e.g. 75" min="20" max="300" step="0.1" aria-describedby="wErr"/>
+            <input class="ifield" id="weight" type="number" placeholder="e.g. 75" min="20" max="300" step="0.1"/>
             <span class="iunit">kg</span>
           </div>
           <span class="errmsg" id="wErr" role="alert">Please enter a valid weight (20–300 kg)</span>
         </div>
         <div class="ig">
-          <label class="ilbl" for="height">Height <span style="font-weight:400;opacity:.6;font-size:.9em">(for BMI)</span></label>
+          <label class="ilbl" for="height">Height</label>
           <div class="iw">
-            <input class="ifield" id="height" type="number" placeholder="e.g. 175" min="100" max="250" step="1" aria-describedby="hErr"/>
+            <input class="ifield" id="height" type="number" placeholder="e.g. 175" min="100" max="250" step="1"/>
             <span class="iunit">cm</span>
           </div>
-          <span class="errmsg" id="hErr" role="alert">Please enter a valid height (100–250 cm)</span>
+          <span class="errmsg" id="hErr" role="alert">Enter a valid height (100–250 cm)</span>
         </div>
       </div>
+
+      <!-- Row 2: Age + Gender -->
+      <div class="i2">
+        <div class="ig">
+          <label class="ilbl" for="age">Age</label>
+          <div class="iw">
+            <input class="ifield" id="age" type="number" placeholder="e.g. 25" min="10" max="100" step="1"/>
+            <span class="iunit">yrs</span>
+          </div>
+          <span class="errmsg" id="ageErr" role="alert">Enter a valid age (10–100)</span>
+        </div>
+        <div class="ig">
+          <label class="ilbl" for="gender">Gender</label>
+          <select class="ifield iselect" id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Row 3: Activity Level -->
+      <div class="ig" style="margin-bottom:22px">
+        <label class="ilbl" for="activity">Activity Level</label>
+        <select class="ifield iselect" id="activity">
+          <option value="1.2">Sedentary — desk job, little/no exercise</option>
+          <option value="1.375">Lightly Active — 1–3 days/week</option>
+          <option value="1.55" selected>Moderately Active — 3–5 days/week</option>
+          <option value="1.725">Very Active — 6–7 days/week</option>
+          <option value="1.9">Extra Active — physical job + intense training</option>
+        </select>
+      </div>
+
       <div class="brow">
         <button class="bcalc" id="calcBtn" onclick="calculate()">
           <div class="bspin" id="bspin" aria-hidden="true"></div>
@@ -1003,6 +1099,27 @@ footer{
         <div class="cccard a"><div class="cce">⚡</div><div class="ccl">Aggressive Cut</div><div class="ccv" id="rA">—</div><div class="ccu">kcal / day</div><div class="ccb">−700 deficit</div></div>
       </div>
 
+      <!-- BMR → TDEE → Goal chain -->
+      <div class="bmr-strip">
+        <div class="bmr-item">
+          <span class="bmr-label">BMR (Base Rate)</span>
+          <span class="bmr-val" id="bmrVal">—</span>
+          <span class="bmr-unit">kcal</span>
+        </div>
+        <div class="bmr-arrow">→</div>
+        <div class="bmr-item">
+          <span class="bmr-label">TDEE (with activity)</span>
+          <span class="bmr-val" id="tdeeVal">—</span>
+          <span class="bmr-unit">kcal</span>
+        </div>
+        <div class="bmr-arrow">→</div>
+        <div class="bmr-item">
+          <span class="bmr-label">Your Goal Target</span>
+          <span class="bmr-val" id="goalChainVal" style="color:var(--cyan)">—</span>
+          <span class="bmr-unit">kcal</span>
+        </div>
+      </div>
+
       <div class="tbn">
         <div class="tbn-l">
           <div class="lbl">Total Calories from Macros</div>
@@ -1015,6 +1132,20 @@ footer{
           <div class="tbi"><div class="v" style="color:var(--purple)" id="tF">—</div><div class="l">Fat</div></div>
         </div>
       </div>
+      
+      <!-- Goal selector tabs -->
+      <div class="goal-tabs">
+        <button class="goal-tab" data-goal="maintenance" onclick="switchGoal('maintenance')">⚖️ Maintenance</button>
+        <button class="goal-tab active" data-goal="fatloss" onclick="switchGoal('fatloss')">📉 Fat Loss</button>
+        <button class="goal-tab" data-goal="aggressive" onclick="switchGoal('aggressive')">⚡ Aggressive Cut</button>
+      </div>
+
+      <!-- Macro label banner -->
+      <div class="macro-banner" id="macroBanner">
+        Calculating macros for: <strong style="color:var(--cyan)">Fat Loss</strong>
+      </div>
+
+      <div class="rdiv">💪 Daily Macros</div>
 
       <div class="rdiv">💪 Daily Macros</div>
       <div class="mcgrid">
@@ -1156,7 +1287,10 @@ document.getElementById('themeBtn').addEventListener('click',()=>{
   isDark=!isDark;
   document.documentElement.setAttribute('data-theme',isDark?'dark':'light');
   document.getElementById('themeBtn').textContent=isDark?'🌙':'☀️';
-  if(window.__lastR)renderCharts(window.__lastR);
+  if(window.__lastR){
+    renderBarChart(window.__lastR);
+    switchGoal(currentGoal);
+  }
 });
 
 /* ═══════════════════════════════════════════
@@ -1193,50 +1327,88 @@ function setErr(fId,eId,show){
 function valid(v,mn,mx){const n=parseFloat(v);return !isNaN(n)&&n>=mn&&n<=mx;}
 
 /* ═══════════════════════════════════════════
-   CALCULATOR — ORIGINAL FORMULAS PRESERVED
+   GOAL STATE
+═══════════════════════════════════════════ */
+let currentGoal = 'fatloss';
+
+/* ═══════════════════════════════════════════
+   CALCULATOR — BMR → TDEE → GOAL → MACROS
 ═══════════════════════════════════════════ */
 function calculate(){
-  const wv=document.getElementById('weight').value.trim();
-  const hv=document.getElementById('height').value.trim();
-  let ok=true;
-  if(!valid(wv,20,300)){setErr('weight','wErr',true);ok=false;}else setErr('weight','wErr',false);
-  if(hv&&!valid(hv,100,250)){setErr('height','hErr',true);ok=false;}else setErr('height','hErr',false);
-  if(!ok)return;
+  const wv  = document.getElementById('weight').value.trim();
+  const hv  = document.getElementById('height').value.trim();
+  const av  = document.getElementById('age').value.trim();
+  const gv  = document.getElementById('gender').value;
+  const acv = parseFloat(document.getElementById('activity').value);
 
-  const btn=document.getElementById('calcBtn');
+  let ok = true;
+  if(!valid(wv,20,300))  { setErr('weight','wErr',true);  ok=false; } else setErr('weight','wErr',false);
+  if(!valid(hv,100,250)) { setErr('height','hErr',true);  ok=false; } else setErr('height','hErr',false);
+  if(!valid(av,10,100))  { setErr('age','ageErr',true);   ok=false; } else setErr('age','ageErr',false);
+  if(!ok) return;
+
+  const btn = document.getElementById('calcBtn');
   btn.classList.add('ld');
-  document.getElementById('bspin').style.display='block';
+  document.getElementById('bspin').style.display = 'block';
 
   setTimeout(()=>{
-    const bw=parseFloat(wv),ht=hv?parseFloat(hv):null;
+    const bw  = parseFloat(wv);
+    const ht  = parseFloat(hv);
+    const age = parseInt(av);
 
-    /* ─── ORIGINAL FORMULAS — DO NOT MODIFY ─── */
-    const maintenance = Math.round(bw * 32);
-    const fatLoss     = maintenance - 500;
-    const aggressive  = maintenance - 700;
-    const protein     = Math.round(bw * 1.7);
-    const carbs       = Math.round(bw * 2);
-    const fat         = Math.round(bw * 0.9);
-    const proteinKcal = protein * 4;
-    const carbsKcal   = carbs   * 4;
-    const fatKcal     = fat     * 9;
-    const totalKcal   = proteinKcal + carbsKcal + fatKcal;
-    /* ────────────────────────────────────────── */
+    /* ── Step 1: BMR (Mifflin-St Jeor) ─────── */
+    const bmr = gv === 'male'
+      ? Math.round(10*bw + 6.25*ht - 5*age + 5)
+      : Math.round(10*bw + 6.25*ht - 5*age - 161);
 
-    const pPct=Math.round(proteinKcal/totalKcal*100);
-    const cPct=Math.round(carbsKcal/totalKcal*100);
-    const fPct=100-pPct-cPct;
-    const waterL=(bw*35/1000).toFixed(1);
-    const waterCups=Math.round(bw*35/250);
-    let bmi=null;
-    if(ht){const hm=ht/100;bmi=(bw/(hm*hm)).toFixed(1);}
+    /* ── Step 2: TDEE ───────────────────────── */
+    const tdee = Math.round(bmr * acv);
 
-    const R={bw,ht,maintenance,fatLoss,aggressive,protein,carbs,fat,proteinKcal,carbsKcal,fatKcal,totalKcal,pPct,cPct,fPct,waterL,waterCups,bmi};
-    window.__lastR=R;
+    /* ── Step 3: Goal calories ──────────────── */
+    const maintenance = tdee;
+    const fatLoss     = tdee - 500;
+    const aggressive  = tdee - 700;
+
+    /* ── Step 4: Macros that match calories ─── */
+    // Protein 30% | Carbs 40% | Fat 30%
+    function getMacros(kcal){
+      const pKcal = Math.round(kcal * 0.30);
+      const cKcal = Math.round(kcal * 0.40);
+      const fKcal = kcal - pKcal - cKcal; // remainder avoids rounding gaps
+      const protein = Math.round(pKcal / 4);
+      const carbs   = Math.round(cKcal / 4);
+      const fat     = Math.round(fKcal / 9);
+      return {
+        protein, carbs, fat,
+        proteinKcal: protein*4,
+        carbsKcal:   carbs*4,
+        fatKcal:     fat*9,
+        totalKcal:   protein*4 + carbs*4 + fat*9
+      };
+    }
+
+    /* ── Water & BMI ────────────────────────── */
+    const waterL    = (bw * 35 / 1000).toFixed(1);
+    const waterCups = Math.round(bw * 35 / 250);
+    const hm        = ht / 100;
+    const bmi       = (bw / (hm * hm)).toFixed(1);
+
+    const R = {
+      bw, ht, age, gender:gv, bmr, tdee,
+      maintenance, fatLoss, aggressive,
+      waterL, waterCups, bmi,
+      macros:{
+        maintenance: getMacros(maintenance),
+        fatloss:     getMacros(fatLoss),
+        aggressive:  getMacros(aggressive)
+      }
+    };
+
+    window.__lastR = R;
     renderResults(R);
     btn.classList.remove('ld');
-    document.getElementById('bspin').style.display='none';
-  },680);
+    document.getElementById('bspin').style.display = 'none';
+  }, 680);
 }
 
 /* ═══════════════════════════════════════════
@@ -1244,59 +1416,103 @@ function calculate(){
 ═══════════════════════════════════════════ */
 function animCount(el,to,dur=860){
   const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
-  (function step(){const p=Math.min((Date.now()-s)/dur,1);el.textContent=Math.round(ease(p)*to).toLocaleString();p<1&&requestAnimationFrame(step);})();
+  (function step(){ const p=Math.min((Date.now()-s)/dur,1); el.textContent=Math.round(ease(p)*to).toLocaleString(); p<1&&requestAnimationFrame(step); })();
 }
 
 function renderResults(R){
-  const res=document.getElementById('results');
-  res.style.display='block';
-  setTimeout(()=>res.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  document.getElementById('results').style.display='block';
+  setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 
-  animCount(document.getElementById('rM'),R.maintenance);
-  animCount(document.getElementById('rF'),R.fatLoss);
-  animCount(document.getElementById('rA'),R.aggressive);
-  animCount(document.getElementById('rT'),R.totalKcal);
+  /* Calorie cards */
+  animCount(document.getElementById('rM'), R.maintenance);
+  animCount(document.getElementById('rF'), R.fatLoss);
+  animCount(document.getElementById('rA'), R.aggressive);
 
-  document.getElementById('tP').textContent=R.proteinKcal+' kcal';
-  document.getElementById('tC').textContent=R.carbsKcal+' kcal';
-  document.getElementById('tF').textContent=R.fatKcal+' kcal';
+  /* BMR / TDEE strip */
+  document.getElementById('bmrVal').textContent  = R.bmr.toLocaleString();
+  document.getElementById('tdeeVal').textContent = R.tdee.toLocaleString();
 
-  document.getElementById('mPg').innerHTML=`${R.protein} <span>g</span>`;
-  document.getElementById('mPk').textContent=`${R.proteinKcal} kcal`;
-  document.getElementById('mPp').textContent=`${R.pPct}% of macros`;
-  document.getElementById('mCg').innerHTML=`${R.carbs} <span>g</span>`;
-  document.getElementById('mCk').textContent=`${R.carbsKcal} kcal`;
-  document.getElementById('mCp').textContent=`${R.cPct}% of macros`;
-  document.getElementById('mFg').innerHTML=`${R.fat} <span>g</span>`;
-  document.getElementById('mFk').textContent=`${R.fatKcal} kcal`;
-  document.getElementById('mFp').textContent=`${R.fPct}% of macros`;
+  /* Default to fat loss, render macros */
+  currentGoal = 'fatloss';
+  switchGoal('fatloss');
 
-  setTimeout(()=>{
-    document.getElementById('mPb').style.width=R.pPct+'%';
-    document.getElementById('mCb').style.width=R.cPct+'%';
-    document.getElementById('mFb').style.width=R.fPct+'%';
-  },160);
-
-  document.getElementById('waterVal').textContent=R.waterL+'L';
-  const cups=document.getElementById('waterCups');
-  cups.innerHTML='';
+  /* Water */
+  document.getElementById('waterVal').textContent = R.waterL + 'L';
+  const cups = document.getElementById('waterCups');
+  cups.innerHTML = '';
   for(let i=0;i<12;i++){
-    const s=document.createElement('span');
-    s.className='wcup'+(i<R.waterCups?' on':'');
-    s.textContent='🥤';s.setAttribute('aria-hidden','true');
+    const s = document.createElement('span');
+    s.className = 'wcup' + (i < R.waterCups ? ' on' : '');
+    s.textContent = '🥤';
+    s.setAttribute('aria-hidden','true');
     cups.appendChild(s);
   }
 
-  renderCharts(R);
+  renderBarChart(R);
   renderBMI(R);
+}
+
+/* ═══════════════════════════════════════════
+   SWITCH GOAL (updates macro section)
+═══════════════════════════════════════════ */
+function switchGoal(goal){
+  currentGoal = goal;
+  const R = window.__lastR;
+  if(!R) return;
+
+  const m     = R.macros[goal];
+  const kcal  = goal==='maintenance' ? R.maintenance : goal==='fatloss' ? R.fatLoss : R.aggressive;
+  const labels = { maintenance:'Maintenance', fatloss:'Fat Loss', aggressive:'Aggressive Cut' };
+  const label  = labels[goal];
+
+  /* Goal chain value */
+  document.getElementById('goalChainVal').textContent = kcal.toLocaleString();
+
+  /* Tab highlight */
+  document.querySelectorAll('.goal-tab').forEach(t =>
+    t.classList.toggle('active', t.dataset.goal === goal)
+  );
+
+  /* Macro banner */
+  document.getElementById('macroBanner').innerHTML =
+    `Macros for <strong style="color:var(--cyan)">${label}</strong> &nbsp;·&nbsp; Target: <strong>${kcal.toLocaleString()} kcal/day</strong> <span style="color:var(--green);font-size:11px">✓ macros match target</span>`;
+
+  /* Total banner values */
+  animCount(document.getElementById('rT'), m.totalKcal);
+  document.getElementById('tP').textContent = m.proteinKcal + ' kcal';
+  document.getElementById('tC').textContent = m.carbsKcal   + ' kcal';
+  document.getElementById('tF').textContent = m.fatKcal     + ' kcal';
+
+  /* Macro cards */
+  const pPct = Math.round(m.proteinKcal / m.totalKcal * 100);
+  const cPct = Math.round(m.carbsKcal   / m.totalKcal * 100);
+  const fPct = 100 - pPct - cPct;
+
+  document.getElementById('mPg').innerHTML   = `${m.protein} <span>g</span>`;
+  document.getElementById('mPk').textContent = `${m.proteinKcal} kcal`;
+  document.getElementById('mPp').textContent = `${pPct}% of macros`;
+  document.getElementById('mCg').innerHTML   = `${m.carbs} <span>g</span>`;
+  document.getElementById('mCk').textContent = `${m.carbsKcal} kcal`;
+  document.getElementById('mCp').textContent = `${cPct}% of macros`;
+  document.getElementById('mFg').innerHTML   = `${m.fat} <span>g</span>`;
+  document.getElementById('mFk').textContent = `${m.fatKcal} kcal`;
+  document.getElementById('mFp').textContent = `${fPct}% of macros`;
+
+  setTimeout(()=>{
+    document.getElementById('mPb').style.width = pPct + '%';
+    document.getElementById('mCb').style.width = cPct + '%';
+    document.getElementById('mFb').style.width = fPct + '%';
+  }, 100);
+
+  renderDonutChart(m, pPct, cPct, fPct);
 }
 
 /* ═══════════════════════════════════════════
    CHARTS
 ═══════════════════════════════════════════ */
-let donutChart=null,barChart=null;
-function textColor(){return isDark?'#9898c0':'#5a5a8a';}
-function gridColor(){return isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)';}
+let donutChart=null, barChart=null;
+function textColor(){ return isDark?'#9898c0':'#5a5a8a'; }
+function gridColor(){ return isDark?'rgba(255,255,255,.05)':'rgba(0,0,0,.06)'; }
 function tooltipDef(){
   return{
     backgroundColor:isDark?'rgba(7,7,26,.96)':'rgba(255,255,255,.96)',
@@ -1307,40 +1523,112 @@ function tooltipDef(){
   };
 }
 
-function renderCharts(R){
-  if(donutChart)donutChart.destroy();
-  donutChart=new Chart(document.getElementById('donutC').getContext('2d'),{
+function renderDonutChart(m, pPct, cPct, fPct){
+  if(donutChart) donutChart.destroy();
+  donutChart = new Chart(document.getElementById('donutC').getContext('2d'),{
     type:'doughnut',
-    data:{labels:['Protein','Carbs','Fat'],
-      datasets:[{data:[R.proteinKcal,R.carbsKcal,R.fatKcal],
+    data:{
+      labels:['Protein','Carbs','Fat'],
+      datasets:[{
+        data:[m.proteinKcal, m.carbsKcal, m.fatKcal],
         backgroundColor:['#f59e0b','#00f5ff','#a855f7'],
-        borderColor:'rgba(0,0,0,0)',borderWidth:0,hoverOffset:8}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'70%',
-      plugins:{legend:{display:false},tooltip:{...tooltipDef(),
-        callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed} kcal (${Math.round(ctx.parsed/R.totalKcal*100)}%)`}}}}
+        borderColor:'rgba(0,0,0,0)',borderWidth:0,hoverOffset:8
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,cutout:'70%',
+      plugins:{
+        legend:{display:false},
+        tooltip:{...tooltipDef(),callbacks:{
+          label:ctx=>` ${ctx.label}: ${ctx.parsed} kcal (${Math.round(ctx.parsed/m.totalKcal*100)}%)`
+        }}
+      }
+    }
   });
   document.getElementById('donutLeg').innerHTML=[
-    {nm:'Protein',g:R.protein,k:R.proteinKcal,pct:R.pPct,c:'#f59e0b'},
-    {nm:'Carbs',g:R.carbs,k:R.carbsKcal,pct:R.cPct,c:'#00f5ff'},
-    {nm:'Fats',g:R.fat,k:R.fatKcal,pct:R.fPct,c:'#a855f7'}
+    {nm:'Protein',g:m.protein,k:m.proteinKcal,pct:pPct,c:'#f59e0b'},
+    {nm:'Carbs',  g:m.carbs,  k:m.carbsKcal,  pct:cPct,c:'#00f5ff'},
+    {nm:'Fats',   g:m.fat,    k:m.fatKcal,    pct:fPct,c:'#a855f7'}
   ].map(i=>`<div class="li"><div class="ld" style="background:${i.c}"></div><span class="ln">${i.nm} (${i.g}g)</span><span class="lv">${i.k} kcal</span><span class="lp">${i.pct}%</span></div>`).join('');
+}
 
-  if(barChart)barChart.destroy();
-  barChart=new Chart(document.getElementById('barC').getContext('2d'),{
+function renderBarChart(R){
+  if(barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barC').getContext('2d'),{
     type:'bar',
-    data:{labels:['Maintenance','Fat Loss','Aggressive'],
-      datasets:[{data:[R.maintenance,R.fatLoss,R.aggressive],
+    data:{
+      labels:['Maintenance','Fat Loss','Aggressive'],
+      datasets:[{
+        data:[R.maintenance,R.fatLoss,R.aggressive],
         backgroundColor:['rgba(14,165,255,.7)','rgba(16,185,129,.7)','rgba(245,158,11,.7)'],
         borderColor:['#0ea5ff','#10b981','#f59e0b'],
         borderWidth:2,borderRadius:8,
-        hoverBackgroundColor:['rgba(14,165,255,.9)','rgba(16,185,129,.9)','rgba(245,158,11,.9)']}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{...tooltipDef(),callbacks:{label:ctx=>` ${ctx.parsed.y.toLocaleString()} kcal/day`}}},
+        hoverBackgroundColor:['rgba(14,165,255,.9)','rgba(16,185,129,.9)','rgba(245,158,11,.9)']
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{...tooltipDef(),callbacks:{
+        label:ctx=>` ${ctx.parsed.y.toLocaleString()} kcal/day`
+      }}},
       scales:{
         x:{grid:{display:false},ticks:{color:textColor(),font:{size:11}},border:{display:false}},
         y:{grid:{color:gridColor()},ticks:{color:textColor(),font:{size:10},callback:v=>v.toLocaleString()},border:{display:false},min:Math.max(0,R.aggressive-300)}
-      }}
+      }
+    }
   });
+}
+
+/* ═══════════════════════════════════════════
+   COPY — uses current selected goal
+═══════════════════════════════════════════ */
+function copyResults(){
+  const R = window.__lastR;
+  if(!R){ showToast('Calculate first!','er'); return; }
+  const m     = R.macros[currentGoal];
+  const kcal  = currentGoal==='maintenance' ? R.maintenance : currentGoal==='fatloss' ? R.fatLoss : R.aggressive;
+  const label = {maintenance:'Maintenance',fatloss:'Fat Loss',aggressive:'Aggressive Cut'}[currentGoal];
+  const gLabel = R.gender==='male' ? 'Male' : 'Female';
+
+  const txt =
+`FITAI PRO — MACRO BLUEPRINT
+
+Body: ${R.bw}kg · ${R.ht}cm · Age ${R.age} · ${gLabel}
+
+🔥 CALORIE CHAIN
+BMR (Base Metabolic Rate): ${R.bmr.toLocaleString()} kcal
+TDEE (Total Daily Energy):  ${R.tdee.toLocaleString()} kcal
+Maintenance:               ${R.maintenance.toLocaleString()} kcal/day
+Fat Loss (−500):           ${R.fatLoss.toLocaleString()} kcal/day
+Aggressive Cut (−700):     ${R.aggressive.toLocaleString()} kcal/day
+
+💪 MACROS FOR ${label.toUpperCase()} — ${kcal.toLocaleString()} kcal/day
+Protein: ${m.protein}g → ${m.proteinKcal} kcal (30%)
+Carbs:   ${m.carbs}g  → ${m.carbsKcal} kcal (40%)
+Fat:     ${m.fat}g    → ${m.fatKcal} kcal (30%)
+Total:   ${m.totalKcal.toLocaleString()} kcal ✓ matches target
+
+💧 Water: ${R.waterL}L/day  ⚖️ BMI: ${R.bmi}
+
+Generated by FitAI Pro`;
+
+  navigator.clipboard.writeText(txt)
+    .then(()=>showToast('📋 Results copied!','ok'))
+    .catch(()=>showToast('Copy failed','er'));
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+function resetAll(){
+  ['weight','height','age'].forEach(id=>{ document.getElementById(id).value=''; });
+  ['weight','height','age'].forEach(id=>setErr(id,id==='weight'?'wErr':id==='height'?'hErr':'ageErr',false));
+  document.getElementById('results').style.display='none';
+  ['mPb','mCb','mFb'].forEach(id=>{ document.getElementById(id).style.width='0'; });
+  if(donutChart){ donutChart.destroy(); donutChart=null; }
+  if(barChart){   barChart.destroy();   barChart=null;   }
+  currentGoal='fatloss';
+  window.__lastR=null;
 }
 
 /* ═══════════════════════════════════════════
@@ -1481,6 +1769,7 @@ document.addEventListener('keydown',e=>{
 });
 document.getElementById('weight').addEventListener('input',()=>setErr('weight','wErr',false));
 document.getElementById('height').addEventListener('input',()=>setErr('height','hErr',false));
+document.getElementById('age').addEventListener('input',()=>setErr('age','ageErr',false));
 
 /* ═══════════════════════════════════════════
    PHYSIQUE SHOWCASE CAROUSEL
