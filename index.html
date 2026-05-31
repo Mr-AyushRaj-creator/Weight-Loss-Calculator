@@ -873,6 +873,103 @@ footer{
 /* reduce gap for 6 items */
 .hero-stats{gap:20px!important}
 
+/* ── Physique calc banner ──────────────── */
+.pcb{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;border-radius:14px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.02);
+  margin-bottom:20px;transition:all var(--t);
+}
+.pcb.has-goal{background:rgba(0,0,0,.25)}
+.pcb-ico{
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;flex-shrink:0;
+}
+.pcb-text{flex:1}
+.pcb-name{
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;font-weight:800;margin-bottom:2px;
+  color:var(--muted2);
+}
+.pcb.has-goal .pcb-name{color:var(--text)}
+.pcb-sub{font-size:11px;color:var(--muted2)}
+.pcb-change{
+  font-size:11px;color:var(--cyan);cursor:pointer;
+  text-decoration:underline;white-space:nowrap;
+  flex-shrink:0;background:none;border:none;
+  font-family:'Poppins',sans-serif;
+}
+[data-theme="light"] .pcb-change{color:var(--purple)}
+
+/* ── Physique result card ──────────────── */
+.pr-card{
+  display:none;border-radius:16px;
+  padding:22px;margin-bottom:20px;
+  border:1px solid;animation:fup .5s ease;
+}
+.pr-card.show{display:block}
+.pr-top{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:18px;flex-wrap:wrap;
+}
+.pr-ico{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;flex-shrink:0;
+}
+.pr-heading{flex:1;min-width:120px}
+.pr-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:1.15rem;font-weight:900;
+  letter-spacing:.04em;margin-bottom:4px;
+}
+.pr-phase{font-size:11px;color:var(--muted2)}
+.pr-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;margin-bottom:14px;
+}
+@media(max-width:500px){.pr-stats{grid-template-columns:1fr 1fr}}
+.pr-stat{
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;padding:10px 12px;
+}
+[data-theme="light"] .pr-stat{
+  background:rgba(0,0,0,.03);
+  border-color:rgba(0,0,0,.06);
+}
+.pr-stat-label{
+  font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.pr-stat-val{
+  font-size:13px;font-weight:600;
+  color:var(--text);line-height:1.3;
+}
+.pr-tip-box{
+  font-size:12px;color:var(--muted2);
+  line-height:1.65;padding:11px 14px;
+  border-radius:10px;border-left:3px solid;
+  background:rgba(255,255,255,.025);
+}
+[data-theme="light"] .pr-tip-box{background:rgba(0,0,0,.03)}
+
+/* ── Recommended calorie card ──────────── */
+.cccard.rec-on{
+  box-shadow:0 0 0 2px var(--rec-col),
+             0 0 24px rgba(var(--rec-rgb),.22);
+  border-color:var(--rec-col)!important;
+}
+.rec-tag{
+  position:absolute;top:-11px;right:12px;
+  font-size:8.5px;font-weight:800;
+  letter-spacing:.06em;text-transform:uppercase;
+  padding:3px 10px;border-radius:50px;
+  background:var(--rec-col);color:#000;
+}
 </style>
 </head>
 <body>
@@ -949,7 +1046,9 @@ footer{
       <div class="ps-track" id="psTrack">
 
         <!-- CARD 1: FAT TO FIT -->
-        <div class="ps-card" style="--cc:#ec4899" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#ec4899" data-physique="fat-to-fit" 
+        onclick="selectPhysique('fat-to-fit')" onmouseenter="psAutoStop()" 
+        onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/1__FAT_TO_FIT_TRANSFORMATION.png" alt="Fat to Fit Transformation" loading="lazy">
           </div>
@@ -964,7 +1063,9 @@ footer{
         </div>
 
         <!-- CARD 2: LEAN ATHLETIC -->
-        <div class="ps-card" style="--cc:#3b82f6" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#3b82f6" data-physique="lean-athlete"
+        onclick="selectPhysique('lean-athlete')"
+        onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/2__LEAN_ATHLETIC_PHYSIQUE.png" alt="Lean Athletic Physique" loading="lazy">
           </div>
@@ -979,7 +1080,9 @@ footer{
         </div>
 
         <!-- CARD 3: CALISTHENICS -->
-        <div class="ps-card" style="--cc:#10b981" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#10b981" data-physique="calisthenics"
+        onclick="selectPhysique('calisthenics')"
+        onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/3__CALISTHENICS_ATHLETE.png" alt="Calisthenics Athlete" loading="lazy">
           </div>
@@ -994,7 +1097,9 @@ footer{
         </div>
 
         <!-- CARD 4: AESTHETIC -->
-        <div class="ps-card" style="--cc:#a855f7" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#a855f7" data-physique="aesthetic"
+        onclick="selectPhysique('aesthetic')"
+        onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/4__AESTHETIC_PHYSIQUE.png" alt="Aesthetic Physique" loading="lazy">
           </div>
@@ -1009,7 +1114,9 @@ footer{
         </div>
 
         <!-- CARD 5: SHREDDED -->
-        <div class="ps-card" style="--cc:#00f5ff" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#00f5ff" data-physique="shredded"
+        onclick="selectPhysique('shredded')"
+        onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/5__SHREDDED_PHYSIQUE.png" alt="Shredded Physique" loading="lazy">
           </div>
@@ -1024,7 +1131,9 @@ footer{
         </div>
 
         <!-- CARD 6: BODYBUILDER -->
-        <div class="ps-card" style="--cc:#f59e0b" onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
+        <div class="ps-card" style="--cc:#f59e0b" data-physique="bodybuilder"
+        onclick="selectPhysique('bodybuilder')"
+        onmouseenter="psAutoStop()" onmouseleave="psAutoStart()">
           <div class="ps-img-wrap">
             <img src="images/6__BODYBUILDER_PHYSIQUE.png" alt="Bodybuilder Physique" loading="lazy">
           </div>
@@ -1058,6 +1167,20 @@ footer{
     </div>
 
     <div class="gc rv">
+      <!-- Physique goal banner -->
+      <div class="pcb" id="pcb">
+        <div class="pcb-ico" id="pcbIco">🎯</div>
+        <div class="pcb-text">
+          <div class="pcb-name" id="pcbName">No Goal Selected</div>
+          <div class="pcb-sub" id="pcbSub">
+          Select a physique above to personalise your macros
+          </div>
+        </div>
+        <button class="pcb-change"
+        onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">
+        Choose ↑
+        </button>
+      </div>
       <div class="gc-head">
         <div class="gc-ico ic-b">⚡</div>
         <div>
@@ -1129,11 +1252,38 @@ footer{
     <!-- RESULTS -->
     <div id="results" aria-live="polite">
 
+      <!-- Physique goal result card -->
+      <div class="pr-card" id="prCard">
+        <div class="pr-top">
+          <div class="pr-ico" id="prIco">🎯</div>
+          <div class="pr-heading">
+            <div class="pr-title" id="prTitle">—</div>
+            <div class="pr-phase" id="prPhase">—</div>
+          </div>
+          <span class="diff-badge" id="prDiff">—</span>
+        </div>
+        <div class="pr-stats">
+          <div class="pr-stat">
+            <div class="pr-stat-label">Est. Timeline</div>
+            <div class="pr-stat-val" id="prTimeline">—</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-label">Training Style</div>
+            <div class="pr-stat-val" id="prTraining">—</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-label">Goal Phase</div>
+            <div class="pr-stat-val" id="prGoalLabel">—</div>
+          </div>
+        </div>
+        <div class="pr-tip-box" id="prTip"></div>
+      </div>
+
       <div class="rdiv">🔥 Calorie Targets</div>
       <div class="ccgrid">
-        <div class="cccard m"><div class="cce">🎯</div><div class="ccl">Maintenance</div><div class="ccv" id="rM">—</div><div class="ccu">kcal / day</div></div>
-        <div class="cccard f"><div class="cce">📉</div><div class="ccl">Fat Loss</div><div class="ccv" id="rF">—</div><div class="ccu">kcal / day</div><div class="ccb">−500 deficit</div></div>
-        <div class="cccard a"><div class="cce">⚡</div><div class="ccl">Aggressive Cut</div><div class="ccv" id="rA">—</div><div class="ccu">kcal / day</div><div class="ccb">−700 deficit</div></div>
+        <div class="cccard m" data-calgoal="maintenance" data-rgb="14,165,255" data-col="#0ea5ff"><div class="cce">🎯</div><div class="ccl">Maintenance</div><div class="ccv" id="rM">—</div><div class="ccu">kcal / day</div></div>
+        <div class="cccard f" data-calgoal="fatloss" data-rgb="16,185,129" data-col="#10b981"><div class="cce">📉</div><div class="ccl">Fat Loss</div><div class="ccv" id="rF">—</div><div class="ccu">kcal / day</div><div class="ccb">−500 deficit</div></div>
+        <div class="cccard a" data-calgoal="aggressive" data-rgb="245,158,11" data-col="#f59e0b"><div class="cce">⚡</div><div class="ccl">Aggressive Cut</div><div class="ccv" id="rA">—</div><div class="ccu">kcal / day</div><div class="ccb">−700 deficit</div></div>
       </div>
 
       <!-- BMR → TDEE → Goal chain -->
@@ -1274,6 +1424,117 @@ footer{
 </footer>
 
 <script>
+  /* ═══════════════════════════════════════════
+   PHYSIQUE DATA
+═══════════════════════════════════════════ */
+const PHYSIQUE_DATA = {
+  'fat-to-fit': {
+    name:'FAT TO FIT', icon:'📈',
+    phase:'Calorie Deficit',
+    recommendedGoal:'fatloss',
+    macroSplit:{ p:.35, c:.40, f:.25 },
+    timeline:'3–9 Months',
+    training:'Cardio + Full Body Resistance',
+    difficulty:'Easy – Moderate', diffClass:'diff-easy',
+    color:'#ec4899', colorRgb:'236,72,153',
+    tip:'High protein preserves muscle in your deficit. Focus on sustainable habits — not crash dieting.'
+  },
+  'lean-athlete': {
+    name:'LEAN ATHLETE', icon:'🏃',
+    phase:'Fat Loss / Recomposition',
+    recommendedGoal:'fatloss',
+    macroSplit:{ p:.30, c:.45, f:.25 },
+    timeline:'4–12 Months',
+    training:'Functional Training + Cardio Endurance',
+    difficulty:'Moderate', diffClass:'diff-mod',
+    color:'#3b82f6', colorRgb:'59,130,246',
+    tip:'Higher carbs fuel your performance. Combine endurance sessions with resistance training 3–4x/week.'
+  },
+  'calisthenics': {
+    name:'CALISTHENICS', icon:'⚡',
+    phase:'Body Recomposition',
+    recommendedGoal:'maintenance',
+    macroSplit:{ p:.32, c:.40, f:.28 },
+    timeline:'6–18 Months',
+    training:'Progressive Bodyweight Overload',
+    difficulty:'Moderate – Hard', diffClass:'diff-modhard',
+    color:'#10b981', colorRgb:'16,185,129',
+    tip:'Recomp is slow but sustainable. Master foundational movements before chasing advanced skills.'
+  },
+  'aesthetic': {
+    name:'AESTHETIC', icon:'🔥',
+    phase:'Lean Bulk',
+    recommendedGoal:'maintenance',
+    macroSplit:{ p:.30, c:.45, f:.25 },
+    timeline:'8–18 Months',
+    training:'Hypertrophy + Progressive Overload',
+    difficulty:'Hard', diffClass:'diff-hard',
+    color:'#a855f7', colorRgb:'168,85,247',
+    tip:'Eat at maintenance and train for symmetry. Target chest, shoulders, arms and V-taper proportions.'
+  },
+  'shredded': {
+    name:'SHREDDED', icon:'💎',
+    phase:'Aggressive Cut',
+    recommendedGoal:'aggressive',
+    macroSplit:{ p:.40, c:.35, f:.25 },
+    timeline:'12–24 Months',
+    training:'Heavy Compound Lifts + HIIT Cardio',
+    difficulty:'Very Hard', diffClass:'diff-vhard',
+    color:'#00f5ff', colorRgb:'0,245,255',
+    tip:'Ultra-high protein protects muscle in a deep deficit. This phase demands elite discipline and sleep.'
+  },
+  'bodybuilder': {
+    name:'BODYBUILDER', icon:'🏆',
+    phase:'Bulk Phase',
+    recommendedGoal:'maintenance',
+    macroSplit:{ p:.30, c:.50, f:.20 },
+    timeline:'2–5 Years',
+    training:'Max Hypertrophy + Heavy Compounds',
+    difficulty:'Elite Commitment', diffClass:'diff-elite',
+    color:'#f59e0b', colorRgb:'245,158,11',
+    tip:'Eat 200–300 kcal above maintenance. Run 16–20 week bulk cycles followed by structured cut phases.'
+  }
+};
+
+let selectedPhysique = null;
+
+/* ═══════════════════════════════════════════
+   SELECT PHYSIQUE
+═══════════════════════════════════════════ */
+function selectPhysique(id){
+  selectedPhysique = id;
+  const pd = PHYSIQUE_DATA[id];
+
+  /* highlight card */
+  document.querySelectorAll('.ps-card').forEach(c =>
+    c.classList.toggle('sel', c.dataset.physique === id)
+  );
+
+  /* update calculator banner */
+  const pcb = document.getElementById('pcb');
+  pcb.classList.add('has-goal');
+  pcb.style.borderColor = pd.color;
+  pcb.style.background  = `rgba(var(--bg-rgb,0,0,0),.3)`;
+  document.getElementById('pcbIco').textContent  = pd.icon;
+  document.getElementById('pcbIco').style.background = `rgba(${pd.colorRgb},.12)`;
+  document.getElementById('pcbIco').style.border = `1px solid rgba(${pd.colorRgb},.28)`;
+  document.getElementById('pcbName').textContent = pd.name + ' — ' + pd.difficulty;
+  document.getElementById('pcbName').style.color = pd.color;
+  document.getElementById('pcbSub').textContent  = pd.phase + ' · ' + pd.timeline;
+
+  /* scroll hint */
+  showToast(`✓ Goal: ${pd.name}`,'ok');
+
+  /* if already calculated, re-render with new physique */
+  if(window.__lastR){
+    const R = window.__lastR;
+    R.macros = buildMacros(R.maintenance, R.fatLoss, R.aggressive, pd.macroSplit);
+    renderPhysiqueCard(pd);
+    highlightRecommendedCal(pd);
+    switchGoal(pd.recommendedGoal);
+  }
+}
+
 /* ═══════════════════════════════════════════
    PARTICLES
 ═══════════════════════════════════════════ */
@@ -1330,8 +1591,6 @@ document.getElementById('themeBtn').addEventListener('click',()=>{
   }
 });
 
-
-
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════════════════ */
@@ -1355,8 +1614,21 @@ function valid(v,mn,mx){const n=parseFloat(v);return !isNaN(n)&&n>=mn&&n<=mx;}
 let currentGoal = 'fatloss';
 
 /* ═══════════════════════════════════════════
-   CALCULATOR — BMR → TDEE → GOAL → MACROS
+   CALCULATOR
 ═══════════════════════════════════════════ */
+function buildMacros(maintenance, fatLoss, aggressive, split){
+  function m(kcal){
+    const pK = Math.round(kcal * split.p);
+    const cK = Math.round(kcal * split.c);
+    const fK = kcal - pK - cK;
+    const p  = Math.round(pK/4), c = Math.round(cK/4), f = Math.round(fK/9);
+    return { protein:p, carbs:c, fat:f,
+             proteinKcal:p*4, carbsKcal:c*4, fatKcal:f*9,
+             totalKcal:p*4+c*4+f*9 };
+  }
+  return { maintenance:m(maintenance), fatloss:m(fatLoss), aggressive:m(aggressive) };
+}
+
 function calculate(){
   const wv  = document.getElementById('weight').value.trim();
   const hv  = document.getElementById('height').value.trim();
@@ -1379,52 +1651,34 @@ function calculate(){
     const ht  = parseFloat(hv);
     const age = parseInt(av);
 
-    /* ── Step 1: BMR (Mifflin-St Jeor) ─────── */
+    /* BMR — Mifflin-St Jeor */
     const bmr = gv === 'male'
       ? Math.round(10*bw + 6.25*ht - 5*age + 5)
       : Math.round(10*bw + 6.25*ht - 5*age - 161);
 
-    /* ── Step 2: TDEE ───────────────────────── */
+    /* TDEE */
     const tdee = Math.round(bmr * acv);
 
-    /* ── Step 3: Goal calories ──────────────── */
+    /* Goal calories */
     const maintenance = tdee;
     const fatLoss     = tdee - 500;
     const aggressive  = tdee - 700;
 
-    /* ── Step 4: Macros that match calories ─── */
-    // Protein 30% | Carbs 40% | Fat 30%
-    function getMacros(kcal){
-      const pKcal = Math.round(kcal * 0.30);
-      const cKcal = Math.round(kcal * 0.40);
-      const fKcal = kcal - pKcal - cKcal; // remainder avoids rounding gaps
-      const protein = Math.round(pKcal / 4);
-      const carbs   = Math.round(cKcal / 4);
-      const fat     = Math.round(fKcal / 9);
-      return {
-        protein, carbs, fat,
-        proteinKcal: protein*4,
-        carbsKcal:   carbs*4,
-        fatKcal:     fat*9,
-        totalKcal:   protein*4 + carbs*4 + fat*9
-      };
-    }
+    /* Macro split — physique-aware */
+    const pd    = selectedPhysique ? PHYSIQUE_DATA[selectedPhysique] : null;
+    const split = pd ? pd.macroSplit : { p:.30, c:.40, f:.30 };
 
-    /* ── Water & BMI ────────────────────────── */
-    const waterL    = (bw * 35 / 1000).toFixed(1);
-    const waterCups = Math.round(bw * 35 / 250);
-    const hm        = ht / 100;
-    const bmi       = (bw / (hm * hm)).toFixed(1);
+    /* Water + BMI */
+    const waterL    = (bw*35/1000).toFixed(1);
+    const waterCups = Math.round(bw*35/250);
+    const hm        = ht/100;
+    const bmi       = (bw/(hm*hm)).toFixed(1);
 
     const R = {
-      bw, ht, age, gender:gv, bmr, tdee,
-      maintenance, fatLoss, aggressive,
+      bw, ht, age, gender:gv,
+      bmr, tdee, maintenance, fatLoss, aggressive,
       waterL, waterCups, bmi,
-      macros:{
-        maintenance: getMacros(maintenance),
-        fatloss:     getMacros(fatLoss),
-        aggressive:  getMacros(aggressive)
-      }
+      macros: buildMacros(maintenance, fatLoss, aggressive, split)
     };
 
     window.__lastR = R;
@@ -1437,13 +1691,8 @@ function calculate(){
 /* ═══════════════════════════════════════════
    RENDER RESULTS
 ═══════════════════════════════════════════ */
-function animCount(el,to,dur=860){
-  const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
-  (function step(){ const p=Math.min((Date.now()-s)/dur,1); el.textContent=Math.round(ease(p)*to).toLocaleString(); p<1&&requestAnimationFrame(step); })();
-}
-
 function renderResults(R){
-  document.getElementById('results').style.display='block';
+  document.getElementById('results').style.display = 'block';
   setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 
   /* Calorie cards */
@@ -1452,14 +1701,22 @@ function renderResults(R){
   animCount(document.getElementById('rA'), R.aggressive);
 
   /* BMR / TDEE strip */
-  document.getElementById('bmrVal').textContent  = R.bmr.toLocaleString();
-  document.getElementById('tdeeVal').textContent = R.tdee.toLocaleString();
+  const bmrEl  = document.getElementById('bmrVal');
+  const tdeeEl = document.getElementById('tdeeVal');
+  if(bmrEl)  bmrEl.textContent  = R.bmr.toLocaleString();
+  if(tdeeEl) tdeeEl.textContent = R.tdee.toLocaleString();
 
-  /* Default to fat loss, render macros */
-  currentGoal = 'fatloss';
-  switchGoal('fatloss');
+  /* Physique card + recommended highlight */
+  const pd = selectedPhysique ? PHYSIQUE_DATA[selectedPhysique] : null;
+  renderPhysiqueCard(pd);
+  highlightRecommendedCal(pd);
 
-  /* Water */
+  /* Default goal tab */
+  const startGoal = pd ? pd.recommendedGoal : 'fatloss';
+  currentGoal = startGoal;
+  switchGoal(startGoal);
+
+  /* Water cups */
   document.getElementById('waterVal').textContent = R.waterL + 'L';
   const cups = document.getElementById('waterCups');
   cups.innerHTML = '';
@@ -1475,21 +1732,75 @@ function renderResults(R){
   renderBMI(R);
 }
 
+/* Render physique info card */
+function renderPhysiqueCard(pd){
+  const card = document.getElementById('prCard');
+  if(!pd){ card.classList.remove('show'); return; }
+
+  card.classList.add('show');
+  card.style.borderColor  = `rgba(${pd.colorRgb},.3)`;
+  card.style.background   = `rgba(${pd.colorRgb},.04)`;
+
+  document.getElementById('prIco').textContent           = pd.icon;
+  document.getElementById('prIco').style.background      = `rgba(${pd.colorRgb},.1)`;
+  document.getElementById('prIco').style.border          = `1px solid rgba(${pd.colorRgb},.25)`;
+  document.getElementById('prTitle').textContent         = pd.name + ' PHYSIQUE';
+  document.getElementById('prTitle').style.color         = pd.color;
+  document.getElementById('prPhase').textContent         = 'Phase: ' + pd.phase;
+  document.getElementById('prTimeline').textContent      = pd.timeline;
+  document.getElementById('prTraining').textContent      = pd.training;
+
+  const goalLabels = { maintenance:'Maintenance Calories', fatloss:'Fat Loss (−500)', aggressive:'Aggressive Cut (−700)' };
+  document.getElementById('prGoalLabel').textContent     = goalLabels[pd.recommendedGoal];
+
+  const diffEl = document.getElementById('prDiff');
+  diffEl.textContent  = pd.difficulty;
+  diffEl.className    = 'diff-badge ' + pd.diffClass;
+
+  const tipEl = document.getElementById('prTip');
+  tipEl.textContent       = '💡 ' + pd.tip;
+  tipEl.style.borderColor = pd.color;
+}
+
+/* Highlight recommended calorie card */
+function highlightRecommendedCal(pd){
+  document.querySelectorAll('.cccard').forEach(c => {
+    c.classList.remove('rec-on');
+    c.style.removeProperty('--rec-col');
+    c.style.removeProperty('--rec-rgb');
+    const t = c.querySelector('.rec-tag');
+    if(t) t.remove();
+  });
+  if(!pd) return;
+  const rec = document.querySelector(`.cccard[data-calgoal="${pd.recommendedGoal}"]`);
+  if(!rec) return;
+  rec.classList.add('rec-on');
+  rec.style.setProperty('--rec-col', rec.dataset.col);
+  rec.style.setProperty('--rec-rgb', rec.dataset.rgb);
+  const tag = document.createElement('span');
+  tag.className   = 'rec-tag';
+  tag.textContent = '★ Recommended';
+  rec.appendChild(tag);
+}
+
 /* ═══════════════════════════════════════════
-   SWITCH GOAL (updates macro section)
+   SWITCH GOAL TAB
 ═══════════════════════════════════════════ */
 function switchGoal(goal){
   currentGoal = goal;
   const R = window.__lastR;
   if(!R) return;
 
-  const m     = R.macros[goal];
-  const kcal  = goal==='maintenance' ? R.maintenance : goal==='fatloss' ? R.fatLoss : R.aggressive;
-  const labels = { maintenance:'Maintenance', fatloss:'Fat Loss', aggressive:'Aggressive Cut' };
-  const label  = labels[goal];
+  const m    = R.macros[goal];
+  const kcal = goal==='maintenance' ? R.maintenance
+             : goal==='fatloss'     ? R.fatLoss
+             : R.aggressive;
 
-  /* Goal chain value */
-  document.getElementById('goalChainVal').textContent = kcal.toLocaleString();
+  const labels = { maintenance:'Maintenance', fatloss:'Fat Loss', aggressive:'Aggressive Cut' };
+
+  /* Goal chain */
+  const gcv = document.getElementById('goalChainVal');
+  if(gcv) gcv.textContent = kcal.toLocaleString();
 
   /* Tab highlight */
   document.querySelectorAll('.goal-tab').forEach(t =>
@@ -1497,18 +1808,25 @@ function switchGoal(goal){
   );
 
   /* Macro banner */
-  document.getElementById('macroBanner').innerHTML =
-    `Macros for <strong style="color:var(--cyan)">${label}</strong> &nbsp;·&nbsp; Target: <strong>${kcal.toLocaleString()} kcal/day</strong> <span style="color:var(--green);font-size:11px">✓ macros match target</span>`;
+  const mb = document.getElementById('macroBanner');
+  if(mb){
+    const pd = selectedPhysique ? PHYSIQUE_DATA[selectedPhysique] : null;
+    const matchNote = `<span style="color:var(--green);font-size:11px;margin-left:6px">✓ macros match target</span>`;
+    const goalNote  = pd && pd.recommendedGoal === goal
+      ? `<span style="color:var(--cyan);font-size:11px;margin-left:6px">★ Recommended for ${pd.name}</span>`
+      : '';
+    mb.innerHTML = `Macros for <strong style="color:var(--cyan)">${labels[goal]}</strong> &nbsp;·&nbsp; <strong>${kcal.toLocaleString()} kcal/day</strong>${matchNote}${goalNote}`;
+  }
 
-  /* Total banner values */
+  /* Total banner */
   animCount(document.getElementById('rT'), m.totalKcal);
   document.getElementById('tP').textContent = m.proteinKcal + ' kcal';
   document.getElementById('tC').textContent = m.carbsKcal   + ' kcal';
   document.getElementById('tF').textContent = m.fatKcal     + ' kcal';
 
   /* Macro cards */
-  const pPct = Math.round(m.proteinKcal / m.totalKcal * 100);
-  const cPct = Math.round(m.carbsKcal   / m.totalKcal * 100);
+  const pPct = Math.round(m.proteinKcal/m.totalKcal*100);
+  const cPct = Math.round(m.carbsKcal  /m.totalKcal*100);
   const fPct = 100 - pPct - cPct;
 
   document.getElementById('mPg').innerHTML   = `${m.protein} <span>g</span>`;
@@ -1525,7 +1843,7 @@ function switchGoal(goal){
     document.getElementById('mPb').style.width = pPct + '%';
     document.getElementById('mCb').style.width = cPct + '%';
     document.getElementById('mFb').style.width = fPct + '%';
-  }, 100);
+  },100);
 
   renderDonutChart(m, pPct, cPct, fPct);
 }
