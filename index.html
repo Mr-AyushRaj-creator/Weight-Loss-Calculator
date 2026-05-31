@@ -856,6 +856,23 @@ footer{
   margin-bottom:16px;text-align:center;
   line-height:1.6;
 }
+/* ── Difficulty badges ─────────────────── */
+.diff-badge{
+  display:inline-block;
+  padding:5px 14px;border-radius:50px;
+  font-size:11px;font-weight:700;letter-spacing:.05em;
+  margin-bottom:6px;
+}
+.diff-easy    {background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.28)}
+.diff-mod     {background:rgba(14,165,255,.12);color:#0ea5ff;border:1px solid rgba(14,165,255,.28)}
+.diff-modhard {background:rgba(168,85,247,.12);color:#a855f7;border:1px solid rgba(168,85,247,.28)}
+.diff-hard    {background:rgba(245,158,11,.12);color:#f59e0b;border:1px solid rgba(245,158,11,.28)}
+.diff-vhard   {background:rgba(249,115,22,.12);color:#f97316;border:1px solid rgba(249,115,22,.28)}
+.diff-elite   {background:rgba(239,68,68,.12); color:#ef4444;border:1px solid rgba(239,68,68,.28)}
+
+/* reduce gap for 6 items */
+.hero-stats{gap:20px!important}
+
 </style>
 </head>
 <body>
@@ -885,11 +902,31 @@ footer{
       <button class="btn-hs" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})">View Physiques →</button>
     </div>
     <div class="hero-stats">
-      <div class="hstat"><div class="n" id="hs1">0</div><div class="l">Users Transformed</div></div>
-      <div class="hstat"><div class="n" id="hs2">0</div><div class="l">Accuracy Rate</div></div>
-      <div class="hstat"><div class="n" id="hs3">0</div><div class="l">Meals Planned</div></div>
-      <div class="hstat"><div class="n" id="hs4">0</div><div class="l">KGs Lost</div></div>
-    </div>
+  <div class="hstat">
+    <div class="diff-badge diff-easy">Easy – Moderate</div>
+    <div class="l">Fat to Fit</div>
+  </div>
+  <div class="hstat">
+    <div class="diff-badge diff-mod">Moderate</div>
+    <div class="l">Lean Athletic</div>
+  </div>
+  <div class="hstat">
+    <div class="diff-badge diff-modhard">Moderate – Hard</div>
+    <div class="l">Calisthenics</div>
+  </div>
+  <div class="hstat">
+    <div class="diff-badge diff-hard">Hard</div>
+    <div class="l">Aesthetic</div>
+  </div>
+  <div class="hstat">
+    <div class="diff-badge diff-vhard">Very Hard</div>
+    <div class="l">Shredded</div>
+  </div>
+  <div class="hstat">
+    <div class="diff-badge diff-elite">Elite Commitment</div>
+    <div class="l">Bodybuilder</div>
+  </div>
+</div>
   </div>
   <div class="scroll-hint" onclick="document.getElementById('showcase').scrollIntoView({behavior:'smooth'})" aria-hidden="true">
     <div class="arr"></div><span>Scroll</span>
@@ -1293,21 +1330,7 @@ document.getElementById('themeBtn').addEventListener('click',()=>{
   }
 });
 
-/* ═══════════════════════════════════════════
-   HERO COUNTERS
-═══════════════════════════════════════════ */
-function animNum(el,to,sfx='',dur=1800){
-  const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
-  (function step(){const p=Math.min((Date.now()-s)/dur,1);el.textContent=Math.round(ease(p)*to).toLocaleString()+sfx;p<1&&requestAnimationFrame(step);})();
-}
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    animNum(document.getElementById('hs1'),50000,'+');
-    animNum(document.getElementById('hs2'),98,'%');
-    animNum(document.getElementById('hs3'),1200000,'+');
-    animNum(document.getElementById('hs4'),850000,'+');
-  },600);
-});
+
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
