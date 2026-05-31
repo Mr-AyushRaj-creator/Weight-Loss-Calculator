@@ -1687,7 +1687,10 @@ function calculate(){
     document.getElementById('bspin').style.display = 'none';
   }, 680);
 }
-
+function animCount(el,to,dur=860){
+  const s=Date.now(),ease=t=>1-Math.pow(1-t,3);
+  (function step(){const p=Math.min((Date.now()-s)/dur,1);el.textContent=Math.round(ease(p)*to).toLocaleString();p<1&&requestAnimationFrame(step);})();
+}
 /* ═══════════════════════════════════════════
    RENDER RESULTS
 ═══════════════════════════════════════════ */
